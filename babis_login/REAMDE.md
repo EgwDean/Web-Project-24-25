@@ -40,9 +40,8 @@ the actual content area will adjust to fit within the specified width of 200 pix
 # fields within the <form> and sends it to the server specified in the action attribute.
 
 -----------------------------------------------------------------------------------------------------------------------
-
+<br><br>
 # Σημαντική Επισήμανση:
-<br>
 <br>
 
 - Keeping different functionalities in separate files helps maintain a clean code structure.
