@@ -15,8 +15,9 @@ the actual content area will adjust to fit within the specified width of 200 pix
 - The action attribute specifies the URL (in this case, login.php) to which the form data will 
    be sent for processing when the form is submitted.
 - The method attribute specifies the HTTP method used for sending the data. 
-   Here, it is set to post, meaning the data will be sent in the request body (rather than the URL).   <br>
-
+   Here, it is set to post, meaning the data will be sent in the request body (rather than the URL).  
+<br>
+<br>
 
 # &lt;input type="text" id="username" name="username" required&gt;
 # &lt;input type="password" id="password" name="password" required&gt;
@@ -27,8 +28,8 @@ the actual content area will adjust to fit within the specified width of 200 pix
    If either field is empty, the browser will prevent the form from being submitted and prompt the user 
    to complete the fields.
 
-  <br>
-
+<br>
+<br>   
 
 # &lt;input type="submit" value="Login"&gt;
 
