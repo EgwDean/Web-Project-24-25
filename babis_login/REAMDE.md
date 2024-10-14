@@ -64,7 +64,12 @@ This makes the code easier to read, maintain, and debug.
 -----------------------------------------------------------------------------------------------------------------------
 <br><br>
 # Γιατί να χρησιμοποιήσω PDO και Prepare statements
+Ασφάλεια: Βοηθούν στην αποφυγή του SQL injection, που μπορεί να οδηγήσει σε μη εξουσιοδοτημένη πρόσβαση ή τροποποίηση δεδομένων. <br><br>
+Απόδοση:  Τα Prepare statements μπορούν να εκτελούνται πολλές φορές με διαφορετικές παραμέτρους, γεγονός που μπορεί να οδηγήσει σε κέρδη απόδοσης σε repeated queries.
 
-Security: They help avoid SQL injection, which can lead to unauthorized access or data manipulation.
-Performance: Prepared statements can be executed multiple times with different parameters, which can lead to performance gains in repeated queries.
+
+
+
+
+
 
