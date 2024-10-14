@@ -3,8 +3,7 @@
 When you set box-sizing to border-box, the following applies:
 The width and height properties include padding and border, not just the content area. 
 This means that if you set an element’s width to 200 pixels and add 20 pixels of padding and a 5-pixel border, 
-the actual content area will adjust to fit within the specified width of 200 pixels, making layout calculations easier 
-and more intuitive.
+the actual content area will adjust to fit within the specified width of 200 pixels instead of less.
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
