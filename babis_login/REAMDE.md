@@ -1,3 +1,15 @@
+<br><br>
+# Complete Flow:
+<br>
+1.)   User submits the form: The form data is sent to insert.php via POST.   <br>
+2.)   PHP checks the request: It verifies if the request method is POST.    <br>
+3.)   Database connection: The script attempts to connect to the database.    <br>
+4.)   Data retrieval: It retrieves the submitted form data.                      <br>
+5.)   Prepare and execute SQL: The script prepares an SQL insert statement and executes it with the retrieved data.    <br>
+6.)   Success or error: If successful, a success message is shown; if not, an error message is displayed.       <br><br>
+
+
+
 # What does <i>box-sizing: border-box;</i>  do?
 <br>
 When you set box-sizing to border-box, the following applies:
@@ -50,16 +62,3 @@ This makes the code easier to read, maintain, and debug.
 - If there are changes needed for the login process, they can be made in login.html without affecting the registration logic in insert.php, and vice versa.
 
 -----------------------------------------------------------------------------------------------------------------------
-<br><br>
-# Complete Flow:
-<br>
-1.)   User submits the form: The form data is sent to insert.php via POST.   <br>
-2.)   PHP checks the request: It verifies if the request method is POST.    <br>
-3.)   Database connection: The script attempts to connect to the database.    <br>
-4.)   Data retrieval: It retrieves the submitted form data.                      <br>
-5.)   Prepare and execute SQL: The script prepares an SQL insert statement and executes it with the retrieved data.    <br>
-6.)   Success or error: If successful, a success message is shown; if not, an error message is displayed.       <br>
-
-
-
-
