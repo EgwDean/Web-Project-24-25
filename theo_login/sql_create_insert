@@ -37,41 +37,5 @@ INSERT INTO admins (username, password, firstname, lastname, email) VALUES
 ('admin6', 'password303', 'Frank', 'Garcia', 'frank.garcia@example.com');
 
 
-DELIMITER $
-CREATE PROCEDURE login(IN pname VARCHAR(30), IN pcode VARCHAR(30), OUT ptype VARCHAR(30))
-BEGIN 
-	DECLARE user_num INT;
-	DECLARE admin_num INT;
-    
-    SELECT COUNT(*)
-    INTO user_num
-    FROM users 
-    WHERE username = pname AND password = pcode;
-    
-	SELECT COUNT(*)
-    INTO admin_num
-    FROM admins
-    WHERE username = pname AND password = pcode;
-
-	IF (user_num > 0) THEN
-		SET ptype = 'USER';
-		SELECT 'USER FOUND.';
-	END IF;
-    
-	IF (admin_num > 0) THEN
-		SET ptype = 'ADMIN';
-		SELECT 'ADMIN FOUND.';
-	END IF;
-    
-	IF (user_num = 0 AND admin_num = 0) THEN
-		SET ptype = 'NONE';
-		SELECT 'WRONG COMBINATION OF USERNAME AND PASSWORD. PLEASE TRY AGAIN.';
-	END IF;
-
-END$
-DELIMITER ;
-
--- DROP PROCEDURE login;
-
 CALL login('admin1', 'password123', @x);
 SELECT @x;
