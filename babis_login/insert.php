@@ -80,7 +80,7 @@
         // Database connection
         $dsn = "mysql:host=localhost;port=3306;dbname=html";
         $dbusername = "root";
-        $dbpassword = "12345theo";
+        $dbpassword = "556782340";
 
         try {
             $pdo = new PDO($dsn, $dbusername, $dbpassword);
