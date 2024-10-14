@@ -44,9 +44,8 @@ the actual content area will adjust to fit within the specified width of 200 pix
 # Σημαντική Επισήμανση:
 <br>
 
-- Keeping different functionalities in separate files helps maintain a clean code structure.
-<br>login.html handles user login, while insert.php is focused on user registration.
-<br>This makes the code easier to read, maintain, and debug.
+- Keeping different functionalities in separate files helps maintain a clean code structure. login.html handles user login, while insert.php is focused on user registration.
+This makes the code easier to read, maintain, and debug.
 
 - If there are changes needed for the login process, they can be made in login.html without affecting the registration logic in insert.php, and vice versa.
 
