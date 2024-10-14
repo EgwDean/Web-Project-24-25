@@ -36,5 +36,20 @@ the actual content area will adjust to fit within the specified width of 200 pix
 - This button, when clicked, triggers the form submission process. 
 - The type="submit" indicates that this button is meant to submit the form data.
 
-When the "Login" button is pressed, the browser collects the data from all input 
-fields within the <form> and sends it to the server specified in the action attribute.
+# When the "Login" button is pressed, the browser collects the data from all input 
+# fields within the <form> and sends it to the server specified in the action attribute.
+
+
+
+# Σημαντική Επισήμανση:
+<br>
+<br>
+
+- Keeping different functionalities in separate files helps maintain a clean code structure.
+<br>login.html handles user login, while insert.php is focused on user registration.
+<br>This makes the code easier to read, maintain, and debug.
+
+- If there are changes needed for the login process, they can be made in login.html without affecting the registration logic in insert.php, and vice versa.
+
+
+
