@@ -94,12 +94,47 @@
             $lastname = $_POST['lastname'];
             $email = $_POST['email'];
 
-            // Prepare and execute the SQL insert statement
-            $stmt = $pdo->prepare("INSERT INTO users (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$username, $password, $firstname, $lastname, $email]);
+            // Prepare the statements for checking username and email
+            // Check if the username is already taken using the PROCEDURE name_taken
+            $stmt_username = $pdo->prepare("CALL name_taken(?, @username_taken)");
+            $stmt_username->execute([$username]);
 
-            // Call JavaScript to show the popup and redirect
-            echo "<script>showPopup();</script>";
+            // Close the cursor to free the connection for the next query
+            $stmt_username->closeCursor();
+
+            // Retrieve the result of the OUT parameter for username
+            $result_username = $pdo->query("SELECT @username_taken")->fetch(PDO::FETCH_ASSOC);
+            $username_taken = $result_username['@username_taken'];
+
+            // Check if the email is already in use using the PROCEDURE email_taken
+            $stmt_email = $pdo->prepare("CALL email_taken(?, @email_taken)");
+            $stmt_email->execute([$email]);
+
+            // Close the cursor to free the connection for the next query
+            $stmt_username->closeCursor();
+
+            // Retrieve the result of the OUT parameter for email
+            $result_email = $pdo->query("SELECT @email_taken")->fetch(PDO::FETCH_ASSOC);
+            $email_taken = $result_email['@email_taken'];
+
+            // Now we check the conditions
+            if ($username_taken == 1) {
+                // Username already taken
+                echo "<script>alert('Username is already taken. Please choose another.');</script>";
+            } elseif ($email_taken == 1) {
+                // Email already in use
+                echo "<script>alert('Email is already in use. Please use another email.');</script>";
+            } else {
+                // Insert the user data into the database since both username and email are available
+                $stmt = $pdo->prepare("INSERT INTO users (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)");
+                $stmt->execute([$username, $password, $firstname, $lastname, $email]);
+
+		// Close the cursor to free the connection for the next query
+        	$stmt_username->closeCursor();
+
+                // Call JavaScript to show the popup and redirect
+                echo "<script>showPopup();</script>";
+            }
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
