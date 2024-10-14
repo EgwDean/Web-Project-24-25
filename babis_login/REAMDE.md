@@ -62,3 +62,9 @@ This makes the code easier to read, maintain, and debug.
 - If there are changes needed for the login process, they can be made in login.html without affecting the registration logic in insert.php, and vice versa.
 
 -----------------------------------------------------------------------------------------------------------------------
+<br><br>
+# Γιατί να χρησιμοποιήσω PDO και Prepare statements
+
+Security: They help avoid SQL injection, which can lead to unauthorized access or data manipulation.
+Performance: Prepared statements can be executed multiple times with different parameters, which can lead to performance gains in repeated queries.
+
