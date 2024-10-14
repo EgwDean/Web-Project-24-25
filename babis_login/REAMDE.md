@@ -1,4 +1,4 @@
-# What Does box-sizing: border-box; Do?
+# What does box-sizing: border-box; do?
 <br>
 When you set box-sizing to border-box, the following applies:
 The width and height properties include padding and border, not just the content area. 
