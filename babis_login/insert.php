@@ -88,7 +88,7 @@
 
             // Get form data
             $username = $_POST['username'];
-            $password = $_POST['password']; // Consider hashing in a real application
+            $password = $_POST['password']; 
             $firstname = $_POST['firstname'];
             $lastname = $_POST['lastname'];
             $email = $_POST['email'];
