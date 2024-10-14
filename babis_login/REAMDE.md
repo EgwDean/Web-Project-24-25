@@ -9,7 +9,7 @@ the actual content area will adjust to fit within the specified width of 200 pix
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 # Explanation about <i>form</i> directive and how it works
 
-&lt; <form action="login.php" method="post">  &gt;
+&lt;form action="login.php" method="post"&gt;
 
 - The <form> tag encapsulates input fields and buttons that allow users to submit data.
 - The action attribute specifies the URL (in this case, login.php) to which the form data will 
