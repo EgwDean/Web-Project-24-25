@@ -18,8 +18,8 @@ the actual content area will adjust to fit within the specified width of 200 pix
    Here, it is set to post, meaning the data will be sent in the request body (rather than the URL).
 
 
-&lt;input type="text" id="username" name="username" required>&gt;
-&lt;<input type="password" id="password" name="password" required>&gt;
+&lt;input type="text" id="username" name="username" required&gt;
+&lt;input type="password" id="password" name="password" required&gt;
 
 - Each input field has a name attribute (username and password) that identifies the data being sent. 
   This is crucial because the server uses these names to access the values sent from the form.
@@ -28,7 +28,7 @@ the actual content area will adjust to fit within the specified width of 200 pix
    to complete the fields.
 
 
-&lt;<input type="submit" value="Login">&gt;
+&lt;input type="submit" value="Login"&gt;
 
 - This button, when clicked, triggers the form submission process. 
 - The type="submit" indicates that this button is meant to submit the form data.
