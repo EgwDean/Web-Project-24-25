@@ -54,6 +54,13 @@
         input[type="submit"]:hover {
             background-color: #218838;
         }
+
+        .error {
+            color: red; /* Κόκκινο χρώμα για τα μηνύματα σφάλματος */
+            margin: 5px 0; /* Λίγο περιθώριο πάνω και κάτω */
+            font-size: 12px; /* Μικρότερο μέγεθος γραμματοσειράς */
+            text-align: center; /* Κεντραρισμένα μηνύματα */
+        }
     </style>
     <script>
         // Function to display the pop-up message and then redirect to the login page
@@ -67,78 +74,77 @@
     <div class="form-container">
         <h1>Sign Up</h1>
         <form action="insert.php" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="username" placeholder="Username" required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
             <input type="password" name="password" placeholder="Password" required>
-            <input type="text" name="firstname" placeholder="First Name" required>
-            <input type="text" name="lastname" placeholder="Last Name" required>
-            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="firstname" placeholder="First Name" required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : ''; ?>">
+            <input type="text" name="lastname" placeholder="Last Name" required value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : ''; ?>">
+            <input type="email" name="email" placeholder="Email" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
             <input type="submit" value="Sign Up">
         </form>
-    </div>
+        <?php
+        // Initialize error messages
+        $username_error = "";
+        $email_error = "";
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Database connection
-        $dsn = "mysql:host=localhost;port=3306;dbname=html";
-        $dbusername = "root";
-        $dbpassword = "12345theo";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Database connection
+            $dsn = "mysql:host=localhost;port=3306;dbname=html";
+            $dbusername = "root";
+            $dbpassword = "12345theo";
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            try {
+                $pdo = new PDO($dsn, $dbusername, $dbpassword);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Get form data
-            $username = $_POST['username'];
-            $password = $_POST['password']; // Consider hashing in a real application
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $email = $_POST['email'];
+                // Get form data
+                $username = $_POST['username'];
+                $password = $_POST['password']; // Consider hashing in a real application
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $email = $_POST['email'];
 
-            // Prepare the statements for checking username and email
-            // Check if the username is already taken using the PROCEDURE name_taken
-            $stmt_username = $pdo->prepare("CALL name_taken(?, @username_taken)");
-            $stmt_username->execute([$username]);
+                // Prepare the statements for checking username and email
+                // Check if the username is already taken using the PROCEDURE name_taken
+                $stmt_username = $pdo->prepare("CALL name_taken(?, @username_taken)");
+                $stmt_username->execute([$username]);
+                $stmt_username->closeCursor();
 
-            // Close the cursor to free the connection for the next query
-            $stmt_username->closeCursor();
+                // Retrieve the result of the OUT parameter for username
+                $result_username = $pdo->query("SELECT @username_taken")->fetch(PDO::FETCH_ASSOC);
+                $username_taken = $result_username['@username_taken'];
 
-            // Retrieve the result of the OUT parameter for username
-            $result_username = $pdo->query("SELECT @username_taken")->fetch(PDO::FETCH_ASSOC);
-            $username_taken = $result_username['@username_taken'];
+                // Check if the email is already in use using the PROCEDURE email_taken
+                $stmt_email = $pdo->prepare("CALL email_taken(?, @email_taken)");
+                $stmt_email->execute([$email]);
+                $stmt_email->closeCursor();
 
-            // Check if the email is already in use using the PROCEDURE email_taken
-            $stmt_email = $pdo->prepare("CALL email_taken(?, @email_taken)");
-            $stmt_email->execute([$email]);
+                // Retrieve the result of the OUT parameter for email
+                $result_email = $pdo->query("SELECT @email_taken")->fetch(PDO::FETCH_ASSOC);
+                $email_taken = $result_email['@email_taken'];
 
-            // Close the cursor to free the connection for the next query
-            $stmt_username->closeCursor();
+                // Now we check the conditions
+                if ($username_taken == 1) {
+                    // Username already taken
+                    $username_error = "Username is already taken. Please choose another.";
+                } elseif ($email_taken == 1) {
+                    // Email already in use
+                    $email_error = "Email is already in use. Please use another email.";
+                } else {
+                    // Insert the user data into the database since both username and email are available
+                    $stmt = $pdo->prepare("INSERT INTO users (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)");
+                    $stmt->execute([$username, $password, $firstname, $lastname, $email]);
 
-            // Retrieve the result of the OUT parameter for email
-            $result_email = $pdo->query("SELECT @email_taken")->fetch(PDO::FETCH_ASSOC);
-            $email_taken = $result_email['@email_taken'];
-
-            // Now we check the conditions
-            if ($username_taken == 1) {
-                // Username already taken
-                echo "<script>alert('Username is already taken. Please choose another.');</script>";
-            } elseif ($email_taken == 1) {
-                // Email already in use
-                echo "<script>alert('Email is already in use. Please use another email.');</script>";
-            } else {
-                // Insert the user data into the database since both username and email are available
-                $stmt = $pdo->prepare("INSERT INTO users (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)");
-                $stmt->execute([$username, $password, $firstname, $lastname, $email]);
-
-		// Close the cursor to free the connection for the next query
-        	$stmt_username->closeCursor();
-
-                // Call JavaScript to show the popup and redirect
-                echo "<script>showPopup();</script>";
+                    // Call JavaScript to show the popup and redirect
+                    echo "<script>showPopup();</script>";
+                }
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
         }
-    }
-    ?>
+        ?>
+        <!-- Display error messages -->
+        <div class="error"><?php echo $username_error; ?></div>
+        <div class="error"><?php echo $email_error; ?></div>
+    </div>
 </body>
 </html>
