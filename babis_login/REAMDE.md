@@ -7,7 +7,7 @@ the actual content area will adjust to fit within the specified width of 200 pix
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-# Explanation about <i>form</i> directive and how it works
+# Explanation about <i>form</i> directive and how it works   <br><br>
 
 # &lt;form action="login.php" method="post"&gt;
 
