@@ -1,7 +1,7 @@
 <?php
 $dsn = "mysql:host=localhost;port=3306;dbname=html"; // Βάση δεδομένων
 $dbusername = "root"; // Όνομα χρήστη
-$dbpassword = "12345theo"; // Κωδικός
+$dbpassword = "556782340"; // Κωδικός
 
 try {
     $pdo = new PDO($dsn, $dbusername, $dbpassword);
