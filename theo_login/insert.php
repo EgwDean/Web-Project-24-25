@@ -66,7 +66,7 @@
         // Function to display the pop-up message and then redirect to the login page
         function showPopup() {
             alert("User inserted successfully!");
-            window.location.href = 'login.html'; // Redirect after the alert
+            window.location.href = 'login.php'; // Redirect after the alert
         }
     </script>
 </head>
