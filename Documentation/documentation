@@ -7,7 +7,10 @@ FILES DESCRIPTION:
 5.)  sql_functions.sql: SQL stored procedures for user authentication, checking username availability, and checking email registration.
 6.)  test_the_functions.sql: SQL commands to test the functionality of the stored procedures created in the previous file.
 
+
+
 Ακολουθεί εξήγηση των 1.) 2.) 3.) συνοπτικά:
+
 
 
 1) display_users.php
