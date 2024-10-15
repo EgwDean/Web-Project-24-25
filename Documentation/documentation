@@ -9,7 +9,7 @@ FILES DESCRIPTION:
 
 
 
-1). display_users.php
+1) display_users.php
 
 PURPOSE
 This file is responsible for displaying all users in a tabular format retrieved from the MySQL database.
@@ -57,3 +57,88 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 SECURITY CONSIDERATIONS
 User data is sanitized using htmlspecialchars() to prevent XSS attacks when displayed.
 
+
+2)  insert.php
+
+PURPOSE
+This file provides a form for user registration and handles the logic to insert new users into the database after validating input data.
+
+
+
+CODE STRUCTURE
+- HTML Form
+         The form collects user data including username, password, first name, last name, and email.   
+------------------------------------------------------
+<form action="insert.php" method="POST">
+    <input type="text" name="username" required>
+    <input type="password" name="password" required>
+    <input type="text" name="firstname" required>
+    <input type="text" name="lastname" required>
+    <input type="email" name="email" required>
+    <input type="submit" value="Sign Up">
+</form>
+-------------------------------------------------------
+
+
+- Database Logic
+            Stored procedures name_taken and email_taken are called to check for existing usernames and emails.
+            If a username or email is already taken, appropriate error messages are displayed.
+--------------------------------------------------------------------------
+$stmt_username = $pdo->prepare("CALL name_taken(?, @username_taken)");
+--------------------------------------------------------------------------
+
+
+- Insert New User
+      If validations pass, the new user is inserted into the users table.
+
+-------------------------------------------------------------------------------------------------------------------
+$stmt = $pdo->prepare("INSERT INTO users (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)");
+$stmt->execute([$username, $password, $firstname, $lastname, $email]);
+-------------------------------------------------------------------------------------------------------------------                 
+
+- JavaScript Notification
+            A pop-up notification is shown upon successful registration, redirecting to the login page.
+--------------------------------------------
+function showPopup() {
+    alert("User inserted successfully!");
+    window.location.href = 'login.html';
+}
+---------------------------------------------
+
+
+SECURITY CONSIDERATIONS
+User passwords should be hashed (e.g., using password_hash()) before storage to enhance security.    ΔΕΝ ΞΕΡΩ ΑΝ ΘΑ ΤΟ ΚΑΝΟΥΜΕ...
+
+
+
+3)  login.php
+
+PURPOSE
+This file handles user authentication by verifying credentials and directing users based on their role (user or admin).
+
+
+CODE STRUCTURE
+
+- HTML Login Form
+            Collects username and password for authentication.
+-----------------------------------------------------
+<form action="" method="post">
+    <input type="text" name="username" required>
+    <input type="password" name="password" required>
+    <input type="submit" value="Login">
+</form>
+--------------------------------------------------------
+
+
+-  Authentication Logic
+                  The login stored procedure checks credentials against the database.
+                  Depending on the return type (USER, ADMIN, or NONE), users are redirected to the appropriate page.
+----------------------------------------------------
+$stmt = $pdo->prepare("CALL login(?, ?, @ptype)");
+----------------------------------------------------
+
+- Error Handling
+            Displays an error message for incorrect login attempts.
+--------------------------------------------------
+$error = "Wrong combination, please try again.";
+--------------------------------------------------
