@@ -3,14 +3,14 @@ CREATE DATABASE html;
 USE html;
 
 CREATE TABLE users (
-  username VARCHAR(30),
+  username VARCHAR(30) BINARY,
   password VARCHAR(20),
   firstname VARCHAR(25),
   lastname VARCHAR(45),
   email VARCHAR(30));
   
 CREATE TABLE admins (
-  username VARCHAR(30),
+  username VARCHAR(30) BINARY,
   password VARCHAR(20),
   firstname VARCHAR(25),
   lastname VARCHAR(45),
