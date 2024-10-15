@@ -6,3 +6,44 @@ FILES DESCRIPTION:
 4.)  sql_create_insert.sql: SQL commands to create the database, tables, and insert initial user and admin data.
 5.)  sql_functions.sql: SQL stored procedures for user authentication, checking username availability, and checking email registration.
 6.)  test_the_functions.sql: SQL commands to test the functionality of the stored procedures created in the previous file.
+
+
+
+1. display_users.php
+
+Purpose
+This file is responsible for displaying all users in a tabular format retrieved from the MySQL database.
+
+Code Structure
+- Database Connection
+      A connection to the MySQL database is established using PDO (PHP Data Objects).
+      Error handling is set to throw exceptions if the connection fails.
+-------------------------------------------------------------------
+$dsn = "mysql:host=localhost;port=3306;dbname=html";
+$dbusername = "root";
+$dbpassword = "556782340";
+
+try {
+    $pdo = new PDO($dsn, $dbusername, $dbpassword);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+    exit;
+}
+
+-------------------------------------------------------------------
+- Fetch Users
+        A query is executed to fetch all records from the users table.
+        Results are stored in the $users array.
+--------------------------------------------
+$stmt = $pdo->query("SELECT * FROM users");
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+--------------------------------------------
+- HTML Structure
+        The HTML structure is defined with CSS for styling the table.
+        A loop iterates over the $users array to create rows in the table for each user.
+
+Security Considerations
+User data is sanitized using htmlspecialchars() to prevent XSS attacks when displayed.
+
