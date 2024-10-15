@@ -9,7 +9,7 @@ FILES DESCRIPTION:
 
 
 
-1. display_users.php
+1). display_users.php
 
 Purpose
 This file is responsible for displaying all users in a tabular format retrieved from the MySQL database.
