@@ -7,6 +7,7 @@ FILES DESCRIPTION:
 5.)  sql_functions.sql: SQL stored procedures for user authentication, checking username availability, and checking email registration.
 6.)  test_the_functions.sql: SQL commands to test the functionality of the stored procedures created in the previous file.
 
+Ακολουθεί εξήγηση των 1.) 2.) 3.) συνοπτικά:
 
 
 1) display_users.php
@@ -56,6 +57,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 SECURITY CONSIDERATIONS
 User data is sanitized using htmlspecialchars() to prevent XSS attacks when displayed.
+
+
+
+
+
+
 
 
 2)  insert.php
@@ -108,6 +115,13 @@ function showPopup() {
 
 SECURITY CONSIDERATIONS
 User passwords should be hashed (e.g., using password_hash()) before storage to enhance security.    ΔΕΝ ΞΕΡΩ ΑΝ ΘΑ ΤΟ ΚΑΝΟΥΜΕ...
+
+
+
+
+
+
+
 
 
 
