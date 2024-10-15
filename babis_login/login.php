@@ -1,7 +1,7 @@
 <?php
 $dsn = "mysql:host=localhost;port=3306;dbname=html"; // Βάση δεδομένων
 $dbusername = "root"; // Όνομα χρήστη
-$dbpassword = "556782340"; // Κωδικός
+$dbpassword = "12345theo"; // Κωδικός
 $error = ""; // Μεταβλητή για σφάλματα
 $username = ""; // Μεταβλητή για το όνομα χρήστη
 $password = ""; // Μεταβλητή για τον κωδικό
