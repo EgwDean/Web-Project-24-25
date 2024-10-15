@@ -1,1 +1,8 @@
+FILES DESCRIPTION:
 
+1.)  display_users.php: A PHP script to display users from a MySQL database in an HTML table.
+2.)  insert.php: A PHP form for user registration that checks if a username or email already exists before inserting new users into the database.
+3.)  login.php: A PHP login form that authenticates users and redirects them based on their role (user or admin).
+4.)  sql_create_insert.sql: SQL commands to create the database, tables, and insert initial user and admin data.
+5.)  sql_functions.sql: SQL stored procedures for user authentication, checking username availability, and checking email registration.
+6.)  test_the_functions.sql: SQL commands to test the functionality of the stored procedures created in the previous file.
