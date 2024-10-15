@@ -11,10 +11,12 @@ FILES DESCRIPTION:
 
 1). display_users.php
 
-Purpose
+PURPOSE
 This file is responsible for displaying all users in a tabular format retrieved from the MySQL database.
 
-Code Structure
+
+
+CODE STRUCTURE
 - Database Connection
       A connection to the MySQL database is established using PDO (PHP Data Objects).
       Error handling is set to throw exceptions if the connection fails.
@@ -33,6 +35,9 @@ catch (PDOException $e) {
 }
 
 -------------------------------------------------------------------
+
+
+
 - Fetch Users
         A query is executed to fetch all records from the users table.
         Results are stored in the $users array.
@@ -40,10 +45,15 @@ catch (PDOException $e) {
 $stmt = $pdo->query("SELECT * FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 --------------------------------------------
+
+
+
 - HTML Structure
         The HTML structure is defined with CSS for styling the table.
         A loop iterates over the $users array to create rows in the table for each user.
 
-Security Considerations
+
+
+SECURITY CONSIDERATIONS
 User data is sanitized using htmlspecialchars() to prevent XSS attacks when displayed.
 
