@@ -1,2 +1,1 @@
-# Καλλισθενικός Μπουχέσας 
-![babis](./memes/IMG_20241013_192406.jpg)
+<h1>CEID undergraduate project for the course "Programming and Systems on the Web".</h1>
