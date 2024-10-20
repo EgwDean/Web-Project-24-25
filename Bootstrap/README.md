@@ -8,5 +8,5 @@
 που υποστηρίζουν την ιστοσελίδα μας (σε εμένα: XAMMP -> htdocs -> babis_login/ ).      <br>
 4.)  Τέλος, πάμε στο αρχείο login.php και κάνουμε link τα αρχεία των φακέλων css και js στο &lt;head&gt; tag και ακριβώς πριν το τέλος του &lt;body&gt; tag αντίστοιχα.    <br>
 
-
+<br><br>
 Note: Αντί να κάνω link στο body tag "js/bootstrap.js" έκανα link "js/bootstrap.bundle.js" το οποίο περιέχει όλα τα dependencies (τα οποία μπορεί να τα χρειαστώ στη συνέχεια). <br>
