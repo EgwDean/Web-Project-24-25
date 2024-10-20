@@ -12,7 +12,7 @@
 Note: Αντί να κάνω link στο body tag "js/bootstrap.js" έκανα link "js/bootstrap.bundle.js" το οποίο περιέχει όλα τα dependencies (τα οποία μπορεί να τα χρειαστώ στη συνέχεια). <br>
 
 
-# Grid System
+# Documentation 
 
 - Layout -> Breakpoints:      https://getbootstrap.com/docs/5.3/layout/breakpoints/
 - Layout -> Containers:       https://getbootstrap.com/docs/5.0/layout/containers/
