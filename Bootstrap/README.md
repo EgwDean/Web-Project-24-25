@@ -15,3 +15,5 @@ Note: Αντί να κάνω link στο body tag "js/bootstrap.js" έκανα l
 # Grid System
 
 - Layout -> Breakpoints:      https://getbootstrap.com/docs/5.3/layout/breakpoints/
+- Layout -> Containers:       https://getbootstrap.com/docs/5.0/layout/containers/
+- Layout -> Grid:             https://getbootstrap.com/docs/5.0/layout/grid/ 
