@@ -44,7 +44,7 @@ BEGIN
 END$
 DELIMITER ;
 
-DROP PROCEDURE login;
+# DROP PROCEDURE login;
 
 CALL login('sec1@gmail.edu', 'p7', @x);
 SELECT @x;
