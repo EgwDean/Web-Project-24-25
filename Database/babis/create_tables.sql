@@ -43,7 +43,7 @@ CREATE TABLE secretary (
 
 
 CREATE TABLE diplomatiki (
-  id_diplomatiki INT(11) PRIMARY KEY,
+  id_diplomatiki INT(11) PRIMARY KEY AUTO_INCREMENT,
   email_prof VARCHAR(100),
   title VARCHAR(100) NOT NULL,    
   description TEXT,                           
