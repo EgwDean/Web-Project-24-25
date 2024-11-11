@@ -48,7 +48,7 @@ CREATE TABLE diplomatiki (
   title VARCHAR(100) NOT NULL,    
   description TEXT,                           
   pdf_link_topic VARCHAR(255),
-  status ENUM('available', 'given', 'pending', 'active', 'canceled', 'under examination', 'finished') NOT NULL
+  status ENUM('available', 'given') NOT NULL
 );
 
 CREATE TABLE eksetasi_diplomatikis (
@@ -82,7 +82,7 @@ CREATE TABLE anathesi_diplomatikis (
 
 CREATE TABLE professor_notes (
 	professor_email VARCHAR(100) NOT NULL,
-    id_diplom VARCHAR(100) NOT NULL,
+    id_diplom INT NOT NULL,
     notes TEXT
 );
 
@@ -96,9 +96,9 @@ CREATE TABLE trimelis_epitropi_diplomatikis (
 );
 
 CREATE TABLE prosklisi_se_trimeli (
-  student_email INT NOT NULL,                             
+  student_email VARCHAR(100) NOT NULL,                             
   prof_email VARCHAR(100) NOT NULL,                   
-  id_dip VARCHAR(100) NOT NULL,                 
+  id_dip INT(11) NOT NULL,                 
   status ENUM('pending', 'accepted', 'declined') NOT NULL, 
   invitation_date DATE NOT NULL,                      
   accept_date DATE,                   
