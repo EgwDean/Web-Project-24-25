@@ -4,7 +4,7 @@ session_start(); // Ξεκινάμε τη συνεδρία
 $host = "localhost";
 $dbusername = "root";
 $dbpassword = "12345theo";
-$dbname = "html";
+$dbname = "diplomatiki_support";
 $error = ""; // Μεταβλητή για σφάλματα
 $email = ""; // Μεταβλητή για το όνομα χρήστη
 $password = ""; // Μεταβλητή για τον κωδικό
