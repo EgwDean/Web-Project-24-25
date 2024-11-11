@@ -48,7 +48,7 @@ CREATE TABLE diplomatiki (
   title VARCHAR(100) NOT NULL,    
   description TEXT,                           
   pdf_link_topic VARCHAR(255),
-  status ENUM('pending', 'active', 'canceled', 'under examination', 'finished') NOT NULL
+  status ENUM('available', 'given', 'pending', 'active', 'canceled', 'under examination', 'finished') NOT NULL
 );
 
 CREATE TABLE eksetasi_diplomatikis (
