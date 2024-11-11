@@ -37,7 +37,7 @@ CREATE TABLE student (
 
 
 CREATE TABLE secretary (
-	email_sec VARCHAR(100) PRIMARY KEY NOT NULL,
+    email_sec VARCHAR(100) PRIMARY KEY NOT NULL,
     password VARCHAR(255)
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE anathesi_diplomatikis (
 
 
 CREATE TABLE professor_notes (
-	email_prof VARCHAR(100) NOT NULL,
+    email_prof VARCHAR(100) NOT NULL,
     title_d VARCHAR(100) NOT NULL,
     notes TEXT
 );
