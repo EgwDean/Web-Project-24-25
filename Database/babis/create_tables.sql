@@ -70,7 +70,7 @@ CREATE TABLE eksetasi_diplomatikis (
 # Σ Υ Σ Χ Ε Τ Ι Σ Ε Ι Σ
 CREATE TABLE anathesi_diplomatikis (
   email_stud VARCHAR(100) NOT NULL,                     
-  id_diploma VARCHAR(100) NOT NULL,                     
+  id_diploma INT(11) NOT NULL,                     
   status ENUM('pending', 'active', 'canceled', 'under examination', 'finished') NOT NULL,  
   start_date DATE NOT NULL,                        
   end_date DATE,                                   
@@ -89,7 +89,7 @@ CREATE TABLE professor_notes (
 
 CREATE TABLE trimelis_epitropi_diplomatikis (
   id_trimelous INT PRIMARY KEY,                   
-  id_dipl VARCHAR(100) NOT NULL,             
+  id_dipl INT(11) NOT NULL,             
   supervisor VARCHAR(100),               
   member1 VARCHAR(100),                  
   member2 VARCHAR(100)
@@ -98,7 +98,7 @@ CREATE TABLE trimelis_epitropi_diplomatikis (
 CREATE TABLE prosklisi_se_trimeli (
   student_email INT NOT NULL,                             
   prof_email VARCHAR(100) NOT NULL,                   
-  title_diploma VARCHAR(100) NOT NULL,                 
+  id_dip VARCHAR(100) NOT NULL,                 
   status ENUM('pending', 'accepted', 'declined') NOT NULL, 
   invitation_date DATE NOT NULL,                      
   accept_date DATE,                   
