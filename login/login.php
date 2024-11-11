@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($row['ptype'] == 'PROF') {
         header("Location: professor.php");
     } elseif ($row['ptype'] == 'GRAM') {
-        header("Location: gramateia.php");
+        header("Location: secretary.php");
     } else {
         $error = "Wrong combination, please try again."; // Μήνυμα σφάλματος
     }
