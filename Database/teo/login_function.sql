@@ -9,17 +9,17 @@ BEGIN
     SELECT COUNT(*)
     INTO student_email
     FROM student
-    WHERE email = pname AND password = pcode;
+    WHERE email_student = pname AND password = pcode;
     
 	SELECT COUNT(*)
     INTO prof_email
     FROM professor
-    WHERE email = pname AND password = pcode;
+    WHERE email_professor = pname AND password = pcode;
     
     SELECT COUNT(*)
     INTO sec_email
     FROM secretary
-    WHERE email = pname AND password = pcode;
+    WHERE email_sec = pname AND password = pcode;
 
 	IF (student_email > 0) THEN
 		SET ptype = 'STUDENT';
@@ -46,5 +46,5 @@ DELIMITER ;
 
 DROP PROCEDURE login;
 
-CALL login('jdoe01@example.com', 'p1', @x);
+CALL login('sec1@gmail.edu', 'p7', @x);
 SELECT @x;
