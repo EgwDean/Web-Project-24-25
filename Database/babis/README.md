@@ -14,3 +14,8 @@ Foreign Keys όπου έπρεπε και cascading
 - createNotes(IN professor_email VARCHAR(255), IN id_diploma INT, IN notes TEXT)
 - cancelAssignmentActive(IN professor_email VARCHAR(255), IN id_diploma INT)
 - setUnderExam(IN professor_email VARCHAR(255), IN id_diploma INT)
+
+
+<br> <br> 
+Ερώτημα 6 Διδάσκων (Υπό Εξέταση)
+- 
