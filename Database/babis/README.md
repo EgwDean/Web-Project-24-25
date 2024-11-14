@@ -2,7 +2,7 @@
 <br> 
 Foreign Keys όπου έπρεπε και cascading
 <br> <br> 
-
+<br> <br> 
 Ερώτημα 6 Διδάσκων (Υπό Ανάθεση)        <br>                                                                                              <br>
 - checkInvitations(IN id_diploma INT)  --> Προβολή προσκλήσεων σε καθηγητές με όρισμα το id της διπλωματικής                            <br><br>
 - cancelAssignment(IN professor_email VARCHAR(255), IN id_diploma INT) --> Ακύρωση Ανάθεσης Διπλωματικής MONO από τον Επιβλέποντα Καθηγητή και Ενημέρωση των πινάκων trimelis_epitropi_diplomatikis και 
