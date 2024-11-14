@@ -18,4 +18,8 @@ Foreign Keys όπου έπρεπε και cascading
 
 <br> <br> 
 Ερώτημα 6 Διδάσκων (Υπό Εξέταση)
-- 
+- Ερώτημα α)         -->  seeDiploma(IN id_diploma INT)
+- Ερώτημα β)         -->  ΔΕΝ ΑΠΑΝΤΗΘΗΚΕ
+- Ερώτημα γ) και δ)  -->  gradeSubmit(IN professor_email VARCHAR(255), IN id_diploma INT, IN grade DECIMAL(3, 2))
+                          seeGrades(IN id_diploma INT)
+                          trigger_check_grade_update
