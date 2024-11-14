@@ -20,6 +20,7 @@ Foreign Keys όπου έπρεπε και cascading
 Ερώτημα 6 Διδάσκων (Υπό Εξέταση)
 - Ερώτημα α)         -->  seeDiploma(IN id_diploma INT)
 - Ερώτημα β)         -->  ΔΕΝ ΑΠΑΝΤΗΘΗΚΕ
-- Ερώτημα γ) και δ):      gradeSubmit(IN professor_email VARCHAR(255), IN id_diploma INT, IN grade DECIMAL(3, 2))   <br>
-                          seeGrades(IN id_diploma INT)              <br>
-                          trigger_check_grade_update               <br>
+- Ερώτημα γ) και δ):       
+          - gradeSubmit(IN professor_email VARCHAR(255), IN id_diploma INT, IN grade DECIMAL(3, 2))   <br>
+          - seeGrades(IN id_diploma INT)              <br>
+          - trigger_check_grade_update               <br>
