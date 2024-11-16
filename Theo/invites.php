@@ -18,12 +18,9 @@ $status = [];
 
 $email = $_SESSION['email']; 
 
-$sql = "SELECT prosklisi_se_trimeli.student_email AS student, 
-prosklisi_se_trimeli.id_dip AS kodikos, 
-diplomatiki.title AS titlos, 
-diplomatiki.email_prof AS email
-FROM prosklisi_se_trimeli INNER JOIN diplomatiki ON prosklisi_se_trimeli.id_dip = diplomatiki.id_diplomatiki
-WHERE prosklisi_se_trimeli.prof_email = '$email' AND prosklisi_se_trimeli.status = 'pending'";
+$sql = "SELECT student_email AS student, id_dip AS kodikos
+FROM prosklisi_se_trimeli
+WHERE prof_email = '$email' AND status = 'pending'";
 
 $result = $conn->query($sql);
 
