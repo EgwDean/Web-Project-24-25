@@ -18,12 +18,12 @@ VALUES
 -- 2 ------
 
 
-INSERT INTO student (username, password, name, surname, student_number, street, number, city, postcode, father_name, landline_telephone, mobile_telephone, email_student)
+INSERT INTO student (password, name, surname, student_number, street, number, city, postcode, father_name, landline_telephone, mobile_telephone, email_student)
 VALUES
   ('s1', 'Giannis', 'Georgiou', 1001, 'Main St', '5A', 'Athens', '10432', 'Nikolaos', '2106543210', '6906543210', 'giannis.georgiou@student.edu'),
-  ( 's2', 'Eleni', 'Papadaki', 1002, 'Oak St', '12B', 'Thessaloniki', '54635', 'Manolis', '2310123456', '6907654321', 'eleni.papadaki@student.edu'),
+  ('s2', 'Eleni', 'Papadaki', 1002, 'Oak St', '12B', 'Thessaloniki', '54635', 'Manolis', '2310123456', '6907654321', 'eleni.papadaki@student.edu'),
   ('s3', 'Kostas', 'Lazaridis', 1003, 'Elm St', '7', 'Patras', '26223', 'Andreas', '2610123456', '6908765432', 'kostas.lazaridis@student.edu'),
-  ( 'pass1234', 'John', 'Doe', 1001, 'Main Street', '10', 'New York', '10001', 'Robert Doe', '1234567890', '9876543210', 'john.doe@example.com'),
+  ('pass1234', 'John', 'Doe', 1001, 'Main Street', '10', 'New York', '10001', 'Robert Doe', '1234567890', '9876543210', 'john.doe@example.com'),
   ('secure567', 'Jane', 'Smith', 1002, 'Elm Avenue', '20', 'Los Angeles', '90001', 'William Smith', NULL, '8765432109', 'jane.smith@example.com'),
   ('mypassword789', 'Mike', 'Brown', 1003, 'Oak Street', '30', 'Chicago', '60601', 'James Brown', '0987654321', '7654321098', 'mike.brown@example.com');
 
@@ -31,6 +31,29 @@ SELECT * FROM anathesi_diplomatikis;
 SELECT * FROM trimelis_epitropi_diplomatikis;
 
 -- 3 ----
+DELETE FROM trimelis_epitropi_diplomatikis;
+DELETE FROM anathesi_diplomatikis;
+DELETE FROM prosklisi_se_trimeli;
+
+SELECT * FROM trimelis_epitropi_diplomatikis;
+SELECT * FROM anathesi_diplomatikis;
+SELECT * FROM prosklisi_se_trimeli;
+
+INSERT INTO trimelis_epitropi_diplomatikis (id_dipl, supervisor, member1, member2)
+VALUES 
+(1, 'Dr. Ioannis Papadopoulos', 'maria.ioannou@university.edu', NULL),
+(2, 'Dr. Eleni Georgiou', NULL, NULL),
+(3, 'Dr. Nikolaos Pappas', NULL, NULL);
+
+INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
+VALUES 
+('john.doe@example.com', 1, 'pending', '2024-01-15', '2024-12-15', 'http://example.com/nemertes/101', 'path/to/diploma1.pdf', 'http://example.com/external_link1'),
+('mary.smith@example.com', 2, 'pending', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2');
+
+INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
+VALUES 
+('mike.brown@example.com', 'dimitris.papa@university.edu', 1, 'pending', NULL, '2024-11-01'),
+('mike.brown@example.com', 'dimitris.papa@university.edu', 2, 'pending', '2024-11-10', '2024-11-05');
 
 -- 4 ----
 
