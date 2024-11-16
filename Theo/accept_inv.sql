@@ -43,7 +43,7 @@ BEGIN
         
 		UPDATE prosklisi_se_trimeli
         SET status = 'declined', reply_date = CURDATE()
-        WHERE status = 'pending';
+        WHERE status = 'pending' AND id_dip = pcode;
         
         UPDATE anathesi_diplomatikis
         SET status = 'active'
