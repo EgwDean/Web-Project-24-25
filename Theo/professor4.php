@@ -288,26 +288,21 @@ function get() {
                 var row = header.insertRow(0);
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
+
 
                 cell1.innerHTML = "Email Φοιτητή";
                 cell2.innerHTML = "Id Διπλωματικής";
-                cell3.innerHTML = "Τίτλος Διπλωματικής";
-                cell4.innerHTML = "Email Καθηγητή";
+
 
                 var tbody = table.createTBody();
                 for (let i = 0; i < data.length; i++) {
                     var row = tbody.insertRow(-1);
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
-                    var cell3 = row.insertCell(2);
-                    var cell4 = row.insertCell(3);
 
                     cell1.innerHTML = data[i]['student'];
                     cell2.innerHTML = data[i]['kodikos'];
-                    cell3.innerHTML = data[i]['titlos'];
-                    cell4.innerHTML = data[i]['email'];
+
 
                     // Προσθήκη event listener για την επιλογή γραμμής
                     row.addEventListener('click', function() {
