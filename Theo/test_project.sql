@@ -30,7 +30,7 @@ VALUES
 SELECT * FROM anathesi_diplomatikis;
 SELECT * FROM trimelis_epitropi_diplomatikis;
 
--- 3 ----
+-- 4 ----
 DELETE FROM trimelis_epitropi_diplomatikis;
 DELETE FROM anathesi_diplomatikis;
 DELETE FROM prosklisi_se_trimeli;
@@ -55,23 +55,6 @@ VALUES
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 1, 'pending', NULL, '2024-11-01'),
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 2, 'pending', '2024-11-10', '2024-11-05');
 
--- 4 ----
-
-SELECT * FROM diplomatiki;
-delete from anathesi_diplomatikis where id_diploma = 116;
-delete from trimelis_epitropi_diplomatikis where id_dipl = 116;
-
-INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
-VALUES 
-('mike.brown@example.com', 'dimitris.papa@university.edu', 121, 'pending', NULL, '2024-11-01'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 116, 'pending', '2024-11-10', '2024-11-05'),
-('mike.brown@example.com', 'nikos.katsaros@university.edu', 116, 'pending', '2024-11-08', '2024-11-03'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 114, 'accepted', NULL, '2024-11-01'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 115, 'declined', '2024-11-10', '2024-11-05'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 105, 'pending', '2024-11-08', '2024-11-03');
-
-SELECT * FROM anathesi_diplomatikis;
-SELECT * FROM trimelis_epitropi_diplomatikis;
 
 --  5 -----
 
