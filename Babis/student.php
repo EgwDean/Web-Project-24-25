@@ -1,13 +1,12 @@
 <?php
-session_start(); // Start the session
+session_start(); 			// Ξεκινάμε τη συνεδρία
 
-// Check if the user is logged in by verifying the session variable
+// Έλεγχος της τιμής της μεταβλητής $email στη συνεδρία 
 if (empty($_SESSION['email'])) {
-    // Redirect to the login page if the user is not logged in
+    // Ανακατεύθυνση στη Login σελίδα αν ο χρήστης δεν έχει συνδεθεί
     header("Location: login.php");
     exit();
 }
-
 
 
 // Λογική για αποσύνδεση
