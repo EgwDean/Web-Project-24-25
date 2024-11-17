@@ -1,26 +1,32 @@
 <?php
 session_start();
 
+// Έλεγχος της τιμής της μεταβλητής $email στη συνεδρία 
+if (empty($_SESSION['email'])) {
+    // Ανακατεύθυνση στη Login σελίδα αν ο χρήστης δεν έχει συνδεθεί
+    header("Location: login.php");
+    exit();
+}
+
 // Database credentials
 $host = "localhost";
 $dbusername = "root";
 $dbpassword = "556782340";
 $dbname = "diplomatiki_support";
 
-// Database connection
+// Σύνδεση με τη βάση δεδομένων
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
 
-// Check connection
+// Έλεγχος σύνδεσης
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if this is an AJAX request to update profile information
+// Έλεγχος για AJAX request για ενημέρωση των στοιχείων χρήστη
 if (isset($_POST['ajax']) && $_POST['ajax'] === '1') {
     $email = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 
-
-    // Retrieve form data for updating user profile
+    // Ανάκτηση δεδομένων φόρμας για ενημέρωση στοιχείων χρήστη
     if (isset($_POST['street'], $_POST['number'], $_POST['city'], $_POST['postcode'], $_POST['landline_telephone'], $_POST['mobile_telephone'])) {
         $street = $_POST['street'];
         $number = $_POST['number'];
@@ -29,14 +35,14 @@ if (isset($_POST['ajax']) && $_POST['ajax'] === '1') {
         $landline_telephone = $_POST['landline_telephone'];
         $mobile_telephone = $_POST['mobile_telephone'];
 
-        // Prepared statement to update user data in the database
+        // Prepared statement για ενημέρωση των στοιχείων χρήστη στη βάση
         $update_query = "UPDATE student SET street = ?, number = ?, city = ?, postcode = ?, landline_telephone = ?, mobile_telephone = ? WHERE email_student = ?";
 
         if ($stmt = $conn->prepare($update_query)) {
-            // Bind parameters (string 'sssssss' means 7 strings)
+            // Bind parameters (string 'sssssss' σημαίνει 7 strings)
             $stmt->bind_param("sssssss", $street, $number, $city, $postcode, $landline_telephone, $mobile_telephone, $email);
 
-            // Execute the query
+            // Εκτέλεση του query
             if ($stmt->execute()) {
                 echo json_encode(['message' => 'Profile updated successfully']);
             } else {
@@ -54,7 +60,7 @@ if (isset($_POST['ajax']) && $_POST['ajax'] === '1') {
     exit();
 }
 
-// If not an AJAX request, just display the page
+// Αν δεν λάβεις AJAX Request, πρόβαλλε απλά τη σελίδα
 ?>
 <!DOCTYPE html>
 <html lang="en">
