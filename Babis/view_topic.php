@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-
-// Check if the user is logged in by verifying the session variable
+// Έλεγχος της τιμής της μεταβλητής $email στη συνεδρία 
 if (empty($_SESSION['email'])) {
-    // Redirect to the login page if the user is not logged in
+    // Ανακατεύθυνση στη Login σελίδα αν ο χρήστης δεν έχει συνδεθεί
     header("Location: login.php");
     exit();
 }
-
 
 
 // Database credentials
@@ -16,30 +14,30 @@ $host = "localhost";
 $dbusername = "root";
 $dbpassword = "556782340";
 $dbname = "diplomatiki_support";
-$dateDiff = null;					// variable for the diplomatiki time active
+$dateDiff = null;					// μεταβλητή για τον χρόνο από την οριστικοποίηση διπλωματικής
 
-// Database connection
+// Σύνδεση με τη βάση δεδομένων
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
 
-// Check connection
+// Έλεγχος σύνδεσης
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if this is an AJAX request
+// Έλεγχος για AJAX request
 if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
     $email = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 
 
 
-	// Get the date difference (time active)
+	// Κλήση της stored procedure get_date_diff από τη βάση
     $sqlTime = "CALL get_date_diff(?)";
     $stmTime = $conn->prepare($sqlTime);
     $stmTime->bind_param("s", $email);
     $stmTime->execute();
     $resultTime = $stmTime->get_result();
 
-    // Fetch the date result (since it's a single value)
+    // Αποθήκευση του αποτελέσματος στη μεταβλητή dateDiff
     if ($rowTime = $resultTime->fetch_assoc()) {
         $dateDiff = $rowTime['dateDiff'];
     }
@@ -48,7 +46,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
 
 
 
-    // Define the SELECT query for the first table (Theses)
+    // SELECT query για τον πρώτο πίνακα (theses ονομάστηκε παρακάτω)
     $sql = "SELECT diplomatiki.title, diplomatiki.description, diplomatiki.pdf_link_topic, anathesi_diplomatikis.status
             FROM diplomatiki 
             INNER JOIN anathesi_diplomatikis 
@@ -67,7 +65,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
     }
     $stmt->close();
 
-    // Fetch ID for the second query
+    // Ανάκτηση και Αποθήκευση του id της διπλωματικής του συνδεδεμένου φοιτητή 
     $sql1 = "SELECT id_diploma FROM anathesi_diplomatikis WHERE email_stud = ?";
     $stmt1 = $conn->prepare($sql1);
     $stmt1->bind_param("s", $email);
@@ -76,7 +74,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
     $stmt1->fetch();
     $stmt1->close();
 
-    // Execute the second query (trimelis_epitropi_diplomatikis)
+    // και Χρήση του παραπάνω id για ανάκτηση των περιεχομένων του 2ου πίνακα (trimelis_epitropi_diplomatikis ονομάστηκε παρακάτω)
     $sql2 = "SELECT supervisor, member1, member2 
              FROM trimelis_epitropi_diplomatikis 
              WHERE id_dipl = ?";
@@ -91,7 +89,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
     }
     $stmt2->close();
 
-    // Return the data as JSON
+    // Επιστροφή του data ως JSON
     echo json_encode($data);
     $conn->close();
     exit;
@@ -238,7 +236,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
 </header>
 
 <div class="table-container">
-    <!-- Table will be dynamically loaded here -->
+    <!-- Οι πίνακες θα φορτωθούν δυναμικά εδώ -->
 </div>
 
 <footer>
