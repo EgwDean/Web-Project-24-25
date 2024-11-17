@@ -8,6 +8,12 @@ if (empty($_SESSION['email'])) {
     exit();
 }
 
+// Λογική για αποσύνδεση
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 
 // Database credentials
 $host = "localhost";
@@ -115,6 +121,56 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
             color: white;
             padding: 20px 0;
             text-align: center;
+            display: flex;
+            justify-content: center; /* Κεντρική ευθυγράμμιση του τίτλου */ 
+            align-items: center;
+        }
+	
+		header h1 {
+			margin: 0;
+			font-size: 24px;
+			
+			text-align: center;
+		}
+		
+        .header-user-menu {
+            font-family: 'Calibri', sans-serif;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+			position: absolute; /* Απόλυτη τοποθέτηση */
+			right: 20px; /* Τοποθέτηση δεξιά */
+        }
+
+        .header-user-menu:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .header-user-menu img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
         }
 
         .table-container {
@@ -233,6 +289,13 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
 <body>
 <header>
     <h1>Προβολή Διπλωματικής</h1>
+	<div class="header-user-menu">
+        <img src="media/icons8-user-48.png" alt="User Logo">
+        <span>Hello, <?php echo $_SESSION['email']; ?>!</span>
+        <form method="POST" action="" style="display: inline;">
+            <button type="submit" name="logout" class="logout-btn">Logout</button>
+        </form>
+    </div>
 </header>
 
 <div class="table-container">
