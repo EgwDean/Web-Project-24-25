@@ -22,45 +22,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Έλεγχος για AJAX request για ενημέρωση των στοιχείων χρήστη
-if (isset($_POST['ajax']) && $_POST['ajax'] === '1') {
-    $email = isset($_SESSION['email']) ? $_SESSION['email'] : null;
-
-    // Ανάκτηση δεδομένων φόρμας για ενημέρωση στοιχείων χρήστη
-    if (isset($_POST['street'], $_POST['number'], $_POST['city'], $_POST['postcode'], $_POST['landline_telephone'], $_POST['mobile_telephone'])) {
-        $street = $_POST['street'];
-        $number = $_POST['number'];
-        $city = $_POST['city'];
-        $postcode = $_POST['postcode'];
-        $landline_telephone = $_POST['landline_telephone'];
-        $mobile_telephone = $_POST['mobile_telephone'];
-
-        // Prepared statement για ενημέρωση των στοιχείων χρήστη στη βάση
-        $update_query = "UPDATE student SET street = ?, number = ?, city = ?, postcode = ?, landline_telephone = ?, mobile_telephone = ? WHERE email_student = ?";
-
-        if ($stmt = $conn->prepare($update_query)) {
-            // Bind parameters (string 'sssssss' σημαίνει 7 strings)
-            $stmt->bind_param("sssssss", $street, $number, $city, $postcode, $landline_telephone, $mobile_telephone, $email);
-
-            // Εκτέλεση του query
-            if ($stmt->execute()) {
-                echo json_encode(['message' => 'Profile updated successfully']);
-            } else {
-                echo json_encode(['error' => 'Error updating profile: ' . $stmt->error]);
-            }
-
-            // Close the statement
-            $stmt->close();
-        } else {
-            echo json_encode(['error' => 'Error preparing statement: ' . $conn->error]);
-        }
-    } else {
-        echo json_encode(['error' => 'Incomplete data received.']);
-    }
+// Λογική για αποσύνδεση
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: login.php");
     exit();
 }
 
-// Αν δεν λάβεις AJAX Request, πρόβαλλε απλά τη σελίδα
+// Υπόλοιπος κώδικας παραμένει αμετάβλητος...
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +53,56 @@ if (isset($_POST['ajax']) && $_POST['ajax'] === '1') {
             background-color: #192f59;
             color: white;
             padding: 20px 0;
+            display: flex;
+            justify-content: center; /* Κεντρική ευθυγράμμιση του τίτλου */
+            align-items: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
             text-align: center;
+        }
+
+        .header-user-menu {
+            font-family: 'Calibri', sans-serif;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: absolute; /* Απόλυτη τοποθέτηση */
+            right: 20px; /* Τοποθέτηση δεξιά */
+        }
+
+        .header-user-menu:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .header-user-menu img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
         }
 
         .table-container {
@@ -140,6 +158,13 @@ if (isset($_POST['ajax']) && $_POST['ajax'] === '1') {
 <body>
 <header>
     <h1>Ενημέρωση Στοιχείων Επικοινωνίας</h1>
+    <div class="header-user-menu">
+        <img src="media/icons8-user-48.png" alt="User Logo">
+        <span>Hello, <?php echo $_SESSION['email']; ?>!</span>
+        <form method="POST" action="" style="display: inline;">
+            <button type="submit" name="logout" class="logout-btn">Logout</button>
+        </form>
+    </div>
 </header>
 
 <div class="table-container">
