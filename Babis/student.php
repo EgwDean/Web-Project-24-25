@@ -37,7 +37,6 @@ if (isset($_POST['logout'])) {
             background-color: rgba(0, 0, 0, 0);
         }
 		
-		
 		.logout-btn {
             padding: 8px 15px;
             background-color: #e74c3c;
@@ -98,7 +97,6 @@ if (isset($_POST['logout'])) {
             padding: 5px;
             border-radius: 5px;
         }
-
        
         .header-user-menu {
             font-family: 'Calibri', sans-serif;
@@ -133,7 +131,9 @@ if (isset($_POST['logout'])) {
             <li><a href="update_student_info.php">Επεξεργασία Προφίλ</a></li>
             <li><a href="manage_thesis.php">Διαχείριση Διπλωματικής</a></li>
         </ul>
-        <!-- Display the welcome message, a profile logo and a logout button !-->
+		
+		
+        <!-- Επίδειξη ενός welcome message, ενός profile logo και ενός logout button !-->
         <div class="header-user-menu">
 			<img src="media/icons8-user-48.png" alt="Logo">
             <span>Hello, <?php echo $_SESSION['email']; ?>!</span>
@@ -144,6 +144,8 @@ if (isset($_POST['logout'])) {
         </form>
     </div>
     
+	
+	<!-- Logo Κεφαλίδα --!>
     <div class="logo-header">
         <div class="ceid-logo">
             <a href="">
@@ -151,5 +153,6 @@ if (isset($_POST['logout'])) {
             </a>
         </div>
     </div>
+	
 </body>
 </html>
