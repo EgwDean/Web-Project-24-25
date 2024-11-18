@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-// Έλεγχος της τιμής της μεταβλητής $email στη συνεδρία 
+// Έλεγχος αν ο χρήστης είναι συνδεδεμένος
 if (empty($_SESSION['email'])) {
-    // Ανακατεύθυνση στη Login σελίδα αν ο χρήστης δεν έχει συνδεθεί
     header("Location: login.php");
     exit();
 }
@@ -22,14 +21,50 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Λογική για αποσύνδεση
-if (isset($_POST['logout'])) {
-    session_destroy();
-    header("Location: login.php");
+// Επεξεργασία του αιτήματος ενημέρωσης
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax']) && $_POST['ajax'] === '1') {
+    // Αποθήκευση των δεδομένων της φόρμας
+    $email = $_SESSION['email']; // Το email του συνδεδεμένου χρήστη
+    $street = $_POST['street'];
+    $number = $_POST['number'];
+    $city = $_POST['city'];
+    $postcode = $_POST['postcode'];
+    $landline_telephone = $_POST['landline_telephone'];
+    $mobile_telephone = $_POST['mobile_telephone'];
+
+    // Προετοιμασία του query
+    $sql = "UPDATE student 
+            SET street = ?, 
+                number = ?, 
+                city = ?, 
+                postcode = ?, 
+                landline_telephone = ?, 
+                mobile_telephone = ? 
+            WHERE email_student = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        "sssssss", 
+        $street, 
+        $number, 
+        $city, 
+        $postcode, 
+        $landline_telephone, 
+        $mobile_telephone, 
+        $email
+    );
+
+    // Εκτέλεση του query και επιστροφή του αποτελέσματος
+    if ($stmt->execute()) {
+        echo json_encode(['message' => 'Information updated successfully.']);
+    } else {
+        echo json_encode(['error' => 'Failed to update information.']);
+    }
+
+    $stmt->close();
+    $conn->close();
     exit();
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
