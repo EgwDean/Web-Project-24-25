@@ -117,6 +117,25 @@ WHERE id_diploma = 1;
 
 -- 4 ----
 
+DROP TABLE diplomatiki;
+
+CREATE TABLE diplomatiki (
+  id_diplomatiki INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  email_prof VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,    
+  description TEXT NOT NULL,                            
+  pdf_link_topic VARCHAR(255),
+  status ENUM('available', 'given') NOT NULL
+);
+
+  INSERT INTO diplomatiki (email_prof, title, description, pdf_link_topic, status)
+VALUES
+  ('dimitris.papa@university.edu', 'Quantum Physics in Computation', 'This thesis explores the applications of quantum mechanics in modern computational theory.', 'uploads/1.pdf', 'available'),
+  ('dimitris.papa@university.edu', 'Advanced Topics in Algebra', 'A detailed analysis of modern algebraic structures and their applications in cryptography.', 'uploads/2.pdf', 'available'),
+  ('dimitris.papa@university.edu', 'Artificial Intelligence Ethics', 'An in-depth study on the ethical implications of artificial intelligence and machine learning.', 'uploads/3.pdf', 'available'),
+  ('dimitris.papa@university.edu', 'Artificial Intelligence Ethics1', 'An in-depth study on the ethical implications of artificial intelligence and machine learning.', 'https://university.edu/papers/ai_ethics.pdf', 'given'),
+  ('nikos.katsaos@university.edu', 'Artificial Intelligence Ethics2', 'An in-depth study on the ethical implications of artificial intelligence and machine learning.', 'https://university.edu/papers/ai_ethics.pdf', 'available');
+
 DELETE FROM trimelis_epitropi_diplomatikis;
 DELETE FROM anathesi_diplomatikis;
 DELETE FROM prosklisi_se_trimeli;
@@ -127,22 +146,22 @@ SELECT * FROM prosklisi_se_trimeli;
 
 INSERT INTO trimelis_epitropi_diplomatikis (id_dipl, supervisor, member1, member2)
 VALUES 
-(1, 'Dr. Ioannis Papadopoulos', 'maria.ioannou@university.edu', NULL),
-(2, 'Dr. Eleni Georgiou', NULL, NULL),
-(3, 'Dr. Nikolaos Pappas', NULL, NULL);
+(3, 'Dr. Ioannis Papadopoulos', 'maria.ioannou@university.edu', NULL),
+(4, 'Dr. Eleni Georgiou', NULL, NULL),
+(5, 'Dr. Nikolaos Pappas', NULL, NULL);
 
 INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
 VALUES 
-('john.doe@example.com', 1, 'pending', '2024-01-15', '2024-12-15', 'http://example.com/nemertes/101', 'path/to/diploma1.pdf', 'http://example.com/external_link1'),
-('mary.smith@example.com', 2, 'pending', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2');
+('john.doe@example.com', 3, 'pending', '2024-01-15', '2024-12-15', 'http://example.com/nemertes/101', 'path/to/diploma1.pdf', 'http://example.com/external_link1'),
+('mary.smith@example.com', 4, 'pending', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2');
 
 INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
 VALUES 
-('mike.brown@example.com', 'dimitris.papa@university.edu', 1, 'pending', NULL, '2024-11-01'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 2, 'pending', '2024-11-10', '2024-11-05'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 3, 'accepted', '2024-11-10', '2024-11-05'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 4, 'declined', '2024-11-10', '2024-11-05'),
-('mike.brown@example.com', 'iversity.edu', 1, 'pending', '2024-11-10', '2024-11-05');
+('mike.brown@example.com', 'dimitris.papa@university.edu', 3, 'pending', NULL, '2024-11-01'),
+('mike.brown@example.com', 'dimitris.papa@university.edu', 4, 'pending', '2024-11-10', '2024-11-05'),
+('mike.brown@example.com', 'dimitris.papa@university.edu', 2, 'accepted', '2024-11-10', '2024-11-05'),
+('mike.brown@example.com', 'dimitris.papa@university.edu', 3, 'declined', '2024-11-10', '2024-11-05'),
+('mike.brown@example.com', 'iversity.edu', 3, 'pending', '2024-11-10', '2024-11-05');
 
 --  5 -----
 
