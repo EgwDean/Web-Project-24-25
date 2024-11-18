@@ -230,7 +230,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
                                     <th>Description</th>
                                     <th>PDF Link</th>
                                     <th>Status</th>
-									<th>Time active</th>
+				    <th>Time active</th>
                                 </tr>
                         `;
                         data.theses.forEach(row => {
