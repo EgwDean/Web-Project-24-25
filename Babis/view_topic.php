@@ -128,8 +128,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
 	
 		header h1 {
 			margin: 0;
-			font-size: 24px;
-			
+			font-size: 24px;	
 			text-align: center;
 		}
 		
@@ -145,8 +144,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
             padding: 5px 10px;
             border-radius: 5px;
             transition: background-color 0.3s ease;
-			position: absolute; /* Απόλυτη τοποθέτηση */
-			right: 20px; /* Τοποθέτηση δεξιά */
+	    position: absolute; /* Απόλυτη τοποθέτηση */
+	    right: 20px; /* Τοποθέτηση δεξιά */
         }
 
         .header-user-menu:hover {
