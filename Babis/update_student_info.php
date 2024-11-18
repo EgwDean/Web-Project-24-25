@@ -29,7 +29,7 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-// Υπόλοιπος κώδικας παραμένει αμετάβλητος...
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
