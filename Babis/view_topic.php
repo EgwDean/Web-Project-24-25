@@ -240,7 +240,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1') {
                                     <td>${row.description}</td>
                                     <td><a href="${row.pdf_link_topic}" target="_blank">Download PDF</a></td>
                                     <td>${row.status}</td>
-									<td>${row.timeactive} days</td> 
+				    <td>${row.timeactive} days</td> 
                                 </tr>
                             `;
                         });
