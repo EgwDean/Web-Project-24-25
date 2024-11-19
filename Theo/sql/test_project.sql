@@ -1,11 +1,11 @@
 -- 1 ----
 -- DELETE FROM diplomatiki;
 
-INSERT INTO professor (username, password, name, surname, email_professor, topic, landline, mobile, department, university)
+INSERT INTO professor (password, name, surname, email_professor, topic, landline, mobile, department, university)
 VALUES
-  ('p1', 'p1', 'Dimitris', 'Papadopoulos', 'dimitris.papa@university.edu', 'Physics', '2101234567', '6901234567', 'Physics', 'National University'),
-  ('p2', 'p2', 'Maria', 'Ioannou', 'maria.ioannou@university.edu', 'Mathematics', '2101234568', '6901234568', 'Mathematics', 'National University'),
-  ('p3', 'p3', 'Nikos', 'Katsaros', 'nikos.katsaros@university.edu', 'Computer Science', '2101234569', '6901234569', 'Computer Science', 'National University');
+  ('p1', 'Dimitris', 'Papadopoulos', 'dimitris.papa@university.edu', 'Physics', '2101234567', '6901234567', 'Physics', 'National University'),
+  ('p2', 'Maria', 'Ioannou', 'maria.ioannou@university.edu', 'Mathematics', '2101234568', '6901234568', 'Mathematics', 'National University'),
+  ('p3', 'Nikos', 'Katsaros', 'nikos.katsaros@university.edu', 'Computer Science', '2101234569', '6901234569', 'Computer Science', 'National University');
   
   DROP TABLE diplomatiki;
 
@@ -42,9 +42,9 @@ VALUES
   
   INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
 VALUES 
-  ('giannis.georgiou@student.edu', 101, 'canceled', '2024-09-01', '2024-12-01', 'https://link1.com', 'pdf1.pdf', 'link1.com'),
+  ('giannis.georgiou@student.edu', 101, 'canceled_by_student', '2024-09-01', '2024-12-01', 'https://link1.com', 'pdf1.pdf', 'link1.com'),
   ('john.doe@example.com', 102, 'active', '2024-07-15', '2025-07-15', 'https://link2.com', 'pdf2.pdf', 'link2.com'),
-  ('kostas.lazaridis@student.edu', 103, 'canceled', '2024-05-01', NULL, 'https://link3.com', 'pdf3.pdf', 'link3.com'),
+  ('kostas.lazaridis@student.edu', 103, 'canceled_by_professor', '2024-05-01', NULL, 'https://link3.com', 'pdf3.pdf', 'link3.com'),
   ('eleni.papadaki@student.edu', 104, 'finished', '2023-06-01', '2024-06-01', 'https://link4.com', 'pdf4.pdf', 'link4.com');
   
   INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
@@ -117,7 +117,7 @@ VALUES
 (4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
 
 UPDATE anathesi_diplomatikis
-SET status = 'finished'
+SET status = 'active'
 WHERE id_diploma = 4;
 
 
@@ -162,7 +162,7 @@ INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, e
 VALUES 
 ('john.doe@example.com', 3, 'pending', '2024-01-15', '2024-12-15', 'http://example.com/nemertes/101', 'path/to/diploma1.pdf', 'http://example.com/external_link1'),
 ('mary.smith@example.com', 4, 'pending', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2'),
-('some other guy', 3, 'canceled', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2');
+('some other guy', 3, 'canceled_by_student', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2');
 
 INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
 VALUES 
