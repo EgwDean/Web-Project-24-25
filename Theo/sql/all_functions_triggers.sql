@@ -200,7 +200,7 @@ BEGIN
         WHERE id_diplomatiki = dip_id;
         
         UPDATE anathesi_diplomatikis
-		SET status = 'canceled'
+		SET status = 'recalled'
         WHERE id_diploma = dip_id;
         
     END IF;
@@ -291,7 +291,7 @@ BEGIN
   
   INSERT INTO log (id_di, record)
   VALUES (NEW.id_diploma, CONCAT(
-    curr_date, ' - New thesis assigned. Status = pending.'
+    curr_date, ' - New thesis assigned. Status : pending.'
   ));
 END //
 
@@ -309,7 +309,7 @@ BEGIN
   INSERT INTO log (id_di, record)
   VALUES (NEW.id_diploma, CONCAT(
     curr_date, ' - UPDATE: ',
-    'status (old): ', IFNULL(OLD.status, 'NULL'), ', ', 'status (new): ', IFNULL(NEW.status, 'NULL'), ', '
+    'Old status: ', IFNULL(OLD.status, 'NULL'), ', ', 'New status: ', IFNULL(NEW.status, 'NULL'), ', '
   ));
 END //
 
