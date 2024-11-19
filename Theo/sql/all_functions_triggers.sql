@@ -131,7 +131,7 @@ BEGIN
     SELECT COUNT(*)
     INTO stud_count
     FROM anathesi_diplomatikis
-    WHERE email_stud = stud_email AND status != 'canceled';
+    WHERE email_stud = stud_email AND (status = 'pending' OR status = 'active' OR status = 'under examination' OR status = 'finished');
         
 	IF (stud_count > 0) THEN
 		SET error_code = 1;
@@ -208,6 +208,7 @@ BEGIN
 END$
 DELIMITER ;
 
+
 DELIMITER $
 CREATE PROCEDURE accept(IN pname VARCHAR(30), IN pcode VARCHAR(30), OUT error_code INT)
 BEGIN 
@@ -215,9 +216,15 @@ BEGIN
     DECLARE prof1 VARCHAR(30);
 	DECLARE prof2 VARCHAR(30);
     DECLARE y INT;
+    DECLARE count INT;
     
     SET error_code = 0;
     SET y = 0;    
+    
+    SELECT COUNT(*)
+    INTO count
+    FROM trimelis_epitropi_diplomatikis
+    WHERE id_dipl = pcode;
     
     SELECT member1, member2
     INTO prof1, prof2
@@ -257,11 +264,11 @@ BEGIN
         
         UPDATE anathesi_diplomatikis
         SET status = 'active'
-        WHERE id_diploma = pcode;
+        WHERE id_diploma = pcode AND status = 'pending';
             
 	END IF;
     
-	IF (y = 0) THEN
+	IF (y = 0 OR count = 0) THEN
 		SELECT 'error';
         SET error_code = 1;
         
@@ -284,15 +291,7 @@ BEGIN
   
   INSERT INTO log (id_di, record)
   VALUES (NEW.id_diploma, CONCAT(
-    curr_date, ' - INSERT: ',
-    'email_stud: ', IFNULL(NEW.email_stud, 'NULL'), ', ',
-    'id_diploma: ', NEW.id_diploma, ', ',
-    'status: ', IFNULL(NEW.status, 'NULL'), ', ',
-    'start_date: ', IFNULL(NEW.start_date, 'NULL'), ', ',
-    'end_date: ', IFNULL(NEW.end_date, 'NULL'), ', ',
-    'Nemertes_link: ', IFNULL(NEW.Nemertes_link, 'NULL'), ', ',
-    'pdf_main_diploma: ', IFNULL(NEW.pdf_main_diploma, 'NULL'), ', ',
-    'external_links: ', IFNULL(NEW.external_links, 'NULL')
+    curr_date, ' - New thesis assigned. Status = pending.'
   ));
 END //
 
@@ -310,14 +309,7 @@ BEGIN
   INSERT INTO log (id_di, record)
   VALUES (NEW.id_diploma, CONCAT(
     curr_date, ' - UPDATE: ',
-    'email_stud (old): ', IFNULL(OLD.email_stud, 'NULL'), ', ', 'email_stud (new): ', IFNULL(NEW.email_stud, 'NULL'), ', ',
-    'id_diploma (old): ', OLD.id_diploma, ', ', 'id_diploma (new): ', NEW.id_diploma, ', ',
-    'status (old): ', IFNULL(OLD.status, 'NULL'), ', ', 'status (new): ', IFNULL(NEW.status, 'NULL'), ', ',
-    'start_date (old): ', IFNULL(OLD.start_date, 'NULL'), ', ', 'start_date (new): ', IFNULL(NEW.start_date, 'NULL'), ', ',
-    'end_date (old): ', IFNULL(OLD.end_date, 'NULL'), ', ', 'end_date (new): ', IFNULL(NEW.end_date, 'NULL'), ', ',
-    'Nemertes_link (old): ', IFNULL(OLD.Nemertes_link, 'NULL'), ', ', 'Nemertes_link (new): ', IFNULL(NEW.Nemertes_link, 'NULL'), ', ',
-    'pdf_main_diploma (old): ', IFNULL(OLD.pdf_main_diploma, 'NULL'), ', ', 'pdf_main_diploma (new): ', IFNULL(NEW.pdf_main_diploma, 'NULL'), ', ',
-    'external_links (old): ', IFNULL(OLD.external_links, 'NULL'), ', ', 'external_links (new): ', IFNULL(NEW.external_links, 'NULL')
+    'status (old): ', IFNULL(OLD.status, 'NULL'), ', ', 'status (new): ', IFNULL(NEW.status, 'NULL'), ', '
   ));
 END //
 
@@ -334,15 +326,7 @@ BEGIN
   
   INSERT INTO log (id_di, record)
   VALUES (OLD.id_diploma, CONCAT(
-    curr_date, ' - DELETE: ',
-    'email_stud: ', IFNULL(OLD.email_stud, 'NULL'), ', ',
-    'id_diploma: ', OLD.id_diploma, ', ',
-    'status: ', IFNULL(OLD.status, 'NULL'), ', ',
-    'start_date: ', IFNULL(OLD.start_date, 'NULL'), ', ',
-    'end_date: ', IFNULL(OLD.end_date, 'NULL'), ', ',
-    'Nemertes_link: ', IFNULL(OLD.Nemertes_link, 'NULL'), ', ',
-    'pdf_main_diploma: ', IFNULL(OLD.pdf_main_diploma, 'NULL'), ', ',
-    'external_links: ', IFNULL(OLD.external_links, 'NULL')
+    curr_date, ' - DELETED: '
   ));
 END //
 
