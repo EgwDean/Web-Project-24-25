@@ -5,6 +5,10 @@
 
 -- ΥΠΟ ΑΝΑΘΕΣΗ ΔΙΠΛΩΜΑΤΙΚΗ
 -- ΠΡΟΒΟΛΗ ΑΛΛΩΝ ΜΕΛΩΝ ΚΑΙ ΑΠΑΝΤΗΣΗ ΤΟΥΣ
+UPDATE anathesi_diplomatikis
+SET status='pending' 
+WHERE id_diploma = 1;
+
 INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
 VALUES 
 ('mike.brown@example.com', 'maria.ioannou@university.edu', 1, 'accepted', '2024-11-11', '2024-11-06');
@@ -17,6 +21,7 @@ VALUES
 -- ΥΠΟΕΡΩΤΗΜΑ α)
 -- ΥΠΟΕΡΩΤΗΜΑ β)
 -- ΥΠΟΕΡΩΤΗΜΑ γ)
+-- ΥΠΟΕΡΩΤΗΜΑ δ)
 -- ΤΕΛΟΣ ΓΙΑ ΤΗΝ ΕΝΕΡΓΟ ΔΙΠΛΩΜΑΤΙΚΗ 
 
 
@@ -25,5 +30,4 @@ VALUES
 -- ΥΠΟΕΡΩΤΗΜΑ α)
 -- ΥΠΟΕΡΩΤΗΜΑ β)
 -- ΥΠΟΕΡΩΤΗΜΑ γ)
--- ΥΠΟΕΡΩΤΗΜΑ δ)
 -- ΤΕΛΟΣ ΓΙΑ ΤΗΝ ΥΠΟ ΕΞΕΤΑΣΗ ΔΙΠΛΩΜΑΤΙΚΗ 
