@@ -277,7 +277,8 @@ div[style="margin-bottom: 20px;"] {
 
 <script>
 
-    let selectedId = null; // Για αποθήκευση του επιλεγμένου ID
+    let selectedId = null;     // Για αποθήκευση του επιλεγμένου ID
+	let selectedStatus = null; // Για αποθήκευση του επιλεγμένου status
 
     function applyFilter() {
         const statusFilter = document.getElementById('status_filter').value;
@@ -326,6 +327,7 @@ div[style="margin-bottom: 20px;"] {
                         // Event listener για click
                         row.onclick = function () {
                             selectedId = item.id; // Αποθηκεύουμε το ID
+							selectedStatus = item.status; // Αποθηκεύουμε το status
                             document.getElementById("view_info_btn").style.display = "inline"; // Εμφάνιση κουμπιού λεπτομερειών
                         };
                     });
@@ -415,14 +417,16 @@ div[style="margin-bottom: 20px;"] {
 						cell1.innerHTML = `<strong>${key}</strong>`;
 						cell2.innerHTML = value;
 
-						// Add event listener to "Member 1" and "Member 2"
-						if (key === "Member 1" || key === "Member 2") {
-							row.addEventListener('click', function () {
-								fetchMemberDetails(value);                   // Call the fetch_member_details function on click
-							});
-						}
-					}
+						if(selectedStatus === 'pending'){
 
+							// Add event listener to "Member 1" and "Member 2"
+							if (key === "Member 1" || key === "Member 2") {
+								row.addEventListener('click', function () {
+									fetchMemberDetails(value);                   // Call the fetch_member_details function on click
+								});
+							}
+						}
+                    }
 
                     // Εμφάνιση του log για την επιλεγμένη διπλωματική
                     const logXhr = new XMLHttpRequest();
