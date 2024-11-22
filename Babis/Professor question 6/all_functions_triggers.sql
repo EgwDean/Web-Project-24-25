@@ -293,40 +293,31 @@ DROP PROCEDURE IF EXISTS createNotes$
 CREATE PROCEDURE createNotes(IN professor_email VARCHAR(255), IN id_diploma INT, IN notes TEXT, OUT error_code INT)
 BEGIN
 
-  DECLARE state ENUM('pending', 'active', 'canceled_by_student', 'canceled_by_professor', 'recalled', 'under examination', 'finished');
+DECLARE state ENUM('pending', 'active', 'canceled_by_student', 'canceled_by_professor', 'recalled', 'under examination', 'finished');
   
-  DECLARE supervisor_email VARCHAR(255);
-  DECLARE member1_email VARCHAR(255);
-  DECLARE member2_email VARCHAR(255);
-  
-  SELECT anathesi_diplomatikis.status INTO state FROM anathesi_diplomatikis 
-  WHERE  anathesi_diplomatikis.id_diploma = id_diploma;
-  
-  
- 
+DECLARE supervisor_email VARCHAR(255);
+DECLARE member1_email VARCHAR(255);
+DECLARE member2_email VARCHAR(255);
+SET error_code=0;
 
-	SELECT supervisor, member1, member2
-	INTO supervisor_email, member1_email, member2_email
-	FROM trimelis_epitropi_diplomatikis
-	WHERE id_dipl = id_diploma;
+SELECT supervisor, member1, member2
+INTO supervisor_email, member1_email, member2_email
+FROM trimelis_epitropi_diplomatikis
+WHERE id_dipl = id_diploma;
 
-	SET error_code=0;
-	IF (professor_email = supervisor_email OR professor_email = member1_email OR professor_email = member2_email) THEN
-		IF NOT EXISTS (SELECT * FROM professor_notes WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma) THEN
-			INSERT INTO professor_notes (professor_email, id_diplom, notes)
-			VALUES (professor_email, id_diploma, notes);
-		ELSE
-			UPDATE professor_notes
-			SET professor_notes.notes = notes
-			WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma;
-		END IF;
+IF (professor_email = supervisor_email OR professor_email = member1_email OR professor_email = member2_email) THEN
+	IF NOT EXISTS (SELECT * FROM professor_notes WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma) THEN
+		INSERT INTO professor_notes (professor_email, id_diplom, notes)
+		VALUES (professor_email, id_diploma, notes);
 	ELSE
-		SET error_code = 1;
-		SELECT 'You need to be a supervisor or member of this diploma to add notes.';
-	
-    END IF;
-
-
+		UPDATE professor_notes
+		SET professor_notes.notes = notes
+		WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma;
+	END IF;
+ELSE
+	SET error_code = 1;
+	SELECT 'You need to be a supervisor or member of this diploma to add notes.';	
+END IF;
 END$
 DELIMITER ;
 
