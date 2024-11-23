@@ -615,7 +615,7 @@ div[style="margin-bottom: 20px;"] {
 		if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το Notes έχω πατήσει άλλο button
-		const gradesTable = getElementById('grades_table');
+		const gradesTable = document.getElementById('grades_table');
 		const gradesContainer = document.getElementById('gradesForm');
 		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
@@ -677,7 +677,7 @@ div[style="margin-bottom: 20px;"] {
 		if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το Grade έχω πατήσει άλλο button
-		const gradesTable = getElementById('grades_table');
+		const gradesTable = document.getElementById('grades_table');
 		const gradesContainer = document.getElementById('gradesForm');
 		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
