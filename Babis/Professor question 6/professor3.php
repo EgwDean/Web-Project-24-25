@@ -737,26 +737,31 @@ div[style="margin-bottom: 20px;"] {
 	}
 	
 	
-	// συνάρτηση για ενημέρωση του βαθμού διπλωματικής
-	function insertedGrade() {
-		if (!selectedId) return; // Ensure selectedId is valid
+	function insertedGrade(event) {
+    event.preventDefault(); // Prevent default form submission
 
-		const xhr = new XMLHttpRequest();
-		const url = `insert_grade.php?id=${selectedId}`;  // sending the 'id'
+    // Get the form element
+    const form = document.getElementById("gradesForm");
+    const formData = new FormData(form); // Collect form data
 
-		xhr.open('GET', url);
-		xhr.send();
+    // Send the form data via AJAX
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "insert_grade.php", true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                alert("Submission successful!"); // Success alert
+            } else {
+                alert("Error: " + response.error); // Error alert
+            }
+        } else {
+            alert("Server error. Please try again.");
+        }
+    };
+    xhr.send(formData); // Send the form data
+}
 
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === XMLHttpRequest.DONE) {
-				if (xhr.status === 200) {
-					alert("Grade inserted successfully.");
-				} else {
-					console.error("Error updating status");
-				}
-			}
-		};
-	}
 	
 	
 	
@@ -1020,7 +1025,7 @@ div[style="margin-bottom: 20px;"] {
 	
 	
 	
-	<form id="gradesForm" action="insert_grade.php" method="POST" class="grades-form-container" style="display: none;">
+	<form id="gradesForm" onsubmit="insertedGrade(event)" class="grades-form-container" style="display: none;">
 		<h2>Καταχώρηση Βαθμού</h2>
     
 		<label for="diplId">ID</label>
@@ -1030,7 +1035,7 @@ div[style="margin-bottom: 20px;"] {
 		<input type="text" id="diplomaGrade" name="diplomaGrade" placeholder="Εισάγετε τον βαθμό της Διπλωματικής" class="form-input" required>
 	
 		<div class="button-wrapper">
-			<button type="submit" onclick="insertedGrade()" class="form-button submit-btn">Υποβολή</button>
+			<button type="submit"  class="form-button submit-btn">Υποβολή</button>
 			<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
 		</div>
 	</form>
