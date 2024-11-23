@@ -445,8 +445,29 @@ div[style="margin-bottom: 20px;"] {
 									const gradeBtn = document.getElementById("grade_btn");
 									gradeBtn.style.display = "inline"; // Show the "Grade" button	
 								}else {
-									const gradeBtn = document.getElementById("grade_btn");
-									gradeBtn.style.display = "none"; // Hide the "Grade" button
+										const xhr = new XMLHttpRequest();
+										const url = `supervisor_approval.php?id=${selectedId}`;
+
+										xhr.open('GET', url);
+										xhr.send();
+
+										xhr.onreadystatechange = function () {
+											if (xhr.readyState === XMLHttpRequest.DONE) {
+												if (xhr.status === 200) {
+													const data = JSON.parse(xhr.responseText);
+
+													if (data.grade1 !== null){
+														const gradeBtn = document.getElementById("grade_btn");
+														gradeBtn.style.display = "inline"; // Show the "Grade" button
+													}else{
+														const gradeBtn = document.getElementById("grade_btn");
+														gradeBtn.style.display = "none"; // Hide the "Grade" button	
+													}	
+												} else {
+													console.error("Error fetching member details");
+												}
+											}
+										};											
 								}
 							}else{
 								const gradeBtn = document.getElementById("grade_btn");
