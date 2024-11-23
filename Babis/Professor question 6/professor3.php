@@ -840,7 +840,7 @@ div[style="margin-bottom: 20px;"] {
                 <button class="export-btn" onclick="exportJSON()">Export to JSON</button>
 				<button class="export-btn" id="view_info_btn" onclick="viewInfo()" style="display: none;">View Info</button>
 				<button class="export-btn" id="notes_btn" onclick="showNotesForm()" style="display: none;">Add Notes</button>
-				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="display: none;">Exam</button>
+				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="display: none;">Set Under Examination</button>
 				<button class="export-btn" id="grade_enable_btn" onclick="showGradeButton()" style="display: none;">Grade Enable</button>
 				<button class="export-btn" id="grade_btn" onclick="showGradesForm()" style="display: none;">Grade</button>
             </div>
