@@ -501,14 +501,16 @@ div[style="margin-bottom: 20px;"] {
         if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το View έχω πατήσει άλλο button
+		const gradesTable = document.getElementById('grades_table');
 		const gradesContainer = document.getElementById('gradesForm');
 		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
 		const logTable = document.getElementById('log_table');
 
-		// Hide the Notes and Grades form
+		// Hide the Notes and Grades form and the View Grades table
 		notesContainer.style.display = 'none';
 		gradesContainer.style.display = 'none';
+		gradesTable.style.display = 'none';
 
 		// Show the Info table
 		infoTable.style.display = 'block';
@@ -613,6 +615,7 @@ div[style="margin-bottom: 20px;"] {
 		if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το Notes έχω πατήσει άλλο button
+		const gradesTable = getElementById('grades_table');
 		const gradesContainer = document.getElementById('gradesForm');
 		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
@@ -622,10 +625,11 @@ div[style="margin-bottom: 20px;"] {
 		notesContainer.style.display = 'block';
 		notesContainer.style.pointerEvents = 'auto'; // Enable form interaction
 		
-		// Hide the Log and Info tables and the Grades form
+		// Hide the Log, Info and View Grades tables and the Grades form
 		logTable.style.display = 'none';
 		infoTable.style.display = 'none';  
 		gradesContainer.style.display = 'none';
+		gradesTable.style.display = 'none';
 	}
 
 
@@ -673,6 +677,7 @@ div[style="margin-bottom: 20px;"] {
 		if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το Grade έχω πατήσει άλλο button
+		const gradesTable = getElementById('grades_table');
 		const gradesContainer = document.getElementById('gradesForm');
 		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
@@ -682,10 +687,11 @@ div[style="margin-bottom: 20px;"] {
 		gradesContainer.style.display = 'block';
 		gradesContainer.style.pointerEvents = 'auto'; // Enable form interaction
 		
-		// Hide the Log, Info and Notes tables
+		// Hide the Log, Info, Notes and View Grades tables
 		logTable.style.display = 'none';
 		infoTable.style.display = 'none'; 
 		notesContainer.style.display = 'none';
+		gradesTable.style.display = 'none';
 	}
 	
 	
