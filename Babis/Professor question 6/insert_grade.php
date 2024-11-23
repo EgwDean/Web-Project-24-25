@@ -17,41 +17,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['diplId'];
     $grade = $_POST['diplomaGrade'];
 	
-        // Στοιχεία σύνδεσης με τη βάση δεδομένων
-        $servername = "localhost";
-        $username = "root";
-        $password = "556782340";
-        $dbname = "diplomatiki_support";
+    // Στοιχεία σύνδεσης με τη βάση δεδομένων
+    $servername = "localhost";
+    $username = "root";
+    $password = "556782340";
+    $dbname = "diplomatiki_support";
 
-        // Σύνδεση στη βάση δεδομένων
-        $conn = new mysqli($servername, $username, $password, $dbname);
+    // Σύνδεση στη βάση δεδομένων
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Έλεγχος σύνδεσης
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+    // Έλεγχος σύνδεσης
+    if ($conn->connect_error) {
+        $message = "Σφάλμα σύνδεσης με τη βάση: " . $conn->connect_error;
+    }else{
 		
-        // Ετοιμάζουμε την κλήση της stored procedure
-        $sql = "CALL gradeSubmit(?, ?, ?)";
-        
-        if ($stmt = $conn->prepare($sql)) {
-            // Δέσιμο των παραμέτρων
-            $stmt->bind_param("sid", $email, $id, $grade);
+		// Ετοιμάζουμε την κλήση της stored procedure
+		$sql = "CALL gradeSubmit(?, ?, ?)";
+			
+		if ($stmt = $conn->prepare($sql)) {
+			// Δέσιμο των παραμέτρων
+			$stmt->bind_param("sid", $email, $id, $grade);
 
-            // Εκτέλεση της διαδικασίας
-            if ($stmt->execute()) {
-                // Αποδέσμευση της αποθηκευμένης διαδικασίας
-                $stmt->close();
+			// Εκτέλεση της διαδικασίας
+			if ($stmt->execute()) {
+				// Αποδέσμευση της αποθηκευμένης διαδικασίας
 				$message = "Επιτυχής εισαγωγή βαθμού.";
-            } else {
-                $message = "Σφάλμα κατά την εκτέλεση της διαδικασίας: " . $stmt->error;
-            }
-        } else {
-            $message = "Σφάλμα κατά την προετοιμασία της διαδικασίας.";
-        }
-
-        // Κλείσιμο της σύνδεσης
-        $conn->close();
+			} else {
+				$message = "Σφάλμα κατά την εκτέλεση της διαδικασίας: " . $stmt->error;
+			}
+				$stmt->close();
+		} else {
+			$message = "Σφάλμα κατά την προετοιμασία της διαδικασίας: " . $conn->error;
+		}
+		// Κλείσιμο της σύνδεσης
+		$conn->close();
+	}
 }
 ?>
 <!DOCTYPE html>
