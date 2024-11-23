@@ -441,7 +441,7 @@ div[style="margin-bottom: 20px;"] {
 									gradeBtn.style.display = "inline"; // Show the "Grade" button	
 								}else {
 									const gradeBtn = document.getElementById("grade_btn");
-									gradeBtn.style.display = "inline"; // Hide the "Grade" button
+									gradeBtn.style.display = "none"; // Hide the "Grade" button
 								}
 							}
 							
