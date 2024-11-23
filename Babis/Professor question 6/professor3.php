@@ -279,7 +279,7 @@ div[style="margin-bottom: 20px;"] {
 
 
 /* Βασικά στυλ για την φόρμα */
-.notes-form-container {
+.notes-form-container.grades-form-container {
     max-width: 400px;
     margin: 50px auto 0; /* Προσθήκη 50px κενό στην κορυφή */
     padding: 20px;
@@ -289,7 +289,7 @@ div[style="margin-bottom: 20px;"] {
     font-family: 'Calibri', sans-serif;
 }
 
-.notes-form-container h2 {
+.notes-form-container.grades-form-container h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
@@ -357,7 +357,7 @@ div[style="margin-bottom: 20px;"] {
 }
 
 /* Στυλ για τα labels */
-.notes-form-container label {
+.notes-form-container.grades-form-container label {
     font-size: 18px;
     font-weight: 500;
     color: #555;
@@ -372,8 +372,6 @@ div[style="margin-bottom: 20px;"] {
 }
 
 </style>
-
-
 <script>
 
     let selectedId = null;     // Για αποθήκευση του επιλεγμένου ID
@@ -438,20 +436,19 @@ div[style="margin-bottom: 20px;"] {
 								gradeEnableBtn.style.display = "inline"; // Show the "Grade Enable" button
 							}
 							else {
-								document.getElementById("exam_btn").style.display = "none"; // Hide if not the supervisor
-								document.getElementById("grade_enable_btn").style.display = "none"; // Hide if not the supervisor
+								// Hide if not the supervisor and status not active or under examination
+								document.getElementById("exam_btn").style.display = "none"; 		
+								document.getElementById("grade_enable_btn").style.display = "none"; 
 							}
-							
 							
 							
                             document.getElementById("view_info_btn").style.display = "inline"; // Εμφάνιση κουμπιού λεπτομερειών
 							document.getElementById("notes_btn").style.display = "inline";     // Εμφάνιση κουμπιού δημιουργίας σημειώσεων
 							
-							rowClickHandler(event);  // συνάρτηση που γεμίζει αυτόματα την φόρμα σημειώσεων και βαθμών σε κάθε 'click' σε γραμμή
+							rowClickHandler(event);  // συνάρτηση που γεμίζει αυτόματα τις φόρμες σημειώσεων και βαθμών σε κάθε 'click' σε γραμμή
                         };
 						
-		
-                    });
+	                });
                 } else {
                     console.error("Error fetching data");
                 }
@@ -460,8 +457,7 @@ div[style="margin-bottom: 20px;"] {
     }
 
 
-
-
+	// συνάρτηση για προβολή απάντησης μέλους τριμελούς σε πρόσκληση(υπό ανάθεση διπλωματική)
 	function fetchMemberDetails(member) {
 		if (!member) return;
 		
@@ -497,7 +493,7 @@ div[style="margin-bottom: 20px;"] {
 
 	
 
-    // Λειτουργία εμφάνισης λεπτομέρειών για το επιλεγμένο ID
+    // Συνάρτηση εμφάνισης λεπτομερειών για την επιλεγμένη γραμμή πίνακα/id διπλωματικής 
     function viewInfo() {
         if (!selectedId) return;
 		
@@ -606,6 +602,8 @@ div[style="margin-bottom: 20px;"] {
         };
     }
 	
+	
+	// συνάρτηση για εμφάνιση της φόρμας εισαγωγής σημειώσεων
 	function showNotesForm() {
 		if (!selectedId) return;
 		
@@ -623,12 +621,24 @@ div[style="margin-bottom: 20px;"] {
 		infoTable.style.display = 'none';    
 	}
 
+
+	// συνάρτηση απόκρυψης της φόρμας σημειώσεων
 	function cancelNotes() {
     var form = document.querySelector('.notesForm');
     form.style.display = 'none';
 	}
 	
 	
+	// συνάρτηση καθαρισμού της φόρμας σημειώσεων
+	function clearForm() {
+		document.getElementById('notes').value = '';
+		document.getElementById('diplomaId').value = '';
+		document.getElementById('diplomaStatus').value = '';
+	}
+	
+	
+	
+	// συνάρτηση για ενημέρωση του status διπλωματικής σε "Υπό Εξέταση"
 	function markUnderExamination() {
 		if (!selectedId) return; // Ensure selectedId is valid
 
@@ -651,11 +661,11 @@ div[style="margin-bottom: 20px;"] {
 	}
 	
 	
-	
+	// συνάρτηση για εμφάνιση της φόρμας καταχώρησης βαθμού
 	function showGradesForm() {
 		if (!selectedId) return;
 		
-		// Κώδικας για την περίπτωση όπου πριν το Notes έχω πατήσει άλλο button
+		// Κώδικας για την περίπτωση όπου πριν το Grade έχω πατήσει άλλο button
 		const gradesContainer = document.getElementById('gradesForm');
 		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
@@ -665,13 +675,18 @@ div[style="margin-bottom: 20px;"] {
 		gradesContainer.style.display = 'block';
 		gradesContainer.style.pointerEvents = 'auto'; // Enable form interaction
 		
-		// Hide the Log and Info and Notes tables
+		// Hide the Log, Info and Notes tables
 		logTable.style.display = 'none';
 		infoTable.style.display = 'none'; 
 		notesContainer.style.display = 'none';
 	}
 	
-
+	
+	// συνάρτηση εμφάνισης του κουμπιού εισαγωγής βαθμού
+	function showGradeButton() {
+		const gradeBtn = document.getElementById("grade_btn");
+		gradeBtn.style.display = "inline"; // Show the "Grade" button
+	}
 	
 	
 
@@ -721,14 +736,7 @@ div[style="margin-bottom: 20px;"] {
     }
 	
 	
-	
-	function clearForm() {
-		document.getElementById('notes').value = '';
-		document.getElementById('diplomaId').value = '';
-		document.getElementById('diplomaStatus').value = '';
-	}
-	
-	
+	// συνάρτηση για την αυτόματη εισαγωγή δεδομένων στις φόρμες σημειώσεων και καταχώρησης βαθμού
 	function rowClickHandler(event) {
 		var row = event.target.closest('tr'); // Βρίσκουμε τη γραμμή του πίνακα που έγινε κλικ
 		if (!row) return;
@@ -738,21 +746,12 @@ div[style="margin-bottom: 20px;"] {
 		var statusDiploma = row.cells[4].textContent;  
 
 		// Συμπληρώνουμε τα πεδία στη φόρμα
-		document.getElementById('diplomaId').value = idDiploma;
-		document.getElementById('diplomaStatus').value = statusDiploma;
+		document.getElementById('diplomaId').value = idDiploma;              // για τη φόρμα σημειώσεων 
+		document.getElementById('diplomaStatus').value = statusDiploma;      // για τη φόρμα σημειώσεων
 		
-		document.getElementById('diplId').value = idDiploma;
+		document.getElementById('diplId').value = idDiploma;                 // για τη φόρμα καταχώρησης βαθμού
 	}
-	
-	
-	
-	function showGradeButton() {
-		const gradeBtn = document.getElementById("grade_btn");
-		gradeBtn.style.display = "inline"; // Show the "Grade" button
-	}
-
 </script>
-
 </head>
 <body onload="get()">
 
@@ -874,17 +873,14 @@ div[style="margin-bottom: 20px;"] {
 	
 	
 	
-	
-	
-	
-	<form id="gradesForm" action="insert_grade.php" method="POST" class="notes-form-container" style="display: none;">
-		<h2>Δημιουργία Σημειώσεων</h2>
+	<form id="gradesForm" action="insert_grade.php" method="POST" class="grades-form-container" style="display: none;">
+		<h2>Καταχώρηση Βαθμού</h2>
     
 		<label for="diplId">ID</label>
 		<input type="text" id="diplId" name="diplId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" required>
     
 		<label for="diplomaGrade">Grade</label>
-		<input type="text" id="diplomaGrade" name="diplomaGrade" placeholder="Εισάγετε την κατάσταση της Διπλωματικής" class="form-input" required>
+		<input type="text" id="diplomaGrade" name="diplomaGrade" placeholder="Εισάγετε τον βαθμό της Διπλωματικής" class="form-input" required>
 	
 		<div class="button-wrapper">
 			<button type="submit" onclick="cancelNotes()" class="form-button submit-btn">Υποβολή</button>
@@ -898,4 +894,3 @@ div[style="margin-bottom: 20px;"] {
 
 </body>
 </html>
-
