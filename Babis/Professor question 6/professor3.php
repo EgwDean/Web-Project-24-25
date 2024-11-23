@@ -498,12 +498,14 @@ div[style="margin-bottom: 20px;"] {
         if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το View έχω πατήσει άλλο button
-		const formContainer = document.getElementById('notesForm');
+		const gradesContainer = document.getElementById('gradesForm');
+		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
 		const logTable = document.getElementById('log_table');
 
-		// Hide the Notes form
-		formContainer.style.display = 'none';
+		// Hide the Notes and Grades form
+		notesContainer.style.display = 'none';
+		gradesContainer.style.display = 'none';
 
 		// Show the Info table
 		infoTable.style.display = 'block';
@@ -608,17 +610,19 @@ div[style="margin-bottom: 20px;"] {
 		if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το Notes έχω πατήσει άλλο button
-		const formContainer = document.getElementById('notesForm');
+		const gradesContainer = document.getElementById('gradesForm');
+		const notesContainer = document.getElementById('notesForm');
 		const infoTable = document.getElementById('info_table');
 		const logTable = document.getElementById('log_table');
 
 		// Show the Notes form
-		formContainer.style.display = 'block';
-		formContainer.style.pointerEvents = 'auto'; // Enable form interaction
+		notesContainer.style.display = 'block';
+		notesContainer.style.pointerEvents = 'auto'; // Enable form interaction
 		
-		// Hide the Log and Info tables
+		// Hide the Log and Info tables and the Grades form
 		logTable.style.display = 'none';
-		infoTable.style.display = 'none';    
+		infoTable.style.display = 'none';  
+		gradesContainer.style.display = 'none';
 	}
 
 
