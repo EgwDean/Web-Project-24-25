@@ -428,21 +428,26 @@ div[style="margin-bottom: 20px;"] {
 							
 							// Check if the professor is the supervisor
 							const professorEmail = "<?php echo $userEmail; ?>"; // Get the logged-in professor's email
-							if (item.supervisor === professorEmail && item.status === "active") {
-								const examBtn = document.getElementById("exam_btn");
-								examBtn.style.display = "inline"; // Show the "Exam" button
-							}else if (item.supervisor === professorEmail && item.status === "under examination") {
-								const gradeEnableBtn = document.getElementById("grade_enable_btn");
-								gradeEnableBtn.style.display = "inline"; // Show the "Grade Enable" button
-							}
-							else {
-								// Hide if not the supervisor and status not active or under examination
-								document.getElementById("exam_btn").style.display = "none"; 		
-								document.getElementById("grade_enable_btn").style.display = "none"; 
+							if (item.status === "active") {
+								if (item.supervisor === professorEmail){
+									const examBtn = document.getElementById("exam_btn");
+									examBtn.style.display = "inline"; // Show the "Set Under Examination" button	
+								}else {examBtn.style.display = "none";}
+						
+							}else if (item.status === "under examination"){
+								
+								if (item.supervisor === professorEmail ) {
+									const gradeBtn = document.getElementById("grade_btn");
+									gradeBtn.style.display = "inline"; // Show the "Grade" button	
+								}else {
+									const gradeBtn = document.getElementById("grade_btn");
+									gradeBtn.style.display = "inline"; // Hide the "Grade" button
+								}
 							}
 							
 							
-                            document.getElementById("view_info_btn").style.display = "inline"; // Εμφάνιση κουμπιού λεπτομερειών
+							document.getElementById("view_grades_btn").style.display = "inline"; // Εμφάνιση κουμπιού προβολής βαθμών
+                            document.getElementById("view_info_btn").style.display = "inline"; // Εμφάνιση κουμπιού λεπτομερειών διπλωματικής
 							document.getElementById("notes_btn").style.display = "inline";     // Εμφάνιση κουμπιού δημιουργίας σημειώσεων
 							
 							rowClickHandler(event);  // συνάρτηση που γεμίζει αυτόματα τις φόρμες σημειώσεων και βαθμών σε κάθε 'click' σε γραμμή
@@ -460,9 +465,7 @@ div[style="margin-bottom: 20px;"] {
 	// συνάρτηση για προβολή απάντησης μέλους τριμελούς σε πρόσκληση(υπό ανάθεση διπλωματική)
 	function fetchMemberDetails(member) {
 		if (!member) return;
-		
-		console.log('selectedId:', selectedId);
-		console.log('member:', member);
+
 		const xhr = new XMLHttpRequest();
 		const url = `fetch_member_details.php?id=${selectedId}&member=${member}`;
 
@@ -686,11 +689,112 @@ div[style="margin-bottom: 20px;"] {
 	}
 	
 	
+	// συνάρτηση απόκρυψης της φόρμας καταχώρησης βαθμού
+	function cancelNotes() {
+    var form = document.querySelector('.gradesForm');
+    form.style.display = 'none';
+	}
+	
+	
 	// συνάρτηση εμφάνισης του κουμπιού εισαγωγής βαθμού
 	function showGradeButton() {
 		const gradeBtn = document.getElementById("grade_btn");
 		gradeBtn.style.display = "inline"; // Show the "Grade" button
 	}
+	
+	
+	// συνάρτηση για ενημέρωση του βαθμού διπλωματικής
+	function insertedGrade() {
+		if (!selectedId) return; // Ensure selectedId is valid
+
+		const xhr = new XMLHttpRequest();
+		const url = `insert_grade.php?id=${selectedId}`;  // sending the 'id'
+
+		xhr.open('GET', url);
+		xhr.send();
+
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					alert("Grade inserted successfully.");
+				} else {
+					console.error("Error updating status");
+				}
+			}
+		};
+	}
+	
+	
+	
+	
+	// συνάρτηση για προβολή των βαθμών των καθηγητών-μελών τριμελούς
+	function fetchGradesDetails() {
+		
+		// Κώδικας για την περίπτωση όπου πριν το View Grades έχω πατήσει άλλο button
+		const gradesTable = document.getElementById('grades_table');
+		const gradesContainer = document.getElementById('gradesForm');
+		const notesContainer = document.getElementById('notesForm');
+		const infoTable = document.getElementById('info_table');
+		const logTable = document.getElementById('log_table');
+
+		// Hide the Notes and Grades form
+		notesContainer.style.display = 'none';
+		gradesContainer.style.display = 'none';
+
+		// Hide the Info table
+		infoTable.style.display = 'none';
+		
+		// Hide the Log table
+		logTable.style.display = 'none';
+		
+		// Show the View Grades table
+		gradesTable.style.display = 'block';
+
+		const xhr = new XMLHttpRequest();
+		const url = `view_grades.php?id=${selectedId}`;
+
+		xhr.open('GET', url);
+		xhr.send();
+
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					const data = JSON.parse(xhr.responseText);
+
+					
+					// Ενημέρωση δεξιού πίνακα με τους βαθμούς
+                    const rightTable = document.getElementById("grades_table");
+                    rightTable.innerHTML = '';
+
+                    // Δημιουργία γραμμών για κάθε λεπτομέρεια
+                    const tbody = rightTable.createTBody();
+
+                    const details = {
+                        "Supervisor": data.supervisor,
+                        "Member 1": data.member1,
+                        "Member 2": data.member2,
+                        "Grade 1":	data.grade1,
+						"Grade 2":	data.grade2,
+						"Grade 3":	data.grade3,
+						"Final Grade": data.final_grade
+                    };
+
+                    // Loop through the details and insert rows
+					for (const [key, value] of Object.entries(details)) {
+						const row = tbody.insertRow();
+						const cell1 = row.insertCell(0);
+						const cell2 = row.insertCell(1);
+
+						cell1.innerHTML = `<strong>${key}</strong>`;
+						cell2.innerHTML = value;				
+					}
+				} else {
+					console.error("Error fetching member details");
+				}
+			}
+		};
+	}     
+	
 	
 	
 
@@ -841,14 +945,19 @@ div[style="margin-bottom: 20px;"] {
 				<button class="export-btn" id="view_info_btn" onclick="viewInfo()" style="display: none;">View Info</button>
 				<button class="export-btn" id="notes_btn" onclick="showNotesForm()" style="display: none;">Add Notes</button>
 				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="display: none;">Set Under Examination</button>
-				<button class="export-btn" id="grade_enable_btn" onclick="showGradeButton()" style="display: none;">Grade Enable</button>
 				<button class="export-btn" id="grade_btn" onclick="showGradesForm()" style="display: none;">Grade</button>
-            </div>
+				<button class="export-btn" id="view_grades_btn" onclick="fetchGradesDetails()" style="display: none;">View Grades</button>
+			</div>
 </div>
 
 <div class="right-section">
     <h1 class="table-title">Λεπτομέρειες</h1>
     <table id="info_table"></table>
+	
+	
+	<table id="grades_table"></table>
+	
+	
 
     <!-- Νέος πίνακας για τα δεδομένα από το log -->
 	<div  id="log_table_container">
@@ -887,7 +996,7 @@ div[style="margin-bottom: 20px;"] {
 		<input type="text" id="diplomaGrade" name="diplomaGrade" placeholder="Εισάγετε τον βαθμό της Διπλωματικής" class="form-input" required>
 	
 		<div class="button-wrapper">
-			<button type="submit" onclick="cancelNotes()" class="form-button submit-btn">Υποβολή</button>
+			<button type="submit" onclick="insertedGrade()" class="form-button submit-btn">Υποβολή</button>
 			<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
 		</div>
 	</form>
