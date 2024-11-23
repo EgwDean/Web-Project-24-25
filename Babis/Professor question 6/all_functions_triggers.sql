@@ -370,6 +370,7 @@ END$
 DELIMITER ;
 
 
+-- Υπό Εξέταση Διπλωματική
 
 DELIMITER $
 DROP PROCEDURE IF EXISTS gradeSubmit$
