@@ -432,7 +432,13 @@ div[style="margin-bottom: 20px;"] {
 								if (item.supervisor === professorEmail){
 									const examBtn = document.getElementById("exam_btn");
 									examBtn.style.display = "inline"; // Show the "Set Under Examination" button	
-								}else {examBtn.style.display = "none";}
+								}else {
+									const examBtn = document.getElementById("exam_btn");
+									examBtn.style.display = "none";
+									
+									const gradeBtn = document.getElementById("grade_btn");
+									gradeBtn.style.display = "none"; // Hide the "Grade" button
+								}
 						
 							}else if (item.status === "under examination"){
 								
@@ -443,8 +449,10 @@ div[style="margin-bottom: 20px;"] {
 									const gradeBtn = document.getElementById("grade_btn");
 									gradeBtn.style.display = "none"; // Hide the "Grade" button
 								}
+							}else{
+								const gradeBtn = document.getElementById("grade_btn");
+								gradeBtn.style.display = "none"; // Hide the "Grade" button
 							}
-							
 							
 							document.getElementById("view_grades_btn").style.display = "inline"; // Εμφάνιση κουμπιού προβολής βαθμών
                             document.getElementById("view_info_btn").style.display = "inline"; // Εμφάνιση κουμπιού λεπτομερειών διπλωματικής
