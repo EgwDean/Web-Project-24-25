@@ -434,7 +434,7 @@ div[style="margin-bottom: 20px;"] {
 									examBtn.style.display = "inline"; // Show the "Set Under Examination" button	
 								}else {
 									const examBtn = document.getElementById("exam_btn");
-									examBtn.style.display = "none";
+									examBtn.style.display = "none";   // Hide the "Set Under Examination" button	
 									
 									const gradeBtn = document.getElementById("grade_btn");
 									gradeBtn.style.display = "none"; // Hide the "Grade" button
