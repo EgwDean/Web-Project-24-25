@@ -330,10 +330,6 @@ DELIMITER ;
 
 
 
-
-
-
-
 -- Ενεργή Διπλωματική
 
 DELIMITER $
@@ -368,6 +364,7 @@ ELSE
 END IF;
 END$
 DELIMITER ;
+
 
 
 -- Υπό Εξέταση Διπλωματική
