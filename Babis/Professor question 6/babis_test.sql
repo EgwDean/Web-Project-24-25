@@ -38,4 +38,14 @@ INSERT INTO eksetasi_diplomatikis (id_diplomatikis, email_st, exam_date, exam_ro
 VALUES 
 (5, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', NULL, 9.50, 9.30, 9.27, 'Pass');
 
+/*
+UPDATE trimelis_epitropi_diplomatikis
+SET supervisor = 'Minister Ioannis Papanikolaou'
+WHERE id_dipl = 5;
+
+UPDATE eksetasi_diplomatikis
+SET grade1 = 5
+WHERE id_diplomatikis = 5;
+*/
+
 -- ΤΕΛΟΣ ΓΙΑ ΤΗΝ ΥΠΟ ΕΞΕΤΑΣΗ ΔΙΠΛΩΜΑΤΙΚΗ 
