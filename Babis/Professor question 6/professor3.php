@@ -430,20 +430,35 @@ div[style="margin-bottom: 20px;"] {
 							const professorEmail = "<?php echo $userEmail; ?>"; // Get the logged-in professor's email
 							if (item.status === "active") {
 								const gradeBtn = document.getElementById("grade_btn");
-								gradeBtn.style.display = "none"; // Hide the "Grade" button
+								gradeBtn.style.pointerEvents = "none";
+								gradeBtn.style.cursor = "not-allowed";
+								gradeBtn.style.opacity = "0.6";				// Disable the "Grade" button
 								if (item.supervisor === professorEmail){
 									const examBtn = document.getElementById("exam_btn");
 									examBtn.style.display = "inline"; // Show the "Set Under Examination" button	
+									examBtn.style.pointerEvents = "auto";
+									examBtn.style.cursor = "pointer";
+									examBtn.style.opacity = "1";
 								}else {
 									const examBtn = document.getElementById("exam_btn");
-									examBtn.style.display = "none";   // Hide the "Set Under Examination" button	
+									examBtn.style.pointerEvents = "none";
+									examBtn.style.cursor = "not-allowed";
+									examBtn.style.opacity = "0.6";   // Disable the "Set Under Examination" button	
 								}
 						
 							}else if (item.status === "under examination"){
 								
+								const examBtn = document.getElementById("exam_btn");
+								examBtn.style.pointerEvents = "none";
+								examBtn.style.cursor = "not-allowed";
+								examBtn.style.opacity = "0.6";   // Disable the "Set Under Examination" button	
+								
 								if (item.supervisor === professorEmail ) {
 									const gradeBtn = document.getElementById("grade_btn");
-									gradeBtn.style.display = "inline"; // Show the "Grade" button	
+									gradeBtn.style.display = "inline"; // Show the "Grade" button
+									gradeBtn.style.pointerEvents = "auto";
+									gradeBtn.style.cursor = "pointer";
+									gradeBtn.style.opacity = "1";									
 								}else {
 										const xhr = new XMLHttpRequest();
 										const url = `supervisor_approval.php?id=${selectedId}`;
@@ -459,9 +474,14 @@ div[style="margin-bottom: 20px;"] {
 													if (data.grade1 !== null){
 														const gradeBtn = document.getElementById("grade_btn");
 														gradeBtn.style.display = "inline"; // Show the "Grade" button
+														gradeBtn.style.pointerEvents = "auto";
+														gradeBtn.style.cursor = "pointer";
+														gradeBtn.style.opacity = "1";
 													}else{
 														const gradeBtn = document.getElementById("grade_btn");
-														gradeBtn.style.display = "none"; // Hide the "Grade" button	
+														gradeBtn.style.pointerEvents = "none";
+														gradeBtn.style.cursor = "not-allowed";
+														gradeBtn.style.opacity = "0.6";   // Disable the "Grade" button
 							
 													}	
 												} else {
@@ -472,15 +492,29 @@ div[style="margin-bottom: 20px;"] {
 								}
 							}else{
 								const gradeBtn = document.getElementById("grade_btn");
-								gradeBtn.style.display = "none"; // Hide the "Grade" button
+								gradeBtn.style.pointerEvents = "none";
+								gradeBtn.style.cursor = "not-allowed";
+								gradeBtn.style.opacity = "0.6";   // Disable the "Grade" button
+							
 								
 								const examBtn = document.getElementById("exam_btn");
-								examBtn.style.display = "none";   // Hide the "Set Under Examination" button
+								examBtn.style.pointerEvents = "none";
+								examBtn.style.cursor = "not-allowed";
+								examBtn.style.opacity = "0.6";   // Disable the "Set Under Examination" button	
 							}
 							
-							document.getElementById("view_grades_btn").style.display = "inline"; // Εμφάνιση κουμπιού προβολής βαθμών
-                            document.getElementById("view_info_btn").style.display = "inline"; // Εμφάνιση κουμπιού λεπτομερειών διπλωματικής
-							document.getElementById("notes_btn").style.display = "inline";     // Εμφάνιση κουμπιού δημιουργίας σημειώσεων
+							document.getElementById("view_grades_btn").style.display = "inline"; // Ενεργοποίηση κουμπιού προβολής βαθμών
+							document.getElementById("view_grades_btn").style.pointerEvents = "auto";
+							document.getElementById("view_grades_btn").style.cursor = "pointer";
+							document.getElementById("view_grades_btn").style.opacity = "1";
+                            document.getElementById("view_info_btn").style.display = "inline"; // Ενεργοποίηση κουμπιού λεπτομερειών διπλωματικής
+							document.getElementById("view_info_btn").style.pointerEvents = "auto";
+							document.getElementById("view_info_btn").style.cursor = "pointer";
+							document.getElementById("view_info_btn").style.opacity = "1";
+							document.getElementById("notes_btn").style.display = "inline";     // Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
+							document.getElementById("notes_btn").style.pointerEvents = "auto";
+							document.getElementById("notes_btn").style.cursor = "pointer";
+							document.getElementById("notes_btn").style.opacity = "1";		
 							
 							rowClickHandler(event);  // συνάρτηση που γεμίζει αυτόματα τις φόρμες σημειώσεων και βαθμών σε κάθε 'click' σε γραμμή
                         };
@@ -672,11 +706,14 @@ div[style="margin-bottom: 20px;"] {
 	}
 	
 	
-	// συνάρτηση καθαρισμού της φόρμας σημειώσεων
+	// συνάρτηση καθαρισμού της φόρμας σημειώσεων και της φόρμας καταχώρησης βαθμού
 	function clearForm() {
 		document.getElementById('notes').value = '';
 		document.getElementById('diplomaId').value = '';
 		document.getElementById('diplomaStatus').value = '';
+		
+		document.getElementById('diplId').value = '';        	// may delete later...
+		document.getElementById('diplomaGrade').value = '';
 	}
 	
 	
@@ -727,13 +764,6 @@ div[style="margin-bottom: 20px;"] {
 	}
 	
 	
-	// συνάρτηση απόκρυψης της φόρμας καταχώρησης βαθμού
-	function cancelNotes() {
-    var form = document.querySelector('.gradesForm');
-    form.style.display = 'none';
-	}
-	
-	
 	// συνάρτηση εμφάνισης του κουμπιού εισαγωγής βαθμού
 	function showGradeButton() {
 		const gradeBtn = document.getElementById("grade_btn");
@@ -756,6 +786,7 @@ div[style="margin-bottom: 20px;"] {
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
                 alert("Grade inserted successfully!"); // Success alert
+				form.style.display = 'none';		  // Hide form after alert
             } else {
                 alert("Error: " + response.error); // Error alert
             }
@@ -766,7 +797,6 @@ div[style="margin-bottom: 20px;"] {
     xhr.send(formData); // Send the form data
 }
 
-	
 	
 	
 	
@@ -900,7 +930,9 @@ div[style="margin-bottom: 20px;"] {
 		document.getElementById('diplomaId').value = idDiploma;              // για τη φόρμα σημειώσεων 
 		document.getElementById('diplomaStatus').value = statusDiploma;      // για τη φόρμα σημειώσεων
 		
-		document.getElementById('diplId').value = idDiploma;                 // για τη φόρμα καταχώρησης βαθμού
+		if(selectedStatus === 'under examination'){
+			document.getElementById('diplId').value = idDiploma;                 // για τη φόρμα καταχώρησης βαθμού
+		}
 	}
 </script>
 </head>
@@ -985,11 +1017,11 @@ div[style="margin-bottom: 20px;"] {
             <div class="export-btn-container">
                 <button class="export-btn" onclick="exportCSV()">Export to CSV</button>
                 <button class="export-btn" onclick="exportJSON()">Export to JSON</button>
-				<button class="export-btn" id="view_info_btn" onclick="viewInfo()" style="display: none;">View Info</button>
-				<button class="export-btn" id="notes_btn" onclick="showNotesForm()" style="display: none;">Add Notes</button>
-				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="display: none;">Set Under Examination</button>
-				<button class="export-btn" id="grade_btn" onclick="showGradesForm()" style="display: none;">Grade</button>
-				<button class="export-btn" id="view_grades_btn" onclick="fetchGradesDetails()" style="display: none;">View Grades</button>
+				<button class="export-btn" id="view_info_btn" onclick="viewInfo()" style="pointer-events: none; cursor: not-allowed; opacity: 0.6;">View Info</button>
+				<button class="export-btn" id="notes_btn" onclick="showNotesForm()" style="pointer-events: none; cursor: not-allowed; opacity: 0.6;">Add Notes</button>
+				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="pointer-events: none; cursor: not-allowed; opacity: 0.6;">Set Under Examination</button>
+				<button class="export-btn" id="grade_btn" onclick="showGradesForm()" style="pointer-events: none; cursor: not-allowed; opacity: 0.6;">Grade</button>
+				<button class="export-btn" id="view_grades_btn" onclick="fetchGradesDetails()" style="pointer-events: none; cursor: not-allowed; opacity: 0.6;">View Grades</button>
 			</div>
 </div>
 
@@ -1033,13 +1065,13 @@ div[style="margin-bottom: 20px;"] {
 		<h2>Καταχώρηση Βαθμού</h2>
     
 		<label for="diplId">ID</label>
-		<input type="text" id="diplId" name="diplId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" required>
+		<input type="text" id="diplId" name="diplId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
     
 		<label for="diplomaGrade">Grade</label>
 		<input type="text" id="diplomaGrade" name="diplomaGrade" placeholder="Εισάγετε τον βαθμό της Διπλωματικής" class="form-input" required>
 	
 		<div class="button-wrapper">
-			<button type="submit"  class="form-button submit-btn">Υποβολή</button>
+			<button type="submit" class="form-button submit-btn">Υποβολή</button>
 			<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
 		</div>
 	</form>
