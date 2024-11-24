@@ -1,15 +1,26 @@
 <?php
-// Ελέγχουμε αν τα δεδομένα έχουν αποσταλεί μέσω POST
+// Ξεκινάμε τη συνεδρία αν δεν έχει ξεκινήσει
+session_start();
+
+
+// Έλεγχος αν ο χρήστης είναι συνδεδεμένος
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Χρήστης που συνδέθηκε
+$email = $_SESSION['email'];
+
+
 $message = ''; // Αρχικοποιούμε τη μεταβλητή για το μήνυμα
 
+// Ελέγχουμε αν τα δεδομένα έχουν αποσταλεί μέσω POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Λήψη των δεδομένων από τη φόρμα
     $dipId = $_POST['studentId'];
     $studentNumber = $_POST['studentNumber'];
     $studentEmail = $_POST['studentEmail'];
-
-    // Ξεκινάμε τη συνεδρία αν δεν έχει ξεκινήσει
-    session_start();
 
     // Ελέγχουμε αν υπάρχει email στη συνεδρία
     if (!isset($_SESSION['email'])) {
@@ -58,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         } elseif ($output == 2) {
                             $message = "Λάθος στοιχεία φοιτητή";
                         } elseif ($output == 3) {
-                            $message = "Επιτυγχία!";
+                            $message = "Επιτυχία!";
                         } else {
                             $message = "Άγνωστο σφάλμα. Επικοινωνήστε με τον διαχειριστή.";
                         }
