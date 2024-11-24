@@ -430,32 +430,32 @@ div[style="margin-bottom: 20px;"] {
 							const professorEmail = "<?php echo $userEmail; ?>"; // Get the logged-in professor's email
 							if (item.status === "active") {
 								const gradeBtn = document.getElementById("grade_btn");
-								gradeBtn.style.pointerEvents = "none";
+								gradeBtn.style.pointerEvents = "none";			// Disable the "Grade" button
 								gradeBtn.style.cursor = "not-allowed";
-								gradeBtn.style.opacity = "0.6";				// Disable the "Grade" button
+								gradeBtn.style.opacity = "0.6";					
 								if (item.supervisor === professorEmail){
 									const examBtn = document.getElementById("exam_btn");
-									examBtn.style.display = "inline"; // Show the "Set Under Examination" button	
+									examBtn.style.display = "inline"; 			// Show the "Set Under Examination" button	
 									examBtn.style.pointerEvents = "auto";
 									examBtn.style.cursor = "pointer";
 									examBtn.style.opacity = "1";
 								}else {
 									const examBtn = document.getElementById("exam_btn");
-									examBtn.style.pointerEvents = "none";
+									examBtn.style.pointerEvents = "none";		// Disable the "Set Under Examination" button
 									examBtn.style.cursor = "not-allowed";
-									examBtn.style.opacity = "0.6";   // Disable the "Set Under Examination" button	
+									examBtn.style.opacity = "0.6";   			
 								}
 						
 							}else if (item.status === "under examination"){
 								
 								const examBtn = document.getElementById("exam_btn");
-								examBtn.style.pointerEvents = "none";
+								examBtn.style.pointerEvents = "none";			// Disable the "Set Under Examination" button
 								examBtn.style.cursor = "not-allowed";
-								examBtn.style.opacity = "0.6";   // Disable the "Set Under Examination" button	
+								examBtn.style.opacity = "0.6";   				
 								
 								if (item.supervisor === professorEmail ) {
 									const gradeBtn = document.getElementById("grade_btn");
-									gradeBtn.style.display = "inline"; // Show the "Grade" button
+									gradeBtn.style.display = "inline"; 			// Show the "Grade" button
 									gradeBtn.style.pointerEvents = "auto";
 									gradeBtn.style.cursor = "pointer";
 									gradeBtn.style.opacity = "1";									
@@ -473,15 +473,15 @@ div[style="margin-bottom: 20px;"] {
 
 													if (data.grade1 !== null){
 														const gradeBtn = document.getElementById("grade_btn");
-														gradeBtn.style.display = "inline"; // Show the "Grade" button
+														gradeBtn.style.display = "inline"; 			// Show the "Grade" button
 														gradeBtn.style.pointerEvents = "auto";
 														gradeBtn.style.cursor = "pointer";
 														gradeBtn.style.opacity = "1";
 													}else{
 														const gradeBtn = document.getElementById("grade_btn");
-														gradeBtn.style.pointerEvents = "none";
+														gradeBtn.style.pointerEvents = "none";		// Disable the "Grade" button
 														gradeBtn.style.cursor = "not-allowed";
-														gradeBtn.style.opacity = "0.6";   // Disable the "Grade" button
+														gradeBtn.style.opacity = "0.6";   
 							
 													}	
 												} else {
@@ -503,15 +503,15 @@ div[style="margin-bottom: 20px;"] {
 								examBtn.style.opacity = "0.6";   // Disable the "Set Under Examination" button	
 							}
 							
-							document.getElementById("view_grades_btn").style.display = "inline"; // Ενεργοποίηση κουμπιού προβολής βαθμών
+							document.getElementById("view_grades_btn").style.display = "inline"; 		// Ενεργοποίηση κουμπιού προβολής βαθμών
 							document.getElementById("view_grades_btn").style.pointerEvents = "auto";
 							document.getElementById("view_grades_btn").style.cursor = "pointer";
 							document.getElementById("view_grades_btn").style.opacity = "1";
-                            document.getElementById("view_info_btn").style.display = "inline"; // Ενεργοποίηση κουμπιού λεπτομερειών διπλωματικής
+                            document.getElementById("view_info_btn").style.display = "inline"; 			// Ενεργοποίηση κουμπιού λεπτομερειών διπλωματικής
 							document.getElementById("view_info_btn").style.pointerEvents = "auto";
 							document.getElementById("view_info_btn").style.cursor = "pointer";
 							document.getElementById("view_info_btn").style.opacity = "1";
-							document.getElementById("notes_btn").style.display = "inline";     // Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
+							document.getElementById("notes_btn").style.display = "inline";     			// Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
 							document.getElementById("notes_btn").style.pointerEvents = "auto";
 							document.getElementById("notes_btn").style.cursor = "pointer";
 							document.getElementById("notes_btn").style.opacity = "1";		
