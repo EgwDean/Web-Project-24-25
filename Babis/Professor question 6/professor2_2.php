@@ -241,10 +241,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <script>
+// συνάρτηση καθαρισμού φόρμας ανάκλησης Διπλωματικής
 function clearForm() {
     document.getElementById('diplomaId').value = '';
     document.getElementById('studentEmail').value = '';
-    document.getElementById('meetingFields').style.display = 'none';
+    document.getElementById('meetYear').value = '';
+	document.getElementById('meetNumber').value = '';
 }
 </script>
 <body>
@@ -333,4 +335,3 @@ function clearForm() {
 	</div>
 </body>
 </html>
-
