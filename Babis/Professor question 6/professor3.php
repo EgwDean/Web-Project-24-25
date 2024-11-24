@@ -273,11 +273,6 @@ div[style="margin-bottom: 20px;"] {
 
 
 
-
-
-
-
-
 /* Βασικά στυλ για την φόρμα */
 .notes-form-container.grades-form-container {
     max-width: 400px;
@@ -375,7 +370,7 @@ div[style="margin-bottom: 20px;"] {
 <script>
 
     let selectedId = null;     // Για αποθήκευση του επιλεγμένου ID
-	let selectedStatus = null; // Για αποθήκευση του επιλεγμένου status
+    let selectedStatus = null; // Για αποθήκευση του επιλεγμένου status
 
     function applyFilter() {
         const statusFilter = document.getElementById('status_filter').value;
@@ -430,7 +425,7 @@ div[style="margin-bottom: 20px;"] {
 							const professorEmail = "<?php echo $userEmail; ?>"; // Get the logged-in professor's email
 							if (item.status === "active") {
 								const gradeBtn = document.getElementById("grade_btn");
-								gradeBtn.style.pointerEvents = "none";			// Disable the "Grade" button
+								gradeBtn.style.pointerEvents = "none";				// Disable the "Grade" button
 								gradeBtn.style.cursor = "not-allowed";
 								gradeBtn.style.opacity = "0.6";					
 								if (item.supervisor === professorEmail){
@@ -441,7 +436,7 @@ div[style="margin-bottom: 20px;"] {
 									examBtn.style.opacity = "1";
 								}else {
 									const examBtn = document.getElementById("exam_btn");
-									examBtn.style.pointerEvents = "none";		// Disable the "Set Under Examination" button
+									examBtn.style.pointerEvents = "none";			// Disable the "Set Under Examination" button
 									examBtn.style.cursor = "not-allowed";
 									examBtn.style.opacity = "0.6";   			
 								}
@@ -449,7 +444,7 @@ div[style="margin-bottom: 20px;"] {
 							}else if (item.status === "under examination"){
 								
 								const examBtn = document.getElementById("exam_btn");
-								examBtn.style.pointerEvents = "none";			// Disable the "Set Under Examination" button
+								examBtn.style.pointerEvents = "none";				// Disable the "Set Under Examination" button
 								examBtn.style.cursor = "not-allowed";
 								examBtn.style.opacity = "0.6";   				
 								
@@ -479,7 +474,7 @@ div[style="margin-bottom: 20px;"] {
 														gradeBtn.style.opacity = "1";
 													}else{
 														const gradeBtn = document.getElementById("grade_btn");
-														gradeBtn.style.pointerEvents = "none";		// Disable the "Grade" button
+														gradeBtn.style.pointerEvents = "none";			// Disable the "Grade" button
 														gradeBtn.style.cursor = "not-allowed";
 														gradeBtn.style.opacity = "0.6";   
 							
@@ -511,7 +506,7 @@ div[style="margin-bottom: 20px;"] {
 							document.getElementById("view_info_btn").style.pointerEvents = "auto";
 							document.getElementById("view_info_btn").style.cursor = "pointer";
 							document.getElementById("view_info_btn").style.opacity = "1";
-							document.getElementById("notes_btn").style.display = "inline";     			// Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
+							document.getElementById("notes_btn").style.display = "inline";     		// Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
 							document.getElementById("notes_btn").style.pointerEvents = "auto";
 							document.getElementById("notes_btn").style.cursor = "pointer";
 							document.getElementById("notes_btn").style.opacity = "1";		
@@ -628,7 +623,7 @@ div[style="margin-bottom: 20px;"] {
 
 							// Add event listener to "Member 1" and "Member 2"
 							if (key === "Member 1" || key === "Member 2") {
-								row.style.cursor = "pointer"; 					// Change cursor to hand on hover
+								row.style.cursor = "pointer"; 			// Change cursor to hand on hover
 								row.addEventListener('click', function () {
 								fetchMemberDetails(value);                   	// Call the fetch_member_details function on click
 								});
@@ -785,10 +780,10 @@ div[style="margin-bottom: 20px;"] {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
-                alert("Grade inserted successfully!"); // Success alert
-				form.style.display = 'none';		  // Hide form after alert
+                alert("Grade inserted successfully!"); 		// Success alert
+				form.style.display = 'none';	// Hide form after alert
             } else {
-                alert("Error: " + response.error); // Error alert
+                alert("Error: " + response.error); 	// Error alert
             }
         } else {
             alert("Server error. Please try again.");
@@ -931,7 +926,7 @@ div[style="margin-bottom: 20px;"] {
 		document.getElementById('diplomaStatus').value = statusDiploma;      // για τη φόρμα σημειώσεων
 		
 		if(selectedStatus === 'under examination'){
-			document.getElementById('diplId').value = idDiploma;                 // για τη φόρμα καταχώρησης βαθμού
+			document.getElementById('diplId').value = idDiploma;         // για τη φόρμα καταχώρησης βαθμού
 		}
 	}
 </script>
