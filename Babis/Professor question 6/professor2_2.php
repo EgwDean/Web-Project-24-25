@@ -2,14 +2,14 @@
 session_start();
 
 
-// Check if the user is logged in and has an email in session
-$userEmail = $_SESSION['email'] ?? null;
-
-if (!$userEmail) {
-    // Handle the case when the email is not set (e.g., redirect to login page)
-    header('Location: login.php');
-    exit;
+// Έλεγχος αν ο χρήστης είναι συνδεδεμένος
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
 }
+
+// Χρήστης που συνδέθηκε
+$userEmail = $_SESSION['email'];
 
 
 // Ελέγχουμε αν τα πεδία πρέπει να είναι ενεργοποιημένα
