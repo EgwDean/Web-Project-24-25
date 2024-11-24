@@ -312,7 +312,7 @@ function clearForm() {
 			<div id="meetingFields">
 				<h3 style="color: #2c3e50; font-weight: bold; text-align: center; margin-bottom: 20px; 
 					font-size: 18px; background-color: #ecf0f1; padding: 10px; border-radius: 10px;">
-					Εισάγετε τα παρακάτω μόνο για οριστικοποιημένη διπλωματική
+					Εισάγετε τα παρακάτω μόνο για ανάκληση οριστικοποιημένης διπλωματικής
 				</h3>
 				
 				<label for="meetNumber">Αριθμός Γενικής Συνέλευσης</label>
