@@ -394,12 +394,12 @@ function rowClickHandler(event) {
 
     <!-- Navigation bar -->
     <div class="navbar">
-        <div class="menu">
-		
-			<div class="logo">
+	
+		<div class="logo">
 				<img src="media/ceid_logo.png" alt="Logo" class="logo-img">
-			</div>
+		</div>
 		
+        <div class="menu">
 		
             <!-- Ενότητες με υπομενού που οδηγούν στο professor.php -->
             <div>
