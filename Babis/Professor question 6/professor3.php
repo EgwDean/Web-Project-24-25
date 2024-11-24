@@ -462,6 +462,7 @@ div[style="margin-bottom: 20px;"] {
 													}else{
 														const gradeBtn = document.getElementById("grade_btn");
 														gradeBtn.style.display = "none"; // Hide the "Grade" button	
+							
 													}	
 												} else {
 													console.error("Error fetching member details");
@@ -472,6 +473,9 @@ div[style="margin-bottom: 20px;"] {
 							}else{
 								const gradeBtn = document.getElementById("grade_btn");
 								gradeBtn.style.display = "none"; // Hide the "Grade" button
+								
+								const examBtn = document.getElementById("exam_btn");
+								examBtn.style.display = "none";   // Hide the "Set Under Examination" button
 							}
 							
 							document.getElementById("view_grades_btn").style.display = "inline"; // Εμφάνιση κουμπιού προβολής βαθμών
