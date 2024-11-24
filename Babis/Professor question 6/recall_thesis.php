@@ -2,6 +2,15 @@
 // Ξεκινάμε τη συνεδρία αν δεν έχει ξεκινήσει
 session_start();
 
+// Έλεγχος αν ο χρήστης είναι συνδεδεμένος
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Χρήστης που συνδέθηκε
+$email = $_SESSION['email'];
+
 $message = ''; // Αρχικοποιούμε τη μεταβλητή για το μήνυμα
 
 // Ελέγχουμε αν τα δεδομένα έχουν αποσταλεί μέσω POST
@@ -16,11 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ελέγχουμε αν τα δεδομένα της φόρμας υπάρχουν
     if (!$dipId || !$studentEmail) {
         $message = "Παρακαλώ εισάγετε και τα δύο πεδία: Αριθμό Διπλώματος και Email Φοιτητή.";
-    } elseif (!isset($_SESSION['email'])) {
-        $message = "Η συνεδρία δεν είναι ενεργή ή δεν υπάρχει email.";
     } else {
-        // Λήψη του email από τη συνεδρία
-        $email = $_SESSION['email'];
 
         // Στοιχεία σύνδεσης με τη βάση δεδομένων
         $servername = "localhost";
