@@ -38,7 +38,7 @@ VALUES
 
 INSERT INTO eksetasi_diplomatikis 
 VALUES 
-(1, 'student1@example.com', '2024-11-27 10:00:00', 'Room A', 8.50, 9.00, 9.50, 9.00, 'Pass'),
-(2, 'student2@example.com', '2024-11-28 14:00:00', 'Room B', 7.00, 8.00, 7.50, 7.50, 'Pass'),
-(3, 'student2@example.com', '2024-11-30 14:00:00', 'Room B', 7.00, 8.00, 7.50, 7.50, 'Pass'),
-(4, 'student3@example.com', '2024-11-29 09:00:00', 'Room C', NULL, NULL, NULL, NULL, NULL);
+(1, 'john.doe@example.com', '2024-11-27 10:00:00', 'Room A', 8.50, 9.00, 9.50, 9.00, 'Pass'),
+(2, 'mary.smith@example.com', '2024-11-28 14:00:00', 'Room B', 7.00, 8.00, 7.50, 7.50, 'Pass'),
+(3, 'peter.jones@example.com', '2024-11-30 14:00:00', 'Room B', 7.00, 8.00, 7.50, 7.50, 'Pass'),
+(4, 'john.doe@example.com', '2024-11-29 09:00:00', 'Room C', NULL, NULL, NULL, NULL, NULL);
