@@ -74,7 +74,7 @@
         }
 
         table {
-            width: 60%; /* Το πλάτος του πίνακα είναι 60% της σελίδας */
+            width: 80%; /* Το πλάτος του πίνακα είναι 60% της σελίδας */
             border-collapse: collapse;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
@@ -135,17 +135,23 @@
                 	var cell7 = row.insertCell(6);
                 	var cell8 = row.insertCell(7);
                 	var cell9 = row.insertCell(8);
+                	var cell10 = row.insertCell(9);
+                	var cell11 = row.insertCell(10);
+                	var cell12 = row.insertCell(11);
 
 
-                	cell1.innerHTML = "Id";
-                	cell2.innerHTML = "Email";
-                	cell3.innerHTML = "Exam Date";
-                	cell4.innerHTML = "Exam Room";
-                	cell5.innerHTML = "Grade 1";
-                	cell6.innerHTML = "Grade 2";
-                	cell7.innerHTML = "Grade 3";
-                	cell8.innerHTML = "Final Grade";
-                	cell9.innerHTML = "Praktiko";
+                	cell1.innerHTML = "Όνομα";
+                	cell2.innerHTML = "Επώνυμο";
+                	cell3.innerHTML = "ΑΜ";
+                	cell4.innerHTML = "Κωδικός Διπλωματικής";
+                	cell5.innerHTML = "Τίτλος Διπλωματικής";
+                	cell6.innerHTML = "Ημερομηνία Εξέτασης";
+                	cell7.innerHTML = "Χώρος Εξέτασης";
+                	cell8.innerHTML = "Email Καθηγητή";
+                	cell9.innerHTML = "Βαθμός 1";
+                	cell10.innerHTML = "Βαθμός 2";
+                	cell11.innerHTML = "Βαθμός 3";
+                	cell12.innerHTML = "Τελικός Βαθμός";
 
 
 
@@ -162,16 +168,22 @@
                 	    var cell7 = row.insertCell(6);
                 	    var cell8 = row.insertCell(7);
                 	    var cell9 = row.insertCell(8);
+                	    var cell10 = row.insertCell(9);
+                	    var cell11 = row.insertCell(10);
+                	    var cell12 = row.insertCell(11);
 
-                            cell1.innerHTML = data[i]['id'];
-                            cell2.innerHTML = data[i]['email_st'];
-                            cell3.innerHTML = data[i]['exam_date'];
-                            cell4.innerHTML = data[i]['exam_room'];
-                            cell5.innerHTML = data[i]['grade1'];
-                            cell6.innerHTML = data[i]['grade2'];
-                            cell7.innerHTML = data[i]['grade3'];
-                            cell8.innerHTML = data[i]['final_grade'];
-                            cell9.innerHTML = data[i]['praktiko_bathmologisis'];
+                            cell1.innerHTML = data[i]['name'];
+                            cell2.innerHTML = data[i]['surname'];
+                            cell3.innerHTML = data[i]['number'];
+                            cell4.innerHTML = data[i]['id'];
+                            cell5.innerHTML = data[i]['title'];
+                            cell6.innerHTML = data[i]['exam_date'];
+                            cell7.innerHTML = data[i]['exam_room'];
+                            cell8.innerHTML = data[i]['email_prof'];
+                            cell9.innerHTML = data[i]['grade1'];
+                            cell10.innerHTML = data[i]['grade2'];
+                            cell11.innerHTML = data[i]['grade3'];
+                            cell12.innerHTML = data[i]['final_grade'];
 
                         }
                     } else {
