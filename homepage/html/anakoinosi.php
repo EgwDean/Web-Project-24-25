@@ -6,30 +6,26 @@ $username = "root";
 $password = "12345theo";
 $dbname = "diplomatiki_support";
 
-// Δημιουργία σύνδεσης με τη βάση δεδομένων
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Έλεγχος σύνδεσης
 if ($conn->connect_error) {
     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 }
 
-// Λήψη των παραμέτρων ημερομηνίας από το URL
 $start_date = isset($_GET['start_date']) ? $_GET['start_date'] : '';
 $end_date = isset($_GET['end_date']) ? $_GET['end_date'] : '';
+$format = isset($_GET['format']) ? $_GET['format'] : 'json';
 
-$sql = "SELECT info FROM anakoinosi WHERE 1=1";
+$sql = "SELECT id_diplomatikis AS id, email_st, exam_date, exam_room, grade1, grade2, grade3, final_grade, praktiko_bathmologisis FROM eksetasi_diplomatikis WHERE 1=1";
 
-// Αν υπάρχουν ημερομηνίες, προσθήκη τους στο query
 if ($start_date) {
-    $sql .= " AND date_exam >= '$start_date 00:00:00'";
+    $sql .= " AND exam_date >= '$start_date 00:00:00'";
 }
 if ($end_date) {
-    $sql .= " AND date_exam <= '$end_date 23:59:59'";
+    $sql .= " AND exam_date <= '$end_date 23:59:59'";
 }
 
-// Ταξινόμηση κατά την ημερομηνία
-$sql .= " ORDER BY date_exam ASC"; // ή DESC αν θέλεις φθίνουσα σειρά
+$sql .= " ORDER BY exam_date ASC";
 
 $result = $conn->query($sql);
 
@@ -40,9 +36,19 @@ if ($result && $result->num_rows > 0) {
     }
 }
 
-// Επιστροφή δεδομένων σε μορφή JSON
-echo json_encode($data);
+if ($format === 'xml') {
+    header("Content-Type: application/xml");
+    $xml = new SimpleXMLElement('<announcements/>');
+    foreach ($data as $row) {
+        $announcement = $xml->addChild('announcement');
+        foreach ($row as $key => $value) {
+            $announcement->addChild($key, htmlspecialchars($value));
+        }
+    }
+    echo $xml->asXML();
+} else {
+    echo json_encode($data);
+}
 
-// Κλείσιμο σύνδεσης
 $conn->close();
 ?>
