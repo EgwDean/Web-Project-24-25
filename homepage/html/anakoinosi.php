@@ -16,7 +16,11 @@ $start_date = isset($_GET['start_date']) ? $_GET['start_date'] : '';
 $end_date = isset($_GET['end_date']) ? $_GET['end_date'] : '';
 $format = isset($_GET['format']) ? $_GET['format'] : 'json';
 
-$sql = "SELECT id_diplomatikis AS id, email_st, exam_date, exam_room, grade1, grade2, grade3, final_grade, praktiko_bathmologisis FROM eksetasi_diplomatikis WHERE 1=1";
+$sql = "SELECT name, surname, number, id_diplomatikis AS id, title, exam_date, exam_room, email_prof, grade1, grade2, grade3, final_grade
+FROM eksetasi_diplomatikis 
+INNER JOIN diplomatiki ON eksetasi_diplomatikis.id_diplomatikis = diplomatiki.id_diplomatiki
+INNER JOIN student ON eksetasi_diplomatikis.email_st = student.email_student
+WHERE 1=1";
 
 if ($start_date) {
     $sql .= " AND exam_date >= '$start_date 00:00:00'";
