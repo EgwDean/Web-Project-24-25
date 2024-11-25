@@ -124,12 +124,55 @@
                         // Διαγραφή προηγούμενων δεδομένων στον πίνακα
                         table.innerHTML = '';
 
+                	var header = table.createTHead();
+                	var row = header.insertRow(0);
+                	var cell1 = row.insertCell(0);
+                	var cell2 = row.insertCell(1);
+                	var cell3 = row.insertCell(2);
+                	var cell4 = row.insertCell(3);
+                	var cell5 = row.insertCell(4);
+                	var cell6 = row.insertCell(5);
+                	var cell7 = row.insertCell(6);
+                	var cell8 = row.insertCell(7);
+                	var cell9 = row.insertCell(8);
+
+
+                	cell1.innerHTML = "Id";
+                	cell2.innerHTML = "Email";
+                	cell3.innerHTML = "Exam Date";
+                	cell4.innerHTML = "Exam Room";
+                	cell5.innerHTML = "Grade 1";
+                	cell6.innerHTML = "Grade 2";
+                	cell7.innerHTML = "Grade 3";
+                	cell8.innerHTML = "Final Grade";
+                	cell9.innerHTML = "Praktiko";
+
+
+
                         // Δημιουργία του σώματος του πίνακα
                         var tbody = table.createTBody();
                         for (var i = 0; i < data.length; i++) {
                             var row = tbody.insertRow(-1);
                             var cell1 = row.insertCell(0);
-                            cell1.innerHTML = data[i]['info'];
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            var cell4 = row.insertCell(3);
+                	    var cell5 = row.insertCell(4);
+                	    var cell6 = row.insertCell(5);
+                	    var cell7 = row.insertCell(6);
+                	    var cell8 = row.insertCell(7);
+                	    var cell9 = row.insertCell(8);
+
+                            cell1.innerHTML = data[i]['id'];
+                            cell2.innerHTML = data[i]['email_st'];
+                            cell3.innerHTML = data[i]['exam_date'];
+                            cell4.innerHTML = data[i]['exam_room'];
+                            cell5.innerHTML = data[i]['grade1'];
+                            cell6.innerHTML = data[i]['grade2'];
+                            cell7.innerHTML = data[i]['grade3'];
+                            cell8.innerHTML = data[i]['final_grade'];
+                            cell9.innerHTML = data[i]['praktiko_bathmologisis'];
+
                         }
                     } else {
                         console.error("Error fetching data");
@@ -137,8 +180,24 @@
                 }
             };
         }
+
+
+function exportFormat(format) {
+    var startDate = document.getElementById('start_date').value;
+    var endDate = document.getElementById('end_date').value;
+
+    // Δημιουργία URL με παραμέτρους
+    var url = 'anakoinosi.php?start_date=' + startDate + '&end_date=' + endDate + '&format=' + format;
+
+    // Άνοιγμα του URL σε νέο παράθυρο ή καρτέλα
+    window.open(url, '_blank');
+}
+
+
+
     </script>
 </head>
+
 <body onload="getAnnouncements()">
     <!-- Κουμπί Login με σύνδεση στην σελίδα Login.php -->
     <a href="Login.php">
@@ -148,14 +207,19 @@
     <h1>Εξετάσεις Διπλωματικών</h1>
     
     <!-- Επιλογή ημερομηνίας -->
-    <div class="date-picker-container">
-        <label for="start_date">Από: </label>
-        <input type="date" id="start_date" name="start_date">
-        <label for="end_date">Έως: </label>
-        <input type="date" id="end_date" name="end_date">
-        <!-- Κουμπί "Filter" με νέο στυλ -->
-        <button class="filter-button" onclick="getAnnouncements()">Filter</button>
-    </div>
+<!-- Επιλογή ημερομηνίας -->
+<div class="date-picker-container">
+    <label for="start_date">Από: </label>
+    <input type="date" id="start_date" name="start_date">
+    <label for="end_date">Έως: </label>
+    <input type="date" id="end_date" name="end_date">
+    <!-- Κουμπί "Filter" -->
+    <button class="filter-button" onclick="getAnnouncements()">Filter</button>
+    <!-- Κουμπί για XML -->
+    <button class="filter-button" onclick="exportFormat('xml')">XML</button>
+    <!-- Κουμπί για JSON -->
+    <button class="filter-button" onclick="exportFormat('json')">JSON</button>
+</div>
     
     <table id="announcement_table" border="1"></table>
 </body>
