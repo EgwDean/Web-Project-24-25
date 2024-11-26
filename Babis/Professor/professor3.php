@@ -631,6 +631,7 @@ div[style="margin-bottom: 20px;"] {
 							// Add event listener to "Member 1" and "Member 2"
 							if (key === "Member 1" || key === "Member 2") {
 								row.style.cursor = "pointer"; 			// Change cursor to hand on hover
+								cell2.innerHTML = `${value} <span style="color: blue; font-size: 0.9em; cursor: pointer;" title="Click to view invitations">🔍</span>`;
 								row.addEventListener('click', function () {
 								fetchMemberDetails(value);                   	// Call the fetch_member_details function on click
 								});
