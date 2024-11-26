@@ -436,15 +436,18 @@ div[style="margin-bottom: 20px;"] {
 							if (item.status === "active") {
 								const gradeBtn = document.getElementById("grade_btn");
 								gradeBtn.style.cursor = "not-allowed";			// Disable the "Grade" button
+								gradeBtn.disabled = true;
 								gradeBtn.style.opacity = "0.6";					
 								if (item.supervisor === professorEmail){
 									const examBtn = document.getElementById("exam_btn");
 									examBtn.style.display = "inline"; 			// Show the "Set Under Examination" button	
+									examBtn.disabled = false;
 									examBtn.style.cursor = "pointer";
 									examBtn.style.opacity = "1";
 								}else {
 									const examBtn = document.getElementById("exam_btn");
 									examBtn.style.cursor = "not-allowed";		// Disable the "Set Under Examination" button
+									examBtn.disabled = true;
 									examBtn.style.opacity = "0.6";   			
 								}
 						
@@ -452,11 +455,13 @@ div[style="margin-bottom: 20px;"] {
 								
 								const examBtn = document.getElementById("exam_btn");
 								examBtn.style.cursor = "not-allowed";			// Disable the "Set Under Examination" button
+								examBtn.disabled = true;
 								examBtn.style.opacity = "0.6";   				
 								
 								if (item.supervisor === professorEmail ) {
 									const gradeBtn = document.getElementById("grade_btn");
 									gradeBtn.style.display = "inline"; 			// Show the "Grade" button
+									gradeBtn.disabled = false;
 									gradeBtn.style.cursor = "pointer";
 									gradeBtn.style.opacity = "1";									
 								}else {
@@ -474,11 +479,13 @@ div[style="margin-bottom: 20px;"] {
 													if (data.grade1 !== null){
 														const gradeBtn = document.getElementById("grade_btn");
 														gradeBtn.style.display = "inline"; 			// Show the "Grade" button
+														gradeBtn.disabled = false;
 														gradeBtn.style.cursor = "pointer";
 														gradeBtn.style.opacity = "1";
 													}else{
 														const gradeBtn = document.getElementById("grade_btn");
 														gradeBtn.style.cursor = "not-allowed";		// Disable the "Grade" button
+														gradeBtn.disabled = true;
 														gradeBtn.style.opacity = "0.6";   
 							
 													}	
@@ -491,11 +498,13 @@ div[style="margin-bottom: 20px;"] {
 							}else{
 								const gradeBtn = document.getElementById("grade_btn");
 								gradeBtn.style.cursor = "not-allowed";		// Disable the "Grade" button
+								gradeBtn.disabled = true;
 								gradeBtn.style.opacity = "0.6";  
 							
 								
 								const examBtn = document.getElementById("exam_btn");
 								examBtn.style.cursor = "not-allowed";		// Disable the "Set Under Examination" button
+								examBtn.disabled = true;
 								examBtn.style.opacity = "0.6";   	
 							}
 							
@@ -819,6 +828,7 @@ div[style="margin-bottom: 20px;"] {
 	
 	// συνάρτηση για προβολή των βαθμών των καθηγητών-μελών τριμελούς
 	function fetchGradesDetails() {
+		if (!selectedId) return;
 		
 		// Κώδικας για την περίπτωση όπου πριν το View Grades έχω πατήσει άλλο button
 		const gradesTable = document.getElementById('grades_table');
