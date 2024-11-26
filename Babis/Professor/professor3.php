@@ -581,10 +581,10 @@ div[style="margin-bottom: 20px;"] {
 		gradesTable.style.display = 'none';
 
 		// Show the Info table
-		infoTable.style.display = 'block';
+		infoTable.style.display = 'enabled';
 		
 		// Show the Log table
-		logTable.style.display = 'block';
+		logTable.style.display = 'enabled';
 		
 		
         const xhr = new XMLHttpRequest();
@@ -1062,13 +1062,14 @@ div[style="margin-bottom: 20px;"] {
     <table id="info_table"></table>
 	
 	
-	<table id="grades_table"></table>
-	
-	
 
     <!-- Νέος πίνακας για τα δεδομένα από το log -->
 	<div  id="log_table_container">
-    <table id="log_table"></table>
+		<table id="log_table"></table>
+	</div>
+	
+	<div>
+	<table id="grades_table"></table>
 	</div>
 	
 	
@@ -1107,6 +1108,7 @@ div[style="margin-bottom: 20px;"] {
 			<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
 		</div>
 	</form>
+	
 </div>
 </div>
 </body>
