@@ -220,7 +220,7 @@ table {
             width: 95%;  
             padding: 12px;
             margin: 12px 0;
-   	    border: 2px solid #ddd;
+			border: 2px solid #ddd;
             border-radius: 20px;
             font-size: 16px;
     	    transition: border-color 0.3s, box-shadow 0.3s;
@@ -265,7 +265,7 @@ table {
             width: 95%;  
             padding: 12px;
             margin: 12px 0;
-   	    border: 2px solid #ddd;
+			border: 2px solid #ddd;
             border-radius: 20px;
             font-size: 16px;
     	    transition: border-color 0.3s, box-shadow 0.3s;
@@ -678,7 +678,7 @@ function uploadDiploma(event){
 			<button type="button" onclick="cancelCreate()" class="cancel-btn">Cancel</button>
 		</div>
 	</form>
-</div>
+
 
 
 
@@ -702,7 +702,6 @@ function uploadDiploma(event){
 			<button type="button" class="cancel-btn" onclick="cancelEdit()">Cancel</button>
 		</div>
 	</form>
-</div>
 
 
 <!-- Φόρμα Upload PDF -->
@@ -721,8 +720,6 @@ function uploadDiploma(event){
             <button type="button" class="cancel-btn" onclick="cancelUpload()">Close</button>
         </div>
     </form>
-</div>
-
 </div>
 </body>
 </html>
