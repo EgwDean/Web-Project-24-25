@@ -1072,7 +1072,7 @@ div[style="margin-bottom: 20px;"] {
 		<h2>Δημιουργία Σημειώσεων</h2>
     
 		<label for="diplomaId">ID</label>
-		<input type="text" id="diplomaId" name="diplomaId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" required>
+		<input type="text" id="diplomaId" name="diplomaId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
     
 		<label for="diplomaStatus">Status</label>
 		<input type="text" id="diplomaStatus" name="diplomaStatus" placeholder="Εισάγετε την κατάσταση της Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
