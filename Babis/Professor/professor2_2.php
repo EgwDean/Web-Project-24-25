@@ -272,9 +272,6 @@ function clearForm() {
             <!-- Ενότητες με υπομενού που οδηγούν στο professor.php -->
             <div>
                 <a href="professor.php" class="menu-item">Θέματα</a>
-                <div class="submenu">
-                    <a href="professor.php">Submenu 1-1</a>
-                </div>
             </div>
             <div>
                 <a href="professor2.php" class="menu-item">Αναθέσεις</a>
