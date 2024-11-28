@@ -581,10 +581,10 @@ div[style="margin-bottom: 20px;"] {
 		gradesTable.style.display = 'none';
 
 		// Show the Info table
-		infoTable.style.display = 'enabled';
+		infoTable.style.display = 'table';
 		
 		// Show the Log table
-		logTable.style.display = 'enabled';
+		logTable.style.display = 'table';
 		
 		
         const xhr = new XMLHttpRequest();
@@ -849,7 +849,7 @@ div[style="margin-bottom: 20px;"] {
 		logTable.style.display = 'none';
 		
 		// Show the View Grades table
-		gradesTable.style.display = 'block';
+		gradesTable.style.display = 'table';
 
 		const xhr = new XMLHttpRequest();
 		const url = `view_grades.php?id=${selectedId}`;
