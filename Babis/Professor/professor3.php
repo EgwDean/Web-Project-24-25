@@ -545,82 +545,6 @@ div[style="margin-bottom: 20px;"] {
         };
     }
 
-
-function viewInvites() {
-    if (!selectedId) return;
-	
-	
-	// Κώδικας για την περίπτωση όπου πριν το View Invites έχω πατήσει άλλο button
-		const gradesTable = document.getElementById('grades_table');
-		const gradesContainer = document.getElementById('gradesForm');
-		const notesContainer = document.getElementById('notesForm');
-		const infoTable = document.getElementById('info_table');
-		const logTable = document.getElementById('log_table');
-
-		// Show the log table containing the invites
-		logTable.style.display = 'table';
-		
-		// Hide the Info and View Grades tables and the Grades and Notes form
-		infoTable.style.display = 'none';  
-		gradesTable.style.display = 'none';
-		gradesContainer.style.display = 'none';
-		notesContainer.style.display = 'none';
-
-
-    const xhr = new XMLHttpRequest();
-    const url = `view_invites.php?id=${selectedId}`;
-
-    xhr.open('GET', url);
-    xhr.send();
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                const logData = JSON.parse(xhr.responseText);
-                console.log(logData);
-
-                // Εντοπισμός του πίνακα log
-                const logTable = document.getElementById("log_table");
-
-                // Δημιουργία ή καθαρισμός του πίνακα, διατηρώντας μόνο τις στήλες
-                logTable.innerHTML = ""; // Καθαρισμός του πίνακα
-
-                // Δημιουργία κεφαλίδας
-                const headerRow = logTable.insertRow();
-                ["Professor", "Status", "Invitation Date", "Reply Date"].forEach(header => {
-                    const th = document.createElement("th");
-                    th.innerText = header;
-                    headerRow.appendChild(th);
-                });
-
-                if (logData && Array.isArray(logData) && logData.length > 0) {
-                    // Συμπλήρωση δεδομένων αν υπάρχουν
-                    logData.forEach(entry => {
-                        const row = logTable.insertRow();
-						row.insertCell(0).innerText = entry.prof_email;
-                        row.insertCell(1).innerText = entry.status;
-                        row.insertCell(2).innerText = entry.invitation_date;
-                        row.insertCell(3).innerText = entry.reply_date;
-                    });
-                } 
-                // Αν δεν υπάρχουν δεδομένα, ο πίνακας παραμένει με τις στήλες αλλά χωρίς γραμμές
-            } else {
-                console.error("Error fetching invites: " + xhr.statusText);
-                // Αν υπάρχει σφάλμα, καθαρίζεται ο πίνακας και παραμένουν οι στήλες
-                document.getElementById("log_table").innerHTML = "";
-                const logTable = document.getElementById("log_table");
-                const headerRow = logTable.insertRow();
-                ["Status", "Invitation Date", "Reply Date"].forEach(header => {
-                    const th = document.createElement("th");
-                    th.innerText = header;
-                    headerRow.appendChild(th);
-                });
-            }
-        }
-    };
-}
-   
-
 	
 
     // Συνάρτηση εμφάνισης λεπτομερειών για την επιλεγμένη γραμμή πίνακα/id διπλωματικής 
@@ -724,6 +648,84 @@ function viewInvites() {
             }
         };
     }
+	
+	
+	// συνάρτηση για εμφάνιση των προσκλήσεων σε καθηγητές για συγκεκριμένη διπλωματική
+	function viewInvites() {
+    if (!selectedId) return;
+	
+	
+	// Κώδικας για την περίπτωση όπου πριν το View Invites έχω πατήσει άλλο button
+		const gradesTable = document.getElementById('grades_table');
+		const gradesContainer = document.getElementById('gradesForm');
+		const notesContainer = document.getElementById('notesForm');
+		const infoTable = document.getElementById('info_table');
+		const logTable = document.getElementById('log_table');
+
+		// Show the log table containing the invites
+		logTable.style.display = 'table';
+		
+		// Hide the Info and View Grades tables and the Grades and Notes form
+		infoTable.style.display = 'none';  
+		gradesTable.style.display = 'none';
+		gradesContainer.style.display = 'none';
+		notesContainer.style.display = 'none';
+
+
+    const xhr = new XMLHttpRequest();
+    const url = `view_invites.php?id=${selectedId}`;
+
+    xhr.open('GET', url);
+    xhr.send();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                const logData = JSON.parse(xhr.responseText);
+                console.log(logData);
+
+                // Εντοπισμός του πίνακα log
+                const logTable = document.getElementById("log_table");
+
+                // Δημιουργία ή καθαρισμός του πίνακα, διατηρώντας μόνο τις στήλες
+                logTable.innerHTML = ""; // Καθαρισμός του πίνακα
+
+                // Δημιουργία κεφαλίδας
+                const headerRow = logTable.insertRow();
+                ["Professor", "Status", "Invitation Date", "Reply Date"].forEach(header => {
+                    const th = document.createElement("th");
+                    th.innerText = header;
+                    headerRow.appendChild(th);
+                });
+
+                if (logData && Array.isArray(logData) && logData.length > 0) {
+                    // Συμπλήρωση δεδομένων αν υπάρχουν
+                    logData.forEach(entry => {
+                        const row = logTable.insertRow();
+						row.insertCell(0).innerText = entry.prof_email;
+                        row.insertCell(1).innerText = entry.status;
+                        row.insertCell(2).innerText = entry.invitation_date;
+                        row.insertCell(3).innerText = entry.reply_date;
+                    });
+                } 
+                // Αν δεν υπάρχουν δεδομένα, ο πίνακας παραμένει με τις στήλες αλλά χωρίς γραμμές
+            } else {
+                console.error("Error fetching invites: " + xhr.statusText);
+                // Αν υπάρχει σφάλμα, καθαρίζεται ο πίνακας και παραμένουν οι στήλες
+                document.getElementById("log_table").innerHTML = "";
+                const logTable = document.getElementById("log_table");
+                const headerRow = logTable.insertRow();
+                ["Status", "Invitation Date", "Reply Date"].forEach(header => {
+                    const th = document.createElement("th");
+                    th.innerText = header;
+                    headerRow.appendChild(th);
+                });
+            }
+        }
+    };
+}
+   
+
 	
 	
 	// συνάρτηση για εμφάνιση της φόρμας εισαγωγής σημειώσεων
