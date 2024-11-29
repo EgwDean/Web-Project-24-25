@@ -7,11 +7,13 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
+// Χρήστης που συνδέθηκε
+$userEmail = $_SESSION['email'];
+
 // Λήψη στοιχείων
-$member_email = isset($_GET['member']) ? $_GET['member'] : null;
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-if ($member_email && $id) {
+if ($id) {
     // Στοιχεία σύνδεσης με τη βάση δεδομένων
     $servername = "localhost";
     $username = "root";
@@ -27,23 +29,27 @@ if ($member_email && $id) {
     }
 
     // Προετοιμασία του SQL query
-    $sql = "SELECT status, invitation_date, reply_date 
+    $sql = "SELECT prof_email, status, invitation_date, reply_date 
             FROM prosklisi_se_trimeli 
-            WHERE prof_email = ? AND id_dip = ?";
+            WHERE id_dip = ? AND prof_email != ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $member_email, $id);
+    $stmt->bind_param("is", $id, $userEmail);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
-        echo json_encode($data);
+        $log_data = [];
+		while ($row = $result->fetch_assoc()) {
+            $log_data[] = $row;
+        }
+		echo json_encode($log_data);
     } else {
-        echo json_encode(["error" => "No data found"]);
+        echo json_encode(["success" => false, "error" => "No data found"]);
     }
     $stmt->close();
-    $conn->close();
 } else {
     echo json_encode(["error" => "Invalid input"]);
 }
+
+ $conn->close();
 ?>
