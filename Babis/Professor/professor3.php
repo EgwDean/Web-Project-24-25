@@ -514,9 +514,25 @@ div[style="margin-bottom: 20px;"] {
                             document.getElementById("view_info_btn").style.display = "inline"; 			// Ενεργοποίηση κουμπιού λεπτομερειών διπλωματικής
 							document.getElementById("view_info_btn").style.cursor = "pointer";
 							document.getElementById("view_info_btn").style.opacity = "1";
-							document.getElementById("notes_btn").style.display = "inline";     		// Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
+							document.getElementById("notes_btn").style.display = "inline";     		    // Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
 							document.getElementById("notes_btn").style.cursor = "pointer";
-							document.getElementById("notes_btn").style.opacity = "1";		
+							document.getElementById("notes_btn").style.opacity = "1";	
+							
+							if(item.status === 'pending'){
+							const invitesBtn = document.getElementById("invites_btn");
+							invitesBtn.style.display = "inline"; 			// Show the "View Invites" button
+							invitesBtn.disabled = false;
+							invitesBtn.style.cursor = "pointer";
+							invitesBtn.style.opacity = "1";		
+							}
+							else{
+								
+								const invitesBtn = document.getElementById("invites_btn");
+								invitesBtn.style.cursor = "not-allowed";					// Disable the "View Invites" button
+								invitesBtn.disabled = true;
+								invitesBtn.style.opacity = "0.6";  
+								
+							}
 							
 							rowClickHandler(event);  // συνάρτηση που γεμίζει αυτόματα τις φόρμες σημειώσεων και βαθμών σε κάθε 'click' σε γραμμή
                         };
@@ -530,37 +546,80 @@ div[style="margin-bottom: 20px;"] {
     }
 
 
-	// συνάρτηση για προβολή απάντησης μέλους τριμελούς σε πρόσκληση(υπό ανάθεση διπλωματική)
-	function fetchMemberDetails(member) {
-		if (!member) return;
+function viewInvites() {
+    if (!selectedId) return;
+	
+	
+	// Κώδικας για την περίπτωση όπου πριν το View Invites έχω πατήσει άλλο button
+		const gradesTable = document.getElementById('grades_table');
+		const gradesContainer = document.getElementById('gradesForm');
+		const notesContainer = document.getElementById('notesForm');
+		const infoTable = document.getElementById('info_table');
+		const logTable = document.getElementById('log_table');
 
-		const xhr = new XMLHttpRequest();
-		const url = `fetch_member_details.php?id=${selectedId}&member=${member}`;
+		// Show the log table containing the invites
+		logTable.style.display = 'table';
+		
+		// Hide the Info and View Grades tables and the Grades and Notes form
+		infoTable.style.display = 'none';  
+		gradesTable.style.display = 'none';
+		gradesContainer.style.display = 'none';
+		notesContainer.style.display = 'none';
 
-		xhr.open('GET', url);
-		xhr.send();
 
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === XMLHttpRequest.DONE) {
-				if (xhr.status === 200) {
-					const memberData = JSON.parse(xhr.responseText);
+    const xhr = new XMLHttpRequest();
+    const url = `view_invites.php?id=${selectedId}`;
 
-					// Populate a new table or modal with member details
-					const rightTable = document.getElementById("info_table");
-					rightTable.innerHTML = ''; // Clear the existing content
+    xhr.open('GET', url);
+    xhr.send();
 
-					const tbody = rightTable.createTBody();
-					for (const [key, value] of Object.entries(memberData)) {
-						const row = tbody.insertRow();
-						row.insertCell(0).innerHTML = `<strong>${key}</strong>`;
-						row.insertCell(1).innerHTML = value;
-					}
-				} else {
-					console.error("Error fetching member details");
-				}
-			}
-		};
-	}     
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                const logData = JSON.parse(xhr.responseText);
+                console.log(logData);
+
+                // Εντοπισμός του πίνακα log
+                const logTable = document.getElementById("log_table");
+
+                // Δημιουργία ή καθαρισμός του πίνακα, διατηρώντας μόνο τις στήλες
+                logTable.innerHTML = ""; // Καθαρισμός του πίνακα
+
+                // Δημιουργία κεφαλίδας
+                const headerRow = logTable.insertRow();
+                ["Professor", "Status", "Invitation Date", "Reply Date"].forEach(header => {
+                    const th = document.createElement("th");
+                    th.innerText = header;
+                    headerRow.appendChild(th);
+                });
+
+                if (logData && Array.isArray(logData) && logData.length > 0) {
+                    // Συμπλήρωση δεδομένων αν υπάρχουν
+                    logData.forEach(entry => {
+                        const row = logTable.insertRow();
+						row.insertCell(0).innerText = entry.prof_email;
+                        row.insertCell(1).innerText = entry.status;
+                        row.insertCell(2).innerText = entry.invitation_date;
+                        row.insertCell(3).innerText = entry.reply_date;
+                    });
+                } 
+                // Αν δεν υπάρχουν δεδομένα, ο πίνακας παραμένει με τις στήλες αλλά χωρίς γραμμές
+            } else {
+                console.error("Error fetching invites: " + xhr.statusText);
+                // Αν υπάρχει σφάλμα, καθαρίζεται ο πίνακας και παραμένουν οι στήλες
+                document.getElementById("log_table").innerHTML = "";
+                const logTable = document.getElementById("log_table");
+                const headerRow = logTable.insertRow();
+                ["Status", "Invitation Date", "Reply Date"].forEach(header => {
+                    const th = document.createElement("th");
+                    th.innerText = header;
+                    headerRow.appendChild(th);
+                });
+            }
+        }
+    };
+}
+   
 
 	
 
@@ -625,18 +684,6 @@ div[style="margin-bottom: 20px;"] {
 
 						cell1.innerHTML = `<strong>${key}</strong>`;
 						cell2.innerHTML = value;
-
-						if(selectedStatus === 'pending'){
-
-							// Add event listener to "Member 1" and "Member 2"
-							if (key === "Member 1" || key === "Member 2") {
-								row.style.cursor = "pointer"; 			// Change cursor to hand on hover
-								cell2.innerHTML = `${value} <span style="color: blue; font-size: 0.9em; cursor: pointer;" title="Click to view invitations">🔍</span>`;
-								row.addEventListener('click', function () {
-								fetchMemberDetails(value);                   	// Call the fetch_member_details function on click
-								});
-							}
-						}
                     }
 
                     // Εμφάνιση του log για την επιλεγμένη διπλωματική
@@ -1048,6 +1095,7 @@ div[style="margin-bottom: 20px;"] {
 				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="cursor: not-allowed; opacity: 0.6;">Set Under Examination</button>
 				<button class="export-btn" id="grade_btn" onclick="showGradesForm()" style="cursor: not-allowed; opacity: 0.6;">Grade</button>
 				<button class="export-btn" id="view_grades_btn" onclick="fetchGradesDetails()" style="cursor: not-allowed; opacity: 0.6;">View Grades</button>
+				<button class="export-btn" id="invites_btn" onclick="viewInvites()" style="cursor: not-allowed; opacity: 0.6;">View Invites</button>
 			</div>
 </div>
 
