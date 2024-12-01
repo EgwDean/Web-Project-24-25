@@ -478,7 +478,7 @@ function decline(event){
 
     <!-- Φόρμα για τη νέα είσοδο -->
 <form id="studentForm" method="POST" class="form-container">
-    <h2>Απάντηση σε αίτηση τριμελής</h2>
+    <h2>Απάντηση σε αίτηση τριμελούς</h2>
     
     <label for="Id">ID</label>
     <input type="text" id="Id" name="Id" placeholder="ID Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
