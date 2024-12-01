@@ -32,7 +32,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $postcode = $_POST['postcode'];
     $landline_telephone = $_POST['landline_telephone'];
     $mobile_telephone = $_POST['mobile_telephone'];
+	
+	
+	
+	// Validate inputs using regular expressions
+    $errors = [];
 
+    // Street: Only letters, numbers, spaces, and basic punctuation
+    if (!preg_match("/^[a-zA-Z0-9\s.,'-]+$/", $street)) {
+        $errors[] = "Το πεδίο 'Οδός' πρέπει να περιέχει μόνο γράμματα, αριθμούς, κενά και σημεία στίξης (.,'-).";
+    }
+
+    // Number: Digits only, up to 10 characters
+    if (!preg_match("/^\d{1,10}$/", $number)) {
+        $errors[] = "Το πεδίο 'Αριθμός' πρέπει να περιέχει μόνο αριθμούς (1-10 χαρακτήρες).";
+    }
+
+    // City: Only letters and spaces
+    if (!preg_match("/^[a-zA-Z\s]+$/", $city)) {
+        $errors[] = "Το πεδίο 'Πόλη' πρέπει να περιέχει μόνο γράμματα και κενά.";
+    }
+
+    // Postcode: Exactly 5 digits
+    if (!preg_match("/^\d{5}$/", $postcode)) {
+        $errors[] = "Το πεδίο 'Ταχυδρομικός Κώδικας' πρέπει να περιέχει ακριβώς 5 ψηφία.";
+    }
+
+    // Landline Telephone: Optional, but must be 10-13 digits
+    if (!empty($landline_telephone) && !preg_match("/^\d{10,13}$/", $landline_telephone)) {
+        $errors[] = "Το πεδίο 'Τηλέφωνο Σταθερού' πρέπει να περιέχει 10-13 ψηφία.";
+    }
+
+    // Mobile Telephone: Required, must be 10-13 digits
+    if (!preg_match("/^\d{10,13}$/", $mobile_telephone)) {
+        $errors[] = "Το πεδίο 'Κινητό Τηλέφωνο' πρέπει να περιέχει 10-13 ψηφία.";
+    }
+
+    // If there are validation errors, return them
+    if (!empty($errors)) {
+        echo json_encode(["success" => false, "errors" => $errors]);
+		exit(); // Σταμάτα την εκτέλεση εδώ
+    }
+	
+	
+	
+	
     // Προετοιμασία του query
     $sql = "UPDATE student 
             SET street = ?, 
