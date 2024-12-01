@@ -217,16 +217,27 @@ footer {
     xhr.open("POST", "update_student_info.php", true);
     xhr.onload = function () {
         if (xhr.status === 200) {
+        try {
             const response = JSON.parse(xhr.responseText);
-            if (response.success) {
-                alert("Personal Info changed successfully!"); 		// Success alert
-				form.style.display = 'none';					// Hide form after alert
-            } else {
-                alert("Error: " + response.error); 				// Error alert
+
+            if (response.errors && response.errors.length > 0) {
+                // If errors exist, display them
+                alert("Errors: " + response.errors.join(", "));
+            } else if (response.success === false) {
+                // If success is false but no specific errors, display the error message
+                alert("Error: " + (response.error || "An unknown error occurred."));
+            } else if (response.success === true) {
+                // Success case
+                alert("Personal Info changed successfully!");
             }
-        } else {
-            alert("Server error. Please try again.");
+
+        } catch (e) {
+            console.error("Invalid JSON response", e);
+            alert("Unexpected server response.");
         }
+    } else {
+        alert("Server error. Please try again.");
+    }
     };
     xhr.send(formData); // Send the form data
 }
