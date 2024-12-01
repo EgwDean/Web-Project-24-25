@@ -204,10 +204,7 @@ if (isset($_POST['logout'])) {
             </form>
         </div>
     </div>
-   
-   
-	
-	
+
 	
 	<footer>
 		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
