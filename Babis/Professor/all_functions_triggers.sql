@@ -27,22 +27,22 @@ BEGIN
 
 	IF (student_email > 0) THEN
 		SET ptype = 'STUDENT';
-		SELECT 'STUDENT FOUND.';
+		#SELECT 'STUDENT FOUND.';
 	END IF;
     
 	IF (prof_email > 0) THEN
 		SET ptype = 'PROF';
-		SELECT 'PROFESSOR FOUND.';
+		#SELECT 'PROFESSOR FOUND.';
 	END IF;
     
 	IF (sec_email > 0) THEN
 		SET ptype = 'GRAM';
-		SELECT 'GRAMATEIA FOUND.';
+		#SELECT 'GRAMATEIA FOUND.';
 	END IF;
     
 	IF (student_email = 0 AND prof_email = 0 AND sec_email = 0) THEN
 		SET ptype = 'NONE';
-		SELECT 'WRONG COMBINATION OF USERNAME AND PASSWORD. PLEASE TRY AGAIN.';
+		#SELECT 'WRONG COMBINATION OF USERNAME AND PASSWORD. PLEASE TRY AGAIN.';
 	END IF;
 
 END$
@@ -65,7 +65,7 @@ BEGIN
 	
     SET link = CONCAT('uploads/',d_id,'.pdf');
     
-    SELECT link;    
+    #SELECT link;    
     
     UPDATE diplomatiki
     SET pdf_link_topic = link
@@ -88,13 +88,13 @@ BEGIN
     WHERE title = dip_title;
     
     IF (title_count > 0) THEN
-		SELECT 'YPARXEI HDH';
+		#SELECT 'YPARXEI HDH';
         SET dip_cod = 0;
         
 	ELSE 
 		INSERT INTO diplomatiki (email_prof, title, description, status) 
         VALUES (pr_email, dip_title, dip_descr, dip_stat);
-        SELECT 'OK';
+        #SELECT 'OK';
         SET dip_cod = 1;
     END IF;
 END$
@@ -114,7 +114,7 @@ BEGIN
     WHERE title = new_title AND id_diplomatiki != id_dip;
     
     IF (title_count > 0) THEN
-		SELECT 'YPARXEI HDH';
+		#SELECT 'YPARXEI HDH';
         SET dip_cod = 0;
         
 	ELSE 
@@ -122,7 +122,7 @@ BEGIN
         SET title = new_title, description = new_descr
         WHERE id_diplomatiki = id_dip;
         
-        SELECT 'OK';
+        #SELECT 'OK';
         
         SET dip_cod = 1;
     END IF;
@@ -155,22 +155,22 @@ BEGIN
         
 	IF (stud_count > 0) THEN
 		SET error_code = 1;
-		SELECT 'exei hdh.';
+		#SELECT 'exei hdh.';
 	END IF;
     
     IF (stud_exist = 0) THEN
 		SET error_code = 2;
-		SELECT 'lathos info.';
+		#SELECT 'lathos info.';
 	END IF;
     
 	IF (id_count = 0) THEN
 		SET error_code = 0;
-		SELECT 'lathos kodikos.';
+		#SELECT 'lathos kodikos.';
 	END IF;
     
 	IF (stud_count = 0 AND id_count = 1 AND stud_exist = 1) THEN
 		SET error_code = 3;
-		SELECT 'YESIR';
+		#SELECT 'YESIR';
         
         INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
 		VALUES(stud_email, dip_id, 'pending', current_date(), NULL, NULL, NULL, NULL);
@@ -375,7 +375,7 @@ IF (professor_email = supervisor_email OR professor_email = member1_email OR pro
 	END IF;
 ELSE
 	SET error_code = 1;
-	SELECT 'You need to be a supervisor or member of this diploma to add notes.';	
+	#SELECT 'You need to be a supervisor or member of this diploma to add notes.';	
 END IF;
 END$
 DELIMITER ;
@@ -527,5 +527,20 @@ BEGIN
     -- Recalculate the final grade, treating NULL as 0
     SET NEW.final_grade = (IFNULL(NEW.grade1, 0) + IFNULL(NEW.grade2, 0) + IFNULL(NEW.grade3, 0)) / 3;
   END IF;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS set_status_finished //
+CREATE TRIGGER set_status_finished
+AFTER UPDATE ON eksetasi_diplomatikis
+FOR EACH ROW
+BEGIN
+    IF (NEW.grade1 IS NOT NULL AND NEW.grade2 IS NOT NULL AND NEW.grade3 IS NOT NULL AND NEW.final_grade IS NOT NULL) THEN
+        UPDATE anathesi_diplomatikis
+        SET status = 'finished'
+        WHERE anathesi_diplomatikis.id_diploma = NEW.id_diplomatikis;
+    END IF;
 END //
 DELIMITER ;
