@@ -529,18 +529,3 @@ BEGIN
   END IF;
 END //
 DELIMITER ;
-
-
-DELIMITER //
-DROP TRIGGER IF EXISTS set_status_finished //
-CREATE TRIGGER set_status_finished
-AFTER UPDATE ON eksetasi_diplomatikis
-FOR EACH ROW
-BEGIN
-    IF (NEW.grade1 IS NOT NULL AND NEW.grade2 IS NOT NULL AND NEW.grade3 IS NOT NULL AND NEW.final_grade IS NOT NULL) THEN
-        UPDATE anathesi_diplomatikis
-        SET status = 'finished'
-        WHERE anathesi_diplomatikis.id_diploma = NEW.id_diplomatikis;
-    END IF;
-END //
-DELIMITER ;
