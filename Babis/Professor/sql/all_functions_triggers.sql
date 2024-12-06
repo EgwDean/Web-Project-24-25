@@ -323,9 +323,9 @@ BEGIN
 		WHERE id_dipl = pcode;
         SET y = 1;
         
-        	UPDATE prosklisi_se_trimeli
-			SET status = 'accepted', reply_date = CURDATE()
-			WHERE prof_email = pname AND id_dip = pcode;
+		UPDATE prosklisi_se_trimeli
+		SET status = 'accepted', reply_date = CURDATE()
+		WHERE prof_email = pname AND id_dip = pcode;
         
 	END IF;
     
@@ -352,15 +352,24 @@ BEGIN
             
 	END IF;
     
-	IF (y = 0 OR count = 0) THEN
-		SELECT 'error';
-        SET error_code = 1;
-        
+	IF (count = 0) THEN
+		-- Case 1: Diploma thesis does not exist (invalid pcode)
+		SET error_code = 2; 
+
+		UPDATE prosklisi_se_trimeli
+		SET status = 'declined', reply_date = CURDATE()
+		WHERE prof_email = pname AND id_dip = pcode;
+
+	ELSEIF (y = 0) THEN
+		-- Case 2: Neither member1 nor member2 was updated (no slot available)
+		SELECT 'error: no available slot';
+		SET error_code = 1; 
+		
 		UPDATE prosklisi_se_trimeli
 		SET status = 'declined', reply_date = CURDATE()
 		WHERE prof_email = pname AND id_dip = pcode;
 	END IF;
-    
+
 END$
 DELIMITER ;
 
