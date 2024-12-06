@@ -32,6 +32,11 @@
 
 Αν δεν το έκανα τότε:   όταν το status θα ενημερωνόταν στον πίνακα anathesi_diplomatikis σε 'recalled by professor' θα ενημερωνόταν και η προηγούμενη ανάκληση(pending) που δεν το θέλω.
 
+<br>
+<br>
 
+# ΠΩΣ ΤΕΣΤΑΡΩ ΤΑ ΠΑΝΤΑ ΣΤΟ section "Διπλωματικές" 
+
+Τρεξε τα αρχεία ως εξής:    create.sql  -->   all_functions_triggers.sql   -->  testfile.sql (--  testfile to test the section "Διπλωματικές")  χωρίς τα τελευταία 2 Updates
 
 
