@@ -367,8 +367,9 @@ function accept(event){
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
-                alert("Invitation accepted successfully!"); 		// Success alert
-				form.style.display = 'none';	// Hide form after alert
+                alert("Invitation accepted successfully!"); 	// Success alert
+				form.style.display = 'none';					// Hide form after alert
+				location.reload();								// Refresh the page to see changes
             } else {
                 alert("Error: " + response.error); 	// Error alert
             }
@@ -394,8 +395,9 @@ function decline(event){
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
-                alert("Invitation declined successfully!"); 		// Success alert
-				form.style.display = 'none';	// Hide form after alert
+                alert("Invitation declined successfully!"); 	// Success alert
+				form.style.display = 'none';					// Hide form after alert
+				location.reload();								// Refresh the page to see changes
             } else {
                 alert("Error: " + response.error); 	// Error alert
             }
