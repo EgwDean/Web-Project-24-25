@@ -133,8 +133,8 @@ DELIMITER $
 DROP PROCEDURE IF EXISTS assign_thesis$
 CREATE PROCEDURE assign_thesis(IN dip_id VARCHAR(30), IN am VARCHAR(30), IN stud_email VARCHAR(30), IN prof_email VARCHAR(30), OUT error_code INT)
 BEGIN 
-	DECLARE id_count INT;
-	DECLARE stud_count INT;
+    DECLARE id_count INT;
+    DECLARE stud_count INT;
     DECLARE stud_exist INT;
     
     SELECT COUNT(*)
@@ -212,8 +212,8 @@ BEGIN
     INTO id_count
     FROM diplomatiki
     WHERE email_prof = prof_email 
-	AND id_diplomatiki = dip_id 
-	AND status = 'given';
+    AND id_diplomatiki = dip_id 
+    AND status = 'given';
     
     SELECT COUNT(*)
     INTO stud_count
