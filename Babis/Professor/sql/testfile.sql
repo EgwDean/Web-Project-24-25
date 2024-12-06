@@ -126,7 +126,7 @@ VALUES
 (2, 'dimitris.papa@university.edu', 'Elena Theodorou', 'Giannis Nikas'),
 (3, 'Professor Dimitrios Xenos', 'dimitris.papa@university.edu', 'Sofia Liasidou'),
 (4, 'Minister Ioannis Papanikolaou', 'Vasilis Georgiou', 'dimitris.papa@university.edu'),
-(5, 'dimitris.papa@university.edu', 'dimitris.papa@university.edu', 'Sofia Liasidou'),
+(5, 'dimitris.papa@university.edu', 'maria.ioannou@university.edu', 'Sofia Liasidou'),
 (6, 'Minister Ioannis Papanikolaou', 'dimitris.papa@university.edu', 'dimitris.papa@university.edu');
 
 
