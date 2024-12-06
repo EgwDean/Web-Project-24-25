@@ -1033,9 +1033,11 @@ if (isset($_POST['logout'])) {
 			var idDiploma = row.cells[0].textContent; 
 			var statusDiploma = row.cells[4].textContent;  
 
-			// Συμπληρώνουμε τα πεδία στη φόρμα
+			// Συμπληρώνουμε τα πεδία στις φόρμες σημειώσεων και καταχώρησης βαθμού
+			if(selectedStatus === 'active'){
 			document.getElementById('diplomaId').value = idDiploma;              // για τη φόρμα σημειώσεων 
 			document.getElementById('diplomaStatus').value = statusDiploma;      // για τη φόρμα σημειώσεων
+			}
 			
 			if(selectedStatus === 'under examination'){
 				document.getElementById('diplId').value = idDiploma;             // για τη φόρμα καταχώρησης βαθμού
