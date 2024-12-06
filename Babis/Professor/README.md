@@ -1,6 +1,6 @@
 # ΠΩΣ ΤΕΣΤΑΡΩ ΤΗΝ ΑΚΥΡΩΣΗ ΑΝΑΘΕΣΗΣ (για ενεργή διπλωματική)
 
-Τρεξε τα αρχεία ως εξής:    create.sql  -->   all_functions_triggers.sql   -->  testfile.sql  χωρίς τα τελευταία 2 Updates
+Τρεξε τα αρχεία ως εξής:    create.sql  -->   all_functions_triggers.sql   -->  testfile.sql (-- testfile to test the section "Ακύρωση Ανάθεσης" --) χωρίς τα τελευταία 2 Updates
 
 Στη συνέχεια κάνε ανάθεση την διπλωματική με ID 1 σε κάποιον φοιτητή που δεν έχει ήδη διπλωματική.
 
