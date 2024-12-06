@@ -16,8 +16,6 @@ $userEmail = $_SESSION['email'];
 $enableFields = $_SESSION['enable_fields'] ?? false;
 unset($_SESSION['enable_fields']); // Καθαρισμός της μεταβλητής μετά την πρώτη εμφάνιση
 
-// Αποστολή μηνύματος αν υπάρχει
-$message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dipId = $_POST['diplomaId'] ?? null;
@@ -258,6 +256,39 @@ function clearForm() {
     document.getElementById('meetYear').value = '';
 	document.getElementById('meetNumber').value = '';
 }
+
+
+
+
+function recallThesis(event){
+	event.preventDefault(); // Prevent default form submission
+
+    // Get the form element
+    const form = document.getElementById("studentForm");
+    const formData = new FormData(form); // Collect form data
+
+    // Send the form data via AJAX
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "recall_thesis.php", true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.success1) {
+                alert("Η ανάκληση της ανάθεσης πραγματοποιήθηκε επιτυχώς!"); 					// Success1 alert
+				clearForm();
+            } else if(response.success2){
+				alert("Η ακύρωση της ανάθεσης διπλωματικής πραγματοποιήθηκε επιτυχώς!"); 		// Success2 alert
+				clearForm();
+			}else{
+                alert("Error: " + response.error); 												// Error alert
+            }
+        } else {
+            alert("Server error. Please try again.");
+        }
+    };
+    xhr.send(formData); // Send the form data
+}
+
 </script>
 <body>
 
@@ -306,7 +337,7 @@ function clearForm() {
     <div class="form-container">
         <h2>Ανάκληση Διπλωματικής</h2>
 
-        <form id="studentForm" action="recall_thesis.php" method="POST">
+        <form id="studentForm" onsubmit="recallThesis(event)" method="POST">
             <label for="diplomaId">ID</label>
             <input type="text" id="diplomaId" name="diplomaId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" required>
 
@@ -340,4 +371,3 @@ function clearForm() {
 	</div>
 </body>
 </html>
-
