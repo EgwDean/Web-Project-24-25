@@ -242,7 +242,7 @@ BEGIN
         -- Ενημέρωση κατάστασης ανάθεσης
         UPDATE anathesi_diplomatikis
         SET status = 'recalled'
-        WHERE id_diploma = dip_id;
+        WHERE id_diploma = dip_id AND status != 'canceled_by_professor';
 
         SET error_code = 1; -- Επιτυχής ανάκληση
         
@@ -356,9 +356,9 @@ BEGIN
 		SELECT 'error';
         SET error_code = 1;
         
-		    UPDATE prosklisi_se_trimeli
-			SET status = 'declined', reply_date = CURDATE()
-			WHERE prof_email = pname AND id_dip = pcode;
+		UPDATE prosklisi_se_trimeli
+		SET status = 'declined', reply_date = CURDATE()
+		WHERE prof_email = pname AND id_dip = pcode;
 	END IF;
     
 END$
