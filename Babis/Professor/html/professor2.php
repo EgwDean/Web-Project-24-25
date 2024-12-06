@@ -401,8 +401,9 @@ function assignThesis(event){
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
                 alert("Thesis assigned successfully!"); 		// Success alert
+				clearForm();
             } else {
-                alert("Error: " + response.error); 	// Error alert
+                alert("Error: " + response.error); 				// Error alert
             }
         } else {
             alert("Server error. Please try again.");
