@@ -4,8 +4,8 @@ DELIMITER $
 DROP PROCEDURE IF EXISTS login$
 CREATE PROCEDURE login(IN pname VARCHAR(30), IN pcode VARCHAR(30), OUT ptype VARCHAR(30))
 BEGIN 
-	DECLARE student_email INT;
-	DECLARE prof_email INT;
+    DECLARE student_email INT;
+    DECLARE prof_email INT;
     DECLARE sec_email INT;
     
     
@@ -14,7 +14,7 @@ BEGIN
     FROM student
     WHERE email_student = pname AND password = pcode;
     
-	SELECT COUNT(*)
+    SELECT COUNT(*)
     INTO prof_email
     FROM professor
     WHERE email_professor = pname AND password = pcode;
