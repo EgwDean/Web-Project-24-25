@@ -66,6 +66,8 @@ WHERE id_diploma = 1;
 
 
 
+
+
 --  testfile to test the section "Διπλωματικές"
 
 
@@ -93,7 +95,7 @@ VALUES
 ('mary.smith@example.com', 2, 'finished', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2'),
 ('peter.jones@example.com', 3, 'pending', '2024-02-20', '2026-1-1', 'http://example.com/nemertes/103', 'path/to/diploma3.pdf', 'http://example.com/external_link3'),
 ('lucy.brown@example.com', 4, 'finished', '2024-04-10', '2024-10-10', 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4'),
-('lucy.brown@example.com', 5, 'active', '2024-04-10', NULL, 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4'),
+('lucy.brown@example.com', 5, 'active', '2020-04-10', NULL, 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4'),
 ('lucy.brown@example.com', 6, 'active', '2024-04-10', NULL, 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4');
 
 INSERT INTO eksetasi_diplomatikis (id_diplomatikis, email_st, exam_date, exam_room, grade1, grade2, grade3, final_grade, praktiko_bathmologisis) 
@@ -101,15 +103,28 @@ VALUES
 (1, 'john.doe@example.com', '2024-06-15 09:00:00', 'Room A101', 8.50, 7.75, 9.00, 8.42, 'Pass'),
 (2, 'mary.smith@example.com', '2024-06-16 11:00:00', 'Room B202', 6.80, 7.90, 8.20, 7.30, 'Pass'),
 (3, 'peter.jones@example.com', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
-(4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
+(4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass'),
+(5, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', NULL, 9.50, 9.30, 9.27, 'Pass');
 
 
 DELETE FROM prosklisi_se_trimeli;
 
 INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
 VALUES 
+('mike.brown@example.com', 'maria.ioannou@university.edu', 1, 'accepted', '2024-11-11', '2024-11-06'),
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 3, 'pending', NULL, '2024-11-01'),
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 4, 'pending', '2024-11-10', '2024-11-05'),
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 2, 'accepted', '2024-11-10', '2024-11-05'),
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 5, 'declined', '2024-11-10', '2024-11-05'),
 ('mike.brown@example.com', 'maria.ioannou@university.edu', 3, 'declined', '2024-11-10', '2024-11-05');
+
+
+/*
+UPDATE trimelis_epitropi_diplomatikis
+SET supervisor = 'Minister Ioannis Papanikolaou'
+WHERE id_dipl = 5;
+
+UPDATE eksetasi_diplomatikis
+SET grade1 = 5
+WHERE id_diplomatikis = 5;
+*/
