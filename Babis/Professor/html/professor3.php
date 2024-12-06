@@ -804,7 +804,8 @@ if (isset($_POST['logout'])) {
 					const response = JSON.parse(xhr.responseText);
 					if (response.success) {
 						alert("Notes created successfully!"); 		// Success alert
-						clearForm();								// Clear form after alert
+						form.style.display = 'none';				// Hide form after alert
+						clearForm();								// Clear form 
 					} else {
 						alert("Error: " + response.error); 	        // Error alert
 					}
