@@ -68,9 +68,11 @@ WHERE id_diploma = 1;
 
 
 
---  testfile to test the section "Διπλωματικές"
 
-DELETE FROM student;
+
+
+
+--  testfile to test the section "Διπλωματικές"
 
 DROP TABLE diplomatiki;
 CREATE TABLE diplomatiki (
@@ -81,6 +83,17 @@ CREATE TABLE diplomatiki (
   pdf_link_topic VARCHAR(255),
   status ENUM('available', 'given') NOT NULL
 );
+
+
+DELETE FROM professor;
+DELETE FROM student;
+
+INSERT INTO professor (password, name, surname, email_professor, topic, landline, mobile, department, university)
+VALUES
+  ('p1', 'Dimitris', 'Papadopoulos', 'dimitris.papa@university.edu', 'Physics', '2101234567', '6901234567', 'Physics', 'National University'),
+  ('p2', 'Maria', 'Ioannou', 'maria.ioannou@university.edu', 'Mathematics', '2101234568', '6901234568', 'Mathematics', 'National University'),
+  ('p3', 'Nikos', 'Katsaros', 'nikos.katsaros@university.edu', 'Computer Science', '2101234569', '6901234569', 'Computer Science', 'National University');
+  
   
   INSERT INTO diplomatiki (email_prof, title, description, pdf_link_topic, status)
 VALUES
@@ -106,9 +119,6 @@ DELETE FROM trimelis_epitropi_diplomatikis;
 DELETE FROM anathesi_diplomatikis;
 DELETE FROM eksetasi_diplomatikis;
 
-SELECT * FROM trimelis_epitropi_diplomatikis;
-SELECT * FROM anathesi_diplomatikis;
-SELECT * FROM eksetasi_diplomatikis;
 
 INSERT INTO trimelis_epitropi_diplomatikis (id_dipl, supervisor, member1, member2) 
 VALUES 
@@ -150,15 +160,6 @@ VALUES
 ('mike.brown@example.com', 'maria.ioannou@university.edu', 3, 'declined', '2024-11-10', '2024-11-05');
 
 
-/*
-UPDATE trimelis_epitropi_diplomatikis
-SET supervisor = 'Minister Ioannis Papanikolaou'
-WHERE id_dipl = 5;
-
-UPDATE eksetasi_diplomatikis
-SET grade1 = 5
-WHERE id_diplomatikis = 5;
-*/
 
 
 
@@ -224,7 +225,7 @@ VALUES
 INSERT INTO prosklisi_se_trimeli (student_email, prof_email, id_dip, status, reply_date, invitation_date)
 VALUES 
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 3, 'pending', NULL, '2024-11-01'),
-('mike.brown@example.com', 'dimitris.papa@university.edu', 4, 'pending', '2024-11-10', '2024-11-05'),
+('mike.brown@example.com', 'dimitris.papa@university.edu', 4, 'pending', NULL, '2024-11-05'),
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 2, 'accepted', '2024-11-10', '2024-11-05'),
 ('mike.brown@example.com', 'dimitris.papa@university.edu', 5, 'declined', '2024-11-10', '2024-11-05'),
-('mike.brown@example.com', 'maria.ioannou@university.edu', 3, 'pending', '2024-11-10', '2024-11-05');
+('mike.brown@example.com', 'maria.ioannou@university.edu', 3, 'pending', NULL, '2024-11-05');
