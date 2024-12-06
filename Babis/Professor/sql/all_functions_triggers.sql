@@ -259,7 +259,7 @@ BEGIN
 				-- Ενημέρωση κατάστασης ανάθεσης σε 'canceled_by_professor'
 				UPDATE anathesi_diplomatikis
 				SET status = 'canceled_by_professor'
-				WHERE id_diploma = dip_id;
+				WHERE id_diploma = dip_id AND status != 'recalled';
                 
 				UPDATE diplomatiki
                 SET status = 'available'
