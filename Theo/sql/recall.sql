@@ -72,6 +72,12 @@ BEGIN
 				UPDATE anathesi_diplomatikis
 				SET status = 'canceled_by_professor'
 				WHERE id_diploma = dip_id;
+
+
+				UPDATE diplomatiki
+                		SET status = 'available'
+                		WHERE id_diplomatiki = dip_id;
+
 				
 				DELETE FROM trimelis_epitropi_diplomatikis
 				WHERE id_dipl = dip_id;  
