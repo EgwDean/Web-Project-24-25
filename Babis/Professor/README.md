@@ -37,6 +37,6 @@
 
 # ΠΩΣ ΤΕΣΤΑΡΩ ΤΑ ΠΑΝΤΑ ΣΤΟ section "Διπλωματικές" 
 
-Τρεξε τα αρχεία ως εξής:    create.sql  -->   all_functions_triggers.sql   -->  testfile.sql (--  testfile to test the section "Διπλωματικές") 
+Τρεξε τα αρχεία ως εξής:    create.sql  -->   all_functions_triggers.sql   -->  testfile.sql (ολοκληρο)
 
 
