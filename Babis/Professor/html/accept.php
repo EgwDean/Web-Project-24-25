@@ -55,7 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				if ($output === null) {
 					echo json_encode(["success" => false, "error" => "Σφάλμα κατά την ανάκτηση του αποτελέσματος."]); 
 				} elseif ($output == 1) {
-					echo json_encode(["success" => false, "error" => "Κάτι πήγε λάθος!"]); 
+					echo json_encode(["success" => false, "error" => "Η τριμελής επιτροπή είναι πλήρης!"]); 
+				} elseif ($output == 2) {
+					echo json_encode(["success" => false, "error" => "Δεν υπάρχει διπλωματική με αυτό το ID"]);
 				} else {
 					echo json_encode(["success" => true]);
 				}
