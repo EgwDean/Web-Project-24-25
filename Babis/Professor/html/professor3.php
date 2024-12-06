@@ -439,7 +439,7 @@ if (isset($_POST['logout'])) {
 
 
 									const viewGradesBtn = document.getElementById("view_grades_btn");
-									viewGradesBtn.style.cursor = "not-allowed";								// Disable the "View Grades" button
+									viewGradesBtn.style.cursor = "not-allowed";							// Disable the "View Grades" button
 									viewGradesBtn.disabled = true;
 									viewGradesBtn.style.opacity = "0.6";					
 									if (item.supervisor === professorEmail){
@@ -448,11 +448,26 @@ if (isset($_POST['logout'])) {
 										examBtn.disabled = false;
 										examBtn.style.cursor = "pointer";
 										examBtn.style.opacity = "1";
+										
+										
+										const notesBtn = document.getElementById("notes_btn");
+										notesBtn.style.display = "inline"; 								// Show the "Add Notes" button	
+										notesBtn.disabled = false;
+										notesBtn.style.cursor = "pointer";
+										notesBtn.style.opacity = "1";
+										
 									}else {
 										const examBtn = document.getElementById("exam_btn");
 										examBtn.style.cursor = "not-allowed";							// Disable the "Set Under Examination" button
 										examBtn.disabled = true;
-										examBtn.style.opacity = "0.6";   			
+										examBtn.style.opacity = "0.6";   
+
+
+										const notesBtn = document.getElementById("notes_btn");
+										notesBtn.style.display = "inline"; 								// Show the "Add Notes" button	
+										notesBtn.disabled = false;
+										notesBtn.style.cursor = "pointer";
+										notesBtn.style.opacity = "1";
 									}
 							
 								}else if (item.status === "under examination"){
@@ -461,9 +476,15 @@ if (isset($_POST['logout'])) {
 									examBtn.style.cursor = "not-allowed";								// Disable the "Set Under Examination" button
 									examBtn.disabled = true;
 									examBtn.style.opacity = "0.6";   
+									
+									
+									const notesBtn = document.getElementById("notes_btn");
+									notesBtn.style.cursor = "not-allowed";								// Disable the "Add Notes" button
+									notesBtn.disabled = true;
+									notesBtn.style.opacity = "0.6";   
 
 									const viewGradesBtn = document.getElementById("view_grades_btn");
-									viewGradesBtn.style.display = "inline"; 									// Show the "View Grades" button
+									viewGradesBtn.style.display = "inline"; 							// Show the "View Grades" button
 									viewGradesBtn.disabled = false;
 									viewGradesBtn.style.cursor = "pointer";
 									viewGradesBtn.style.opacity = "1";
@@ -513,23 +534,27 @@ if (isset($_POST['logout'])) {
 								
 								
 									const viewGradesBtn = document.getElementById("view_grades_btn");
-									viewGradesBtn.style.cursor = "not-allowed";								// Disable the "View Grades" button
+									viewGradesBtn.style.cursor = "not-allowed";							// Disable the "View Grades" button
 									viewGradesBtn.disabled = true;
 									viewGradesBtn.style.opacity = "0.6";  
 									
 									const examBtn = document.getElementById("exam_btn");
 									examBtn.style.cursor = "not-allowed";								// Disable the "Set Under Examination" button
 									examBtn.disabled = true;
-									examBtn.style.opacity = "0.6";   	
+									examBtn.style.opacity = "0.6";   	 
+									
+									
+									const notesBtn = document.getElementById("notes_btn");
+									notesBtn.style.cursor = "not-allowed";								// Disable the "Add Notes" button
+									notesBtn.disabled = true;
+									notesBtn.style.opacity = "0.6"; 
 								}
 								
 								
 								document.getElementById("view_info_btn").style.display = "inline"; 		// Ενεργοποίηση κουμπιού λεπτομερειών διπλωματικής
 								document.getElementById("view_info_btn").style.cursor = "pointer";
 								document.getElementById("view_info_btn").style.opacity = "1";
-								document.getElementById("notes_btn").style.display = "inline";     		// Ενεργοποίηση κουμπιού δημιουργίας σημειώσεων
-								document.getElementById("notes_btn").style.cursor = "pointer";
-								document.getElementById("notes_btn").style.opacity = "1";	
+								
 								
 								if(item.status === 'pending'){
 								const invitesBtn = document.getElementById("invites_btn");
