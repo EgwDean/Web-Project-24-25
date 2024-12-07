@@ -31,19 +31,15 @@ BEGIN
     
 	IF (prof_email > 0) THEN
 		SET ptype = 'PROF';
-		#SELECT 'PROFESSOR FOUND.';
 	END IF;
     
 	IF (sec_email > 0) THEN
 		SET ptype = 'GRAM';
-		#SELECT 'GRAMATEIA FOUND.';
 	END IF;
     
 	IF (student_email = 0 AND prof_email = 0 AND sec_email = 0) THEN
-		SET ptype = 'NONE';
-		#SELECT 'WRONG COMBINATION OF USERNAME AND PASSWORD. PLEASE TRY AGAIN.';
+		SET ptype = 'NONE';       #  WRONG COMBINATION OF USERNAME AND PASSWORD. PLEASE TRY AGAIN.
 	END IF;
-
 END$
 DELIMITER ;
 
@@ -63,8 +59,6 @@ BEGIN
 	DECLARE link VARCHAR(50);
 	
     SET link = CONCAT('uploads/',d_id,'.pdf');
-    
-    #SELECT link;    
     
     UPDATE diplomatiki
     SET pdf_link_topic = link
@@ -87,14 +81,12 @@ BEGIN
     WHERE title = dip_title;
     
     IF (title_count > 0) THEN
-		#SELECT 'YPARXEI HDH';
-        SET dip_cod = 0;
+        SET dip_cod = 0;		# ALREADY EXISTS
         
 	ELSE 
 		INSERT INTO diplomatiki (email_prof, title, description, status) 
         VALUES (pr_email, dip_title, dip_descr, dip_stat);
-        #SELECT 'OK';
-        SET dip_cod = 1;
+        SET dip_cod = 1;		# SUCCESS
     END IF;
 END$
 DELIMITER ;
@@ -113,17 +105,14 @@ BEGIN
     WHERE title = new_title AND id_diplomatiki != id_dip;
     
     IF (title_count > 0) THEN
-		#SELECT 'YPARXEI HDH';
-        SET dip_cod = 0;
+        SET dip_cod = 0;		# ALREADY EXISTS
         
 	ELSE 
 		UPDATE diplomatiki 
         SET title = new_title, description = new_descr
         WHERE id_diplomatiki = id_dip;
         
-        #SELECT 'OK';
-        
-        SET dip_cod = 1;
+        SET dip_cod = 1;		# SUCCESS
     END IF;
 END$
 DELIMITER ;
@@ -153,23 +142,19 @@ BEGIN
     WHERE email_stud = stud_email AND (status = 'pending' OR status = 'active' OR status = 'under examination' OR status = 'finished');
         
 	IF (stud_count > 0) THEN
-		SET error_code = 1;
-		#SELECT 'exei hdh.';
+		SET error_code = 1;		# STUDENT ALREADY HAS A THESIS
 	END IF;
     
     IF (stud_exist = 0) THEN
-		SET error_code = 2;
-		#SELECT 'lathos info.';
+		SET error_code = 2;		# WRONG STUDENT INFO
 	END IF;
     
 	IF (id_count = 0) THEN
-		SET error_code = 0;
-		#SELECT 'lathos kodikos.';
+		SET error_code = 0;		# WRONG THESIS ID
 	END IF;
     
 	IF (stud_count = 0 AND id_count = 1 AND stud_exist = 1) THEN
-		SET error_code = 3;
-		#SELECT 'YESIR';
+		SET error_code = 3;		# CORRECT
         
         INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
 		VALUES(stud_email, dip_id, 'pending', current_date(), NULL, NULL, NULL, NULL);
@@ -404,8 +389,7 @@ IF (professor_email = supervisor_email OR professor_email = member1_email OR pro
 		WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma;
 	END IF;
 ELSE
-	SET error_code = 1;
-	#SELECT 'You need to be a supervisor or member of this diploma to add notes.';	
+	SET error_code = 1;      # You need to be a supervisor or member of this diploma to add notes.
 END IF;
 END$
 DELIMITER ;
