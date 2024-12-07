@@ -358,7 +358,7 @@ function createChart3(chartId, chartData) {
 
         <!-- Στοιχεία χρήστη -->
         <div class="user-info">
-            <span>Welcome, <?php echo htmlspecialchars($userEmail); ?></span>
+            <span><?php echo htmlspecialchars($userEmail);?></span>
             <form action="" method="post" style="display:inline;">
                 <button type="submit" name="logout" class="logout-btn">Logout</button>
             </form>
