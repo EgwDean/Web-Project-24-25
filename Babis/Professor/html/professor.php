@@ -642,7 +642,7 @@ function uploadDiploma(event){
 
 
         <div class="user-info">
-            <span>Welcome, <?php echo $userEmail; ?></span>
+            <span><?php echo $userEmail;?></span>
             <form method="POST" action="">
                 <button type="submit" name="logout" class="logout-btn">Logout</button>
             </form>
