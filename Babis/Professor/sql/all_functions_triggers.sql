@@ -526,20 +526,13 @@ END //
 DELIMITER ;
 
 
-
 DELIMITER //
 DROP TRIGGER IF EXISTS update_final_grade //
 CREATE TRIGGER update_final_grade
 BEFORE UPDATE ON eksetasi_diplomatikis
 FOR EACH ROW
 BEGIN
-  -- Ensure that only one grade is updated at a time
-  IF ( (OLD.grade1 != NEW.grade1) + (OLD.grade2 != NEW.grade2) + (OLD.grade3 != NEW.grade3) ) > 1 THEN
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = 'Only one grade column can be updated at a time.';
-  ELSE
-    -- Recalculate the final grade, treating NULL as 0
-    SET NEW.final_grade = (IFNULL(NEW.grade1, 0) + IFNULL(NEW.grade2, 0) + IFNULL(NEW.grade3, 0)) / 3;
-  END IF;
+  -- Recalculate the final grade, treating NULL as 0
+  SET NEW.final_grade = (IFNULL(NEW.grade1, 0) + IFNULL(NEW.grade2, 0) + IFNULL(NEW.grade3, 0)) / 3;
 END //
 DELIMITER ;
