@@ -33,7 +33,7 @@ $sql = "SELECT ROUND(AVG(TIMESTAMPDIFF(MONTH, start_date, end_date)), 1) AS stat
 FROM anathesi_diplomatikis 
 INNER JOIN trimelis_epitropi_diplomatikis 
   ON anathesi_diplomatikis.id_diploma = trimelis_epitropi_diplomatikis.id_dipl
-WHERE supervisor = '$email' 
+WHERE supervisor = ?
   AND anathesi_diplomatikis.status = 'finished'
 
 UNION
@@ -42,7 +42,7 @@ SELECT ROUND(AVG(TIMESTAMPDIFF(MONTH, start_date, end_date)), 1) AS avg_completi
 FROM anathesi_diplomatikis 
 INNER JOIN trimelis_epitropi_diplomatikis 
   ON anathesi_diplomatikis.id_diploma = trimelis_epitropi_diplomatikis.id_dipl
-WHERE (member1 = '$email' OR member2 = '$email') 
+WHERE (member1 = ? OR member2 = ?) 
   AND anathesi_diplomatikis.status = 'finished'
 
 UNION
@@ -51,7 +51,7 @@ SELECT ROUND(AVG(final_grade), 1) AS mesos_oros
 FROM trimelis_epitropi_diplomatikis 
 INNER JOIN eksetasi_diplomatikis 
   ON trimelis_epitropi_diplomatikis.id_dipl = eksetasi_diplomatikis.id_diplomatikis
-WHERE supervisor = '$email' 
+WHERE supervisor = ?
   AND final_grade IS NOT NULL
 
 UNION
@@ -60,7 +60,7 @@ SELECT ROUND(AVG(final_grade), 1) AS mesos_oros
 FROM trimelis_epitropi_diplomatikis 
 INNER JOIN eksetasi_diplomatikis 
   ON trimelis_epitropi_diplomatikis.id_dipl = eksetasi_diplomatikis.id_diplomatikis
-WHERE (member1 = '$email' OR member2 = '$email') 
+WHERE (member1 = ? OR member2 = ?) 
   AND final_grade IS NOT NULL
 
 UNION
@@ -69,7 +69,7 @@ SELECT CAST(COUNT(*) AS DECIMAL(10, 1)) AS plithos1
 FROM trimelis_epitropi_diplomatikis 
 INNER JOIN eksetasi_diplomatikis 
   ON trimelis_epitropi_diplomatikis.id_dipl = eksetasi_diplomatikis.id_diplomatikis
-WHERE supervisor = '$email'
+WHERE supervisor = ?
 
 UNION ALL
 
@@ -77,12 +77,16 @@ SELECT CAST(COUNT(*) AS DECIMAL(10, 1)) AS plithos2
 FROM trimelis_epitropi_diplomatikis 
 INNER JOIN eksetasi_diplomatikis 
   ON trimelis_epitropi_diplomatikis.id_dipl = eksetasi_diplomatikis.id_diplomatikis
-WHERE member1 = '$email' 
-   OR member2 = '$email';";
+WHERE member1 = ? 
+   OR member2 = ?;";
 
 
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('sssssssss', $email, $email, $email, $email, $email, $email, $email, $email, $email); // Bind parameters
+$stmt->execute();
+$result = $stmt->get_result();
+
 
 // Έλεγχος αν υπάρχουν αποτελέσματα
 if ($result && $result->num_rows > 0) {
