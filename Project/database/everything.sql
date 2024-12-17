@@ -513,7 +513,7 @@ DELIMITER ;
 
 DELIMITER $
 DROP PROCEDURE IF EXISTS gradeSubmit$
-CREATE PROCEDURE gradeSubmit(IN professor_email VARCHAR(255), IN id_diploma INT, IN grade DECIMAL(3, 2))
+CREATE PROCEDURE gradeSubmit(IN professor_email VARCHAR(255), IN id_diploma INT, IN grade DECIMAL(4, 2))
 BEGIN
 
 DECLARE supervisor VARCHAR(255);
