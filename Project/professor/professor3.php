@@ -908,6 +908,7 @@ if (isset($_POST['logout'])) {
 					if (response.success) {
 						alert("Grade inserted successfully!"); 		// Success alert
 						form.style.display = 'none';	            // Hide form after alert
+						applyFilter(); // Refresh the table
 					} else {
 						alert("Error: " + response.error); 	        // Error alert
 					}
