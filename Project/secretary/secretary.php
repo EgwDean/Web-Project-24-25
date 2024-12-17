@@ -67,6 +67,7 @@ $email = $_SESSION['email']; //email χρήστη
 
     .user-info {
       margin-right: 8px;
+      margin-left: 8px;
     }
 
     .user-icon {
