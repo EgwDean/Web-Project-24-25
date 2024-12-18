@@ -18,7 +18,7 @@
         /* Στυλ για το κουμπί Login */
         .login-button {
             position: absolute;
-            top: 15px; /* 5px πιο κάτω από το μοβ πλαίσιο */
+            top: 28px; 
             right: 20px;
             padding: 10px 20px;
             background-color: #007bff; /* Μπλε χρώμα */
@@ -35,7 +35,7 @@
 
         h1 {
             text-align: center;
-            margin: 70px 0 50px; /* Προσθήκη 40px κενό κάτω από τον τίτλο */
+            margin: 0px 0px 50px; 
             font-size: 48px;
             font-weight: bold;
             color: white;
@@ -102,92 +102,104 @@
         .selected-row {
             background-color: #cce5ff;
         }
+
+	footer {
+		background-color: #192f59;
+		color: white;
+		text-align: center;
+		padding: 10px 0;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+	
+
     </style>
     <script>
-        function getAnnouncements() {
-            var startDate = document.getElementById('start_date').value;
-            var endDate = document.getElementById('end_date').value;
-            var table = document.getElementById("announcement_table");
-            var xhr = new XMLHttpRequest();
+function getAnnouncements() {
+    var startDate = document.getElementById('start_date').value;
+    var endDate = document.getElementById('end_date').value;
+    var table = document.getElementById("announcement_table");
+    var xhr = new XMLHttpRequest();
 
-            // Δημιουργία URL με παραμέτρους για ημερομηνίες
-            var url = 'anakoinosi.php?start_date=' + startDate + '&end_date=' + endDate;
+    // Δημιουργία URL με παραμέτρους για ημερομηνίες
+    var url = 'anakoinosi.php?start_date=' + startDate + '&end_date=' + endDate;
 
-            xhr.open('GET', url);
-            xhr.send();
+    xhr.open('GET', url);
+    xhr.send();
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
 
-                        // Διαγραφή προηγούμενων δεδομένων στον πίνακα
-                        table.innerHTML = '';
+                // Διαγραφή προηγούμενων δεδομένων στον πίνακα
+                table.innerHTML = '';
 
-                	var header = table.createTHead();
-                	var row = header.insertRow(0);
-                	var cell1 = row.insertCell(0);
-                	var cell2 = row.insertCell(1);
-                	var cell3 = row.insertCell(2);
-                	var cell4 = row.insertCell(3);
-                	var cell5 = row.insertCell(4);
-                	var cell6 = row.insertCell(5);
-                	var cell7 = row.insertCell(6);
-                	var cell8 = row.insertCell(7);
-                	var cell9 = row.insertCell(8);
-                	var cell10 = row.insertCell(9);
-                	var cell11 = row.insertCell(10);
+                if (data.length > 0) {
+                    // Δημιουργία κεφαλίδων του πίνακα μόνο αν υπάρχουν δεδομένα
+                    var header = table.createTHead();
+                    var row = header.insertRow(0);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+                    var cell5 = row.insertCell(4);
+                    var cell6 = row.insertCell(5);
+                    var cell7 = row.insertCell(6);
+                    var cell8 = row.insertCell(7);
+                    var cell9 = row.insertCell(8);
+                    var cell10 = row.insertCell(9);
+                    var cell11 = row.insertCell(10);
 
+                    cell1.innerHTML = "Ονοματεπώνυμο Φοιτητή";
+                    cell2.innerHTML = "ΑΜ";
+                    cell3.innerHTML = "Κωδικός Διπλωματικής";
+                    cell4.innerHTML = "Τίτλος Διπλωματικής";
+                    cell5.innerHTML = "Ημερομηνία Εξέτασης";
+                    cell6.innerHTML = "Χώρος Εξέτασης";
+                    cell7.innerHTML = "Ονοματεπώνυμο Καθηγητή";
+                    cell8.innerHTML = "Βαθμός 1";
+                    cell9.innerHTML = "Βαθμός 2";
+                    cell10.innerHTML = "Βαθμός 3";
+                    cell11.innerHTML = "Τελικός Βαθμός";
 
-                	cell1.innerHTML = "Ονοματεπώνυμο Φοιτητή";
-                	cell2.innerHTML = "ΑΜ";
-                	cell3.innerHTML = "Κωδικός Διπλωματικής";
-                	cell4.innerHTML = "Τίτλος Διπλωματικής";
-                	cell5.innerHTML = "Ημερομηνία Εξέτασης";
-                	cell6.innerHTML = "Χώρος Εξέτασης";
-                	cell7.innerHTML = "Ονοματεπώνυμο Καθηγητή";
-                	cell8.innerHTML = "Βαθμός 1";
-                	cell9.innerHTML = "Βαθμός 2";
-                	cell10.innerHTML = "Βαθμός 3";
-                	cell11.innerHTML = "Τελικός Βαθμός";
+                    // Δημιουργία του σώματος του πίνακα
+                    var tbody = table.createTBody();
+                    for (var i = 0; i < data.length; i++) {
+                        var row = tbody.insertRow(-1);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+                        var cell7 = row.insertCell(6);
+                        var cell8 = row.insertCell(7);
+                        var cell9 = row.insertCell(8);
+                        var cell10 = row.insertCell(9);
+                        var cell11 = row.insertCell(10);
 
-
-
-                        // Δημιουργία του σώματος του πίνακα
-                        var tbody = table.createTBody();
-                        for (var i = 0; i < data.length; i++) {
-                            var row = tbody.insertRow(-1);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                	    var cell5 = row.insertCell(4);
-                	    var cell6 = row.insertCell(5);
-                	    var cell7 = row.insertCell(6);
-                	    var cell8 = row.insertCell(7);
-                	    var cell9 = row.insertCell(8);
-                	    var cell10 = row.insertCell(9);
-                	    var cell11 = row.insertCell(10);
-
-                            cell1.innerHTML = data[i]['student_full_name'];
-                            cell2.innerHTML = data[i]['number'];
-                            cell3.innerHTML = data[i]['id'];
-                            cell4.innerHTML = data[i]['title'];
-                            cell5.innerHTML = data[i]['exam_date'];
-                            cell6.innerHTML = data[i]['exam_room'];
-                            cell7.innerHTML = data[i]['professor_full_name'];
-                            cell8.innerHTML = data[i]['grade1'];
-                            cell9.innerHTML = data[i]['grade2'];
-                            cell10.innerHTML = data[i]['grade3'];
-                            cell11.innerHTML = data[i]['final_grade'];
-
-                        }
-                    } else {
-                        console.error("Error fetching data");
+                        cell1.innerHTML = data[i]['student_full_name'];
+                        cell2.innerHTML = data[i]['number'];
+                        cell3.innerHTML = data[i]['id'];
+                        cell4.innerHTML = data[i]['title'];
+                        cell5.innerHTML = data[i]['exam_date'];
+                        cell6.innerHTML = data[i]['exam_room'];
+                        cell7.innerHTML = data[i]['professor_full_name'];
+                        cell8.innerHTML = data[i]['grade1'];
+                        cell9.innerHTML = data[i]['grade2'];
+                        cell10.innerHTML = data[i]['grade3'];
+                        cell11.innerHTML = data[i]['final_grade'];
                     }
                 }
-            };
+            } else {
+                console.error("Error fetching data");
+            }
         }
+    };
+}
+
 
 
 function exportFormat(format) {
@@ -207,11 +219,12 @@ function exportFormat(format) {
 </head>
 
 <body onload="getAnnouncements()">
+    
     <!-- Κουμπί Login με σύνδεση στην σελίδα Login.php -->
     <a href="Login.php">
         <button class="login-button">Login</button>
     </a>
-    
+
     <h1>Εξετάσεις Διπλωματικών</h1>
     
     <!-- Επιλογή ημερομηνίας -->
@@ -230,5 +243,12 @@ function exportFormat(format) {
 </div>
     
     <table id="announcement_table" border="1"></table>
+
+
+	<footer>
+		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+	</footer>
+
+
 </body>
 </html>
