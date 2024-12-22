@@ -126,6 +126,7 @@ if (isset($_POST['logout'])) {
         .right-section {
             flex: 1; 			/* Αύξηση πλάτους για το δεξί τμήμα */
             padding: 20px;
+	    margin-top: 55px;
         }
 
         .table-title {
@@ -633,19 +634,21 @@ if (isset($_POST['logout'])) {
 						const rightTable = document.getElementById("info_table");
 						rightTable.innerHTML = '';
 
+
 						// Δημιουργία γραμμών για κάθε λεπτομέρεια
 						const tbody = rightTable.createTBody();
 
 						const details = {
     							"Title": data.title,
-    							"Pdf(main text)": data.pdf_main_diploma ? `<a href="${data.pdf_main_diploma}" target="_blank">${data.pdf_main_diploma}</a>` : "", // Link για το PDF main text
+    							"PDF (main text)": data.pdf_main_diploma ? `<a href="${data.pdf_main_diploma}" target="_blank">${data.pdf_main_diploma.substring(20)}</a>` : "", // Αφαίρεση των πρώτων 5 χαρακτήρων από το κείμενο του link
     							"Email Student": data.email_stud,
     							"Supervisor": data.supervisor,
     							"Member 1": data.member1,
     							"Member 2": data.member2,
     							"Final Grade": data.final_grade,
    							"Nemertes Link": data.Nemertes_link ? `<a href="${data.Nemertes_link}" target="_blank">Link</a>` : "", // Έλεγχος για κενό link
-    							"Praktiko Bathmologisis": data.praktiko_bathmologisis ? `<a href="${data.praktiko_bathmologisis}" target="_blank">${data.praktiko_bathmologisis}</a>` : "" // Link για το praktiko bathmologisis
+    							"Πρακτικό Βαθμολόγησης": data.praktiko_bathmologisis ? `<a href="${data.praktiko_bathmologisis}" target="_blank">${data.praktiko_bathmologisis.substring(20)}</a>` : "", // Link για το praktiko bathmologisis
+							"Supporting Links": data.external_links							
 						};
 	
 						// Loop through the details and insert rows
@@ -1145,7 +1148,7 @@ if (isset($_POST['logout'])) {
 		</div>
 
 		<div class="right-section">
-			<h1 class="table-title">Λεπτομέρειες</h1>
+			<h1 class="table-title"></h1>
 			
 			<table id="info_table"></table>
 		
