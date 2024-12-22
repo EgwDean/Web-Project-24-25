@@ -27,7 +27,7 @@ if ($id) {
     }
 
     // Προετοιμασία του SQL query
-    $sql = "SELECT title, pdf_main_diploma, email_stud, supervisor, member1, member2, final_grade, Nemertes_link, praktiko_bathmologisis 
+    $sql = "SELECT title, pdf_main_diploma, email_stud, supervisor, member1, member2, final_grade, Nemertes_link, praktiko_bathmologisis, external_links 
             FROM anathesi_diplomatikis 
             INNER JOIN trimelis_epitropi_diplomatikis ON anathesi_diplomatikis.id_diploma = trimelis_epitropi_diplomatikis.id_dipl
             INNER JOIN diplomatiki ON anathesi_diplomatikis.id_diploma = diplomatiki.id_diplomatiki
