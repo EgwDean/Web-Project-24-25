@@ -664,7 +664,7 @@ if (isset($_POST['logout'])) {
 
 						const details = {
     							"Title": data.title,
-    							"PDF (main text)": data.pdf_main_diploma ? `<a href="${data.pdf_main_diploma}" target="_blank">${data.pdf_main_diploma}</a>` : "",
+    							"PDF (main text)": data.pdf_main_diploma ? `<a href="${data.pdf_main_diploma}" target="_blank">${data.pdf_main_diploma.substring(20)}</a>` : "", // Αφαίρεση των πρώτων 5 χαρακτήρων από το κείμενο του link
     							"Email Student": data.email_stud,
     							"Supervisor": data.supervisor,
     							"Member 1": data.member1,
