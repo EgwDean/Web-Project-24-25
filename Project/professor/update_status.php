@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
     // Στοιχεία σύνδεσης με τη βάση δεδομένων
     $servername = "localhost";
     $username = "root";
-    $password = "Matsaniarakos9";
+    $password = "556782340";
     $dbname = "diplomatiki_support";
 
     // Σύνδεση στη βάση δεδομένων
@@ -27,19 +27,40 @@ if (isset($_GET['id'])) {
     }
 
     // Ενημέρωση της κατάστασης
-    $sql = "UPDATE anathesi_diplomatikis SET status = 'under examination' WHERE id_diploma = ? AND status = 'active'";
+    $sql = "CALL setUnderExam(?, @output)";
     $stmt = $conn->prepare($sql);
     
     // Bind the parameters and execute
     $stmt->bind_param("i", $id);
 
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true]);
-    } else {
-        echo json_encode(["success" => false, "error" => $stmt->error]);
-    }
+    // Εκτέλεση της διαδικασίας
+	if ($stmt->execute()) {
+		// Αποδέσμευση της αποθηκευμένης διαδικασίας
+		$stmt->close();
+		while ($conn->next_result()) {;} // Αδειάζει τα υπόλοιπα αποτελέσματα
 
-    $stmt->close();
+		// Ανάκτηση της τιμής του @output
+		$result = $conn->query("SELECT @output AS output");
+		if ($result) {
+			$row = $result->fetch_assoc();
+			$output = $row['output'] ?? null;
+
+			if ($output === null) {
+				echo json_encode(["success" => false, "error" => "Σφάλμα κατά την ανάκτηση του αποτελέσματος."]); 
+			} elseif ($output == 0) {
+				echo json_encode(["success" => true]);
+			} elseif ($output == 1) {
+				echo json_encode(["success" => false, "error" => "Δεν έχει εισαχθεί Αριθμός Πρωτοκόλου από τη Γραμματεία ακόμη."]);
+			} else {
+				echo json_encode(["success" => false, "error" => "Άγνωστο σφάλμα. Επικοινωνήστε με τον διαχειριστή."]);
+			}
+		} else {
+			echo json_encode(["success" => false, "error" => "Σφάλμα κατά την ανάκτηση του @output: " . $conn->error]);
+		}
+	} else {
+			echo json_encode(["success" => false, "error" => $stmt->error]);
+	}
+
     $conn->close();
 } else {
     echo json_encode(["success" => false, "error" => "Invalid request"]);
