@@ -884,14 +884,21 @@ if (isset($_POST['logout'])) {
 			xhr.onreadystatechange = function () {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					if (xhr.status === 200) {
-						alert("Status updated to 'Under Examination'");
-						applyFilter(); // Refresh the table
+						const response = JSON.parse(xhr.responseText);
+						if (response.success) {
+							alert("Status updated to 'Under Examination'");	
+							applyFilter(); // Refresh the table
+						} else {
+							alert("Error: " + response.error); 	        // Error alert
+						}
+								
 					} else {
 						console.error("Error updating status");
 					}
 				}
 			};
 		}
+			
 			
 			
 		// συνάρτηση για εμφάνιση της φόρμας καταχώρησης βαθμού
