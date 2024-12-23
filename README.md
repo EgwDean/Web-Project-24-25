@@ -4,7 +4,7 @@
 <h2>Languages and Utilities Used</h2>
 
 - <b>HTML</b>
-- <b>CSS & Bootstrap</b>
+- <b>CSS</b>
 - <b>PHP</b>
 - <b>SQL</b>
 - <b>Javascript</b>
