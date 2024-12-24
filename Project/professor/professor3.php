@@ -23,376 +23,157 @@ if (isset($_POST['logout'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professor Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="professor3.css">
+</head>
+<body onload="get()">
 
-    <style>
-        body {
-            font-family: Calibri, Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-        }
+    <!-- Navigation bar -->
+    <div class="navbar">
+	
+		<div class="logo">
+    			<a href="professor.php">
+			<img src="../media/logo.png" alt="Logo" class="logo-img">
+		</div>
+	
+        <div class="menu">
+            <!-- Ενότητες με υπομενού που οδηγούν στο professor.php -->
+            <div>
+                <a href="professor.php" class="menu-item">Θέματα</a>
+            </div>
+            <div>
+                <a href="professor2.php" class="menu-item">Αναθέσεις</a>
+                <div class="submenu">
+                    <a href="professor2.php">Ανάθεση</a>
+                    <a href="professor2_2.php">Ακύρωση Ανάθεσης</a>
+                </div>
+            </div>
+            <div>
+                <a href="professor3.php" class="menu-item">Διπλωματικές</a>
+            </div>
+            <div>
+                <a href="professor4.php" class="menu-item">Προσκλήσεις</a>
+            </div>
+            <div>
+                <a href="professor5.php" class="menu-item">Στατιστικά</a>
+            </div>
+            
+        </div>
 
-        .navbar {
-            background-color: #333;
-            color: #fff;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        <!-- Στοιχεία χρήστη -->
+        <div class="user-info">
+            <form action="" method="post" style="display:inline;">
+                <button type="submit" name="logout" class="logout-btn">Logout</button>
+            </form>
+			<span id="userEmail"><?php echo htmlspecialchars($userEmail);?></span>
+        </div>
+    </div>
 
-        .navbar .menu {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex: 1;
-        }
+    <!-- Περιεχόμενο -->
+	<div class="container">
+		<div class="left-section">
+			<h1 class="table-title">Διπλωματικές</h1>
 
-        .navbar .menu > div {
-            position: relative;
-        }
+			<!-- Προσθήκη φίλτρου -->
+			<div style="margin-bottom: 20px;">
+				<!-- Φίλτρο για status -->
+				<label for="status_filter">Filter by Status:</label>
+				<select id="status_filter">
+					<option value="none">None</option>
+					<option value="pending">Pending</option>
+					<option value="active">Active</option>
+					<option value="under examination">Under Examination</option>
+					<option value="finished">Finished</option>
+				</select>
 
-        .navbar .menu > div:hover .submenu {
-            display: block;
-        }
+				<!-- Φίλτρο για τύπο χρήστη -->
+				<label for="role_filter">Filter by Role:</label>
+				<select id="role_filter">
+					<option value="none">None</option>
+					<option value="supervisor">Supervisor</option>
+					<option value="member">Member</option>
+				</select>
 
-        .navbar .menu-item {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            background-color: #444;
-            transition: background-color 0.3s;
-            border-radius: 5px;
-        }
+				<button class="filter-btn" onclick="applyFilter()">Filter</button>
+			</div>
 
-        .menu-item:hover {
-            background-color: #00BFFF;
-        }
-
-        /* Στυλ για τα υπομενού */
-        .submenu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #444;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-        }
-
-        .submenu a {
-            display: block;
-            padding: 10px;
-            color: #fff;
-            text-decoration: none;
-            width: 150px;
-            transition: background-color 0.3s;
-            border-radius: 5px;
-        }
-
-        .submenu a:hover {
-            background-color: #00BFFF;
-        }
-
-        .navbar .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            white-space: nowrap;
-        }
-
-        .user-info span {
-            color: #fff;
-        }
-
-        .logout-btn {
-            padding: 8px 15px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .logout-btn:hover {
-            background-color: #00BFFF;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: row;
-            margin: 20px;
-        }
-
-        .left-section {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .right-section {
-            flex: 1; 			/* Αύξηση πλάτους για το δεξί τμήμα */
-            padding: 20px;
-	    margin-top: 55px;
-        }
-
-        .table-title {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4a4a8d;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #e1e1f0;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 28px;  		/* Προαιρετικά, μπορείς να αλλάξεις το μέγεθος του τίτλου */
-            margin-bottom: 20px;
-			margin-top: 0px;
-        }
-
-		/* Ειδικό styling για τα φίλτρα */
-		label {
-			font-size: 16px;
-			font-weight: bold;
-			color: #333;
-			margin-right: 10px;
-		}
-
-		select {
-			font-size: 14px;
-			padding: 8px;
-			border-radius: 5px;
-			border: 1px solid #ddd;
-			background-color: #fff;
-			margin-right: 20px;
-			transition: all 0.3s ease;
-		}
-
-		select:hover, select:focus {
-			border-color: #4a4a8d;
-			background-color: #f9f9f9;
-			outline: none;
-		}
-
-		.filter-btn {
-			padding: 8px 15px;
-			background-color: #444;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			font-size: 16px;
-			transition: background-color 0.3s ease;
-		}
-
-		.filter-btn:hover {
-			background-color: #00BFFF;
-		}
-
-		/* Styling για το container των φίλτρων */
-		div[style="margin-bottom: 20px;"] {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			gap: 15px;
-		}
-
-		.export-btn {
-			padding: 8px 15px;
-			background-color: #444;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			font-size: 16px;
-			transition: background-color 0.3s ease;
-			margin-top: 20px;    /* Προσθήκη κενών από πάνω */
-		}
-
-		.export-btn:hover {
-			background-color: #00BFFF;
-		}
+			<table id="item_table"></table>
 
 
-		.right-section table td:first-child {
-			font-weight: bold;
-			background-color: #f9f9f9;
-			width: 150px;        /* Σταθερό πλάτος για την κεφαλίδα */
-		}
+			<!-- Προσθήκη κουμπιών εξαγωγής -->
+			<div class="export-btn-container">
+				<button class="export-btn" onclick="exportCSV()">Export to CSV</button>
+				<button class="export-btn" onclick="exportJSON()">Export to JSON</button>
+				<button class="export-btn" id="view_info_btn" onclick="viewInfo()" style="cursor: not-allowed; opacity: 0.6;">View Info</button>
+				<button class="export-btn" id="notes_btn" onclick="showNotesForm()" style="cursor: not-allowed; opacity: 0.6;">Add Notes</button>
+				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="cursor: not-allowed; opacity: 0.6;">Set Under Examination</button>
+				<button class="export-btn" id="grade_btn" onclick="showGradesForm()" style="cursor: not-allowed; opacity: 0.6;">Grade</button>
+				<button class="export-btn" id="view_grades_btn" onclick="fetchGradesDetails()" style="cursor: not-allowed; opacity: 0.6;">View Grades</button>
+				<button class="export-btn" id="invites_btn" onclick="viewInvites()" style="cursor: not-allowed; opacity: 0.6;">View Invites</button>
+				<button class="export-btn" id="presentation_btn" onclick="viewPresentation()" style="cursor: not-allowed; opacity: 0.6;">View Presentation</button>
+			</div>
+		</div>
 
-		.right-section table td:last-child {
-			padding-left: 10px;
-		}
+		<div class="right-section">
+			<h1 class="table-title"></h1>
+			
+			<table id="info_table"></table>
+		
+	
+			<!-- Νέος πίνακας για τα δεδομένα από το log -->
+			<div  id="log_table_container">
+				<table id="log_table"></table>
+			</div>
+			
+			<div>
+			<table id="grades_table"></table>
+			</div>
+	
+	
+			<!-- Φόρμα για τη νέα είσοδο -->
+			<form id="notesForm" onsubmit="createNotes(event)" method="POST" class="notes-form-container" style="display: none;">
+				<h2>Δημιουργία Σημειώσεων</h2>
+			
+				<label for="diplomaId">ID</label>
+				<input type="text" id="diplomaId" name="diplomaId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
+			
+				<label for="diplomaStatus">Status</label>
+				<input type="text" id="diplomaStatus" name="diplomaStatus" placeholder="Εισάγετε την κατάσταση της Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
+			
+				<label for="notes">Notes</label>
+				<textarea id="notes" name="notes" rows="4" cols="50"></textarea>
+			
+				<div class="button-wrapper">
+					<button type="submit" class="form-button submit-btn">Υποβολή</button>
+					<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
+				</div>
+			</form>
+						
+			
+			<form id="gradesForm" onsubmit="insertGrade(event)" class="grades-form-container" style="display: none;">
+				<h2>Καταχώρηση Βαθμού</h2>
+			
+				<label for="diplId">ID</label>
+				<input type="text" id="diplId" name="diplId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
+			
+				<label for="diplomaGrade">Grade</label>
+				<input type="text" id="diplomaGrade" name="diplomaGrade" placeholder="Εισάγετε τον βαθμό της Διπλωματικής" class="form-input" required>
+			
+				<div class="button-wrapper">
+					<button type="submit" class="form-button submit-btn">Υποβολή</button>
+					<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
+				</div>
+			</form>	
+		</div>
+	</div>
 
-		.right-section h1 {
-			text-align: center;
-			font-size: 24px;     /* Ανάλογα με την ανάγκη σου, μπορείς να προσαρμόσεις το μέγεθος */
-			margin-top: 28px;    /* Κατάργηση του περιττού περιθωρίου */
-			margin-bottom: 64px;
-		}
+	<footer>
+		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+	</footer>
+	
+	
+	
 
-		#log_table_container {
-			max-height: 250px;   /* Περιορίζει το ύψος του container */
-			overflow-y: auto;    /* Ενεργοποιεί το κάθετο scroll */
-			width: 100%;         /* Καταλαμβάνει όλο το πλάτος */
-			margin-top: 20px;    /* Προσθήκη κενών από πάνω */
-		}
-
-		#log_table {
-			border-collapse: collapse; /* Καταρρέει τα όρια των κελιών για καθαρή εμφάνιση */
-			width: 100%; /* Επιτρέπει στον πίνακα να καταλαμβάνει όλο το διαθέσιμο πλάτος */
-		}
-
-		#log_table th, #log_table td {
-			padding: 8px;         /* Στυλ για την απόσταση μέσα στα κελιά */
-			border: 1px solid #ddd; /* Όρια για τα κελιά */
-		}
-
-		#log_table th {
-			background-color: #4a4a8d; /* Χρώμα φόντου για την κεφαλίδα */
-			color: white; /* Χρώμα κειμένου για την κεφαλίδα */
-		}
-
-
-
-		/* Βασικά στυλ για την φόρμα */
-		.notes-form-container.grades-form-container {
-			max-width: 400px;
-			margin: 50px auto 0; /* Προσθήκη 50px κενό στην κορυφή */
-			padding: 20px;
-			background-color: #fff;
-			border-radius: 20px;
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-			font-family: 'Calibri', sans-serif;
-		}
-
-		.notes-form-container.grades-form-container h2 {
-			text-align: center;
-			color: #333;
-			margin-bottom: 20px;
-			font-size: 24px;
-			font-weight: bold;
-		}
-
-		/* Στυλ για τα πεδία εισαγωγής */
-		.form-input {
-			width: 90%;
-			padding: 12px;
-			margin: 12px 0;
-			border: 2px solid #ddd;
-			border-radius: 20px;
-			font-size: 16px;
-			transition: border-color 0.3s, box-shadow 0.3s;
-		}
-
-		/* Εφέ hover για τα πεδία εισαγωγής */
-		.form-input:focus {
-			border-color: #3498db;
-			box-shadow: 0 0 8px rgba(52, 152, 219, 0.6);
-			outline: none;
-		}
-
-		/* Στυλ για τα κουμπιά */
-		.form-button {
-			background-color: #444;
-			padding: 12px 23px;
-			margin: 10px 0;
-			border-radius: 9px;
-			border: none;
-			font-size: 14px;
-			cursor: pointer;
-			transition: background-color 0.3s, transform 0.2s;
-		}
-
-		/* Εφέ hover για το κουμπί Submit */
-		.form-button.submit-btn {
-			background-color: #444;
-			color: white;
-		}
-
-		.form-button.submit-btn:hover {
-			background-color: #00BFFF;
-		}
-
-		/* Εφέ hover για το κουμπί Clear */
-		.form-button.clear-btn {
-			background-color: #444;
-			color: white;
-		}
-
-		.form-button.clear-btn:hover {
-			background-color: #00BFFF;
-		}
-
-		/* Στυλ για το wrapper των κουμπιών */
-		.button-wrapper {
-			display: flex;
-			justify-content: center;
-			gap: 15px;
-		}
-
-		/* Στυλ για τα labels */
-		.notes-form-container.grades-form-container label {
-			font-size: 18px;
-			font-weight: 500;
-			color: #555;
-			margin-bottom: 8px;
-			display: block;
-		}
-
-		/* Στυλ για το πεδίο φόρμας */
-		.form-input::placeholder {
-			color: #aaa;
-			font-style: italic;
-		}
-
-		.logo {
-			margin-right: 20px;
-		}
-
-		.logo-img {
-			height: 40px; 	/* Adjust size as needed */
-			width: auto;
-		}
-
-	footer {
-		background-color: #192f59;
-		color: white;
-		text-align: center;
-		padding: 0 0;
-		position: fixed;
-		bottom: 0;
-		width: 100%;           
-	}
-
-	</style>
-	<script>
+<script>
 
 		let selectedId = null;     		// Για αποθήκευση του επιλεγμένου ID
 		let selectedStatus = null; 		// Για αποθήκευση του επιλεγμένου status
@@ -471,6 +252,13 @@ if (isset($_POST['logout'])) {
 									gradeBtn.style.cursor = "not-allowed";								// Disable the "Grade" button
 									gradeBtn.disabled = true;
 									gradeBtn.style.opacity = "0.6";
+									
+									
+									
+									const presBtn = document.getElementById("presentation_btn");
+									presBtn.style.cursor = "not-allowed";								// Disable the "View Presentation" button
+									presBtn.disabled = true;
+									presBtn.style.opacity = "0.6";
 
 
 									const viewGradesBtn = document.getElementById("view_grades_btn");
@@ -529,7 +317,16 @@ if (isset($_POST['logout'])) {
 										gradeBtn.style.display = "inline"; 								// Show the "Grade" button
 										gradeBtn.disabled = false;
 										gradeBtn.style.cursor = "pointer";
-										gradeBtn.style.opacity = "1";									
+										gradeBtn.style.opacity = "1";	
+
+
+										const presBtn = document.getElementById("presentation_btn");
+										presBtn.style.display = "inline"; 								// Show the "View Presentation" button
+										presBtn.disabled = false;
+										presBtn.style.cursor = "pointer";
+										presBtn.style.opacity = "1";	
+
+										
 									}else {
 											const xhr = new XMLHttpRequest();
 											const url = `supervisor_approval.php?id=${selectedId}`;
@@ -559,13 +356,25 @@ if (isset($_POST['logout'])) {
 														console.error("Error fetching member details");
 													}
 												}
-											};											
+											};			
+
+											const presBtn = document.getElementById("presentation_btn");
+											presBtn.style.cursor = "not-allowed";								// Disable the "View Presentation" button
+											presBtn.disabled = true;
+											presBtn.style.opacity = "0.6";
+											
 									}
 								}else{
 									const gradeBtn = document.getElementById("grade_btn");
 									gradeBtn.style.cursor = "not-allowed";								// Disable the "Grade" button
 									gradeBtn.disabled = true;
 									gradeBtn.style.opacity = "0.6";  
+									
+									
+									const presBtn = document.getElementById("presentation_btn");
+									presBtn.style.cursor = "not-allowed";								// Disable the "View Presentation" button
+									presBtn.disabled = true;
+									presBtn.style.opacity = "0.6";
 								
 								
 									const viewGradesBtn = document.getElementById("view_grades_btn");
@@ -584,6 +393,9 @@ if (isset($_POST['logout'])) {
 									notesBtn.disabled = true;
 									notesBtn.style.opacity = "0.6"; 
 								}
+								
+								
+								
 								
 								
 								document.getElementById("view_info_btn").style.display = "inline"; 		// Ενεργοποίηση κουμπιού λεπτομερειών διπλωματικής
@@ -723,7 +535,36 @@ if (isset($_POST['logout'])) {
 				}
 			};
 		}
+					
 			
+			
+		// Συνάρτηση εμφάνισης παρουσίασης για την επιλεγμένη γραμμή πίνακα/id διπλωματικής 
+		function viewPresentation() {
+			if (!selectedId) return;
+			
+			// Κώδικας για την περίπτωση όπου πριν το "View Presentation" έχω πατήσει άλλο button
+			const gradesTable = document.getElementById('grades_table');
+			const gradesContainer = document.getElementById('gradesForm');
+			const notesContainer = document.getElementById('notesForm');
+			const infoTable = document.getElementById('info_table');
+			const logTable = document.getElementById('log_table');
+
+			// Hide the Notes and Grades form and the View Grades, Info, Log tables
+			notesContainer.style.display = 'none';
+			gradesContainer.style.display = 'none';
+			gradesTable.style.display = 'none';
+			infoTable.style.display = 'none';
+			logTable.style.display = 'none';
+			
+			
+		
+			// Redirect to anakoinosi.php with the selected ID
+			const url = `anakoinosi_professor.php?id=${selectedId}`;
+			window.location.href = url;
+		}	
+			
+			
+					
 			
 		// συνάρτηση για εμφάνιση των προσκλήσεων σε καθηγητές για συγκεκριμένη διπλωματική
 		function viewInvites() {
@@ -1094,150 +935,7 @@ if (isset($_POST['logout'])) {
 				document.getElementById('diplId').value = idDiploma;             // για τη φόρμα καταχώρησης βαθμού
 			}
 		}
-	</script>
-</head>
-<body onload="get()">
+</script>
 
-    <!-- Navigation bar -->
-    <div class="navbar">
-	
-		<div class="logo">
-    			<a href="professor.php">
-			<img src="../media/logo.png" alt="Logo" class="logo-img">
-		</div>
-	
-        <div class="menu">
-            <!-- Ενότητες με υπομενού που οδηγούν στο professor.php -->
-            <div>
-                <a href="professor.php" class="menu-item">Θέματα</a>
-            </div>
-            <div>
-                <a href="professor2.php" class="menu-item">Αναθέσεις</a>
-                <div class="submenu">
-                    <a href="professor2.php">Ανάθεση</a>
-                    <a href="professor2_2.php">Ακύρωση Ανάθεσης</a>
-                </div>
-            </div>
-            <div>
-                <a href="professor3.php" class="menu-item">Διπλωματικές</a>
-            </div>
-            <div>
-                <a href="professor4.php" class="menu-item">Προσκλήσεις</a>
-            </div>
-            <div>
-                <a href="professor5.php" class="menu-item">Στατιστικά</a>
-            </div>
-            
-        </div>
-
-        <!-- Στοιχεία χρήστη -->
-        <div class="user-info">
-            <form action="" method="post" style="display:inline;">
-                <button type="submit" name="logout" class="logout-btn">Logout</button>
-            </form>
-			<span id="userEmail"><?php echo htmlspecialchars($userEmail);?></span>
-        </div>
-    </div>
-
-    <!-- Περιεχόμενο -->
-	<div class="container">
-		<div class="left-section">
-			<h1 class="table-title">Διπλωματικές</h1>
-
-			<!-- Προσθήκη φίλτρου -->
-			<div style="margin-bottom: 20px;">
-				<!-- Φίλτρο για status -->
-				<label for="status_filter">Filter by Status:</label>
-				<select id="status_filter">
-					<option value="none">None</option>
-					<option value="pending">Pending</option>
-					<option value="active">Active</option>
-					<option value="under examination">Under Examination</option>
-					<option value="finished">Finished</option>
-				</select>
-
-				<!-- Φίλτρο για τύπο χρήστη -->
-				<label for="role_filter">Filter by Role:</label>
-				<select id="role_filter">
-					<option value="none">None</option>
-					<option value="supervisor">Supervisor</option>
-					<option value="member">Member</option>
-				</select>
-
-				<button class="filter-btn" onclick="applyFilter()">Filter</button>
-			</div>
-
-			<table id="item_table"></table>
-
-
-			<!-- Προσθήκη κουμπιών εξαγωγής -->
-			<div class="export-btn-container">
-				<button class="export-btn" onclick="exportCSV()">Export to CSV</button>
-				<button class="export-btn" onclick="exportJSON()">Export to JSON</button>
-				<button class="export-btn" id="view_info_btn" onclick="viewInfo()" style="cursor: not-allowed; opacity: 0.6;">View Info</button>
-				<button class="export-btn" id="notes_btn" onclick="showNotesForm()" style="cursor: not-allowed; opacity: 0.6;">Add Notes</button>
-				<button class="export-btn" id="exam_btn" onclick="markUnderExamination()" style="cursor: not-allowed; opacity: 0.6;">Set Under Examination</button>
-				<button class="export-btn" id="grade_btn" onclick="showGradesForm()" style="cursor: not-allowed; opacity: 0.6;">Grade</button>
-				<button class="export-btn" id="view_grades_btn" onclick="fetchGradesDetails()" style="cursor: not-allowed; opacity: 0.6;">View Grades</button>
-				<button class="export-btn" id="invites_btn" onclick="viewInvites()" style="cursor: not-allowed; opacity: 0.6;">View Invites</button>
-			</div>
-		</div>
-
-		<div class="right-section">
-			<h1 class="table-title"></h1>
-			
-			<table id="info_table"></table>
-		
-	
-			<!-- Νέος πίνακας για τα δεδομένα από το log -->
-			<div  id="log_table_container">
-				<table id="log_table"></table>
-			</div>
-			
-			<div>
-			<table id="grades_table"></table>
-			</div>
-	
-	
-			<!-- Φόρμα για τη νέα είσοδο -->
-			<form id="notesForm" onsubmit="createNotes(event)" method="POST" class="notes-form-container" style="display: none;">
-				<h2>Δημιουργία Σημειώσεων</h2>
-			
-				<label for="diplomaId">ID</label>
-				<input type="text" id="diplomaId" name="diplomaId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
-			
-				<label for="diplomaStatus">Status</label>
-				<input type="text" id="diplomaStatus" name="diplomaStatus" placeholder="Εισάγετε την κατάσταση της Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
-			
-				<label for="notes">Notes</label>
-				<textarea id="notes" name="notes" rows="4" cols="50"></textarea>
-			
-				<div class="button-wrapper">
-					<button type="submit" class="form-button submit-btn">Υποβολή</button>
-					<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
-				</div>
-			</form>
-						
-			
-			<form id="gradesForm" onsubmit="insertGrade(event)" class="grades-form-container" style="display: none;">
-				<h2>Καταχώρηση Βαθμού</h2>
-			
-				<label for="diplId">ID</label>
-				<input type="text" id="diplId" name="diplId" placeholder="Εισάγετε τον κωδικό Διπλωματικής" class="form-input" style="pointer-events: none; background-color: lightgray; cursor: not-allowed;">
-			
-				<label for="diplomaGrade">Grade</label>
-				<input type="text" id="diplomaGrade" name="diplomaGrade" placeholder="Εισάγετε τον βαθμό της Διπλωματικής" class="form-input" required>
-			
-				<div class="button-wrapper">
-					<button type="submit" class="form-button submit-btn">Υποβολή</button>
-					<button type="button" onclick="clearForm()" class="form-button clear-btn">Καθαρισμός</button>
-				</div>
-			</form>	
-		</div>
-	</div>
-
-	<footer>
-		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
-	</footer>
 </body>
 </html>
