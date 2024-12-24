@@ -20,169 +20,7 @@ $email = $_SESSION['email']; // Αποθήκευση email χρήστη για �
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Secretary System</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #333;
-      padding: 10px 20px;
-      color: white;
-      width: 100%;
-    }
-
-    .nav-items {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-left: auto;
-    }
-
-    .nav-button {
-      background-color: #444;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .nav-button:hover {
-      background-color: rgb(0, 191, 255);
-    }
-
-    .logo img {
-      height: 40px;
-      cursor: pointer;
-    }
-
-    .user-info {
-      margin-right: 8px;
-    }
-
-    .main-content {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      gap: 20px;
-      height: 100%;
-    }
-
-    .left-column {
-      flex: 1;
-      padding: 15px;
-      border-radius: 5px;
-      overflow: auto;
-    }
-
-    .right-column {
-      flex: 1;
-      display: grid;
-      grid-auto-rows: auto;
-      gap: 15px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    .right-column .row {
-      background-color: white;
-      border: 1px solid #ccc;
-      padding: 1px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .details-container {
-      flex: 1;
-      max-width: 50%;
-      padding-right: 20px;
-      overflow-y: auto;
-    }
-
-    .form-container {
-      background: #fff;
-      padding: 20px 30px;
-      width: 100%;
-      text-align: center;
-    }
-
-    .form-label {
-      font-size: 16px;
-      color: #333;
-      margin-bottom: 10px;
-      display: block;
-      text-align: left;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .form-button {
-      background-color: #444;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-
-    .form-button:hover {
-      background-color: rgb(0, 191, 225);
-    }
-
-    .form-button:disabled {
-      cursor: not-allowed;
-      background-color: #ccc;
-      color: #666;
-    }
-
-    .form-button:disabled:hover {
-      background-color: #ccc;
-    }
-
-    .red-label {
-      font-size: 12px;
-      color: red;
-      margin-bottom: 5px;
-      display: block;
-      text-align: center;
-    }
-
-    footer {
-		background-color: #192f59;
-		color: white;
-		text-align: center;
-		padding: 10px 0;
-		position: relative;
-		bottom: 0;
-		width: 100%;
-	  }
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="proccess_diplomatiki.css">
 </head>
 <body>
 <div>
@@ -249,7 +87,9 @@ $email = $_SESSION['email']; // Αποθήκευση email χρήστη για �
 	<p>&copy; 2024 University of Patras - All Rights Reserved</p>
 </footer>
 
-  <script>
+
+
+<script>
     const urlParams = new URLSearchParams(window.location.search); // Ανάκτηση id από το URL
     const id = urlParams.get('data');
 
@@ -451,6 +291,7 @@ $email = $_SESSION['email']; // Αποθήκευση email χρήστη για �
             xhr.send(); // Αποστολή request
             //header("Location: " . $_SERVER['PHP_SELF']); // Page reload
         });
-  </script>
+</script>
+
 </body>
 </html>
