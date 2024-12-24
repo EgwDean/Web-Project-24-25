@@ -16,10 +16,11 @@
 - <b>HTML</b>
 - <b>CSS</b>
 - <b>PHP</b>
-- <b>SQL</b>
+- <b>MySQL</b>
 - <b>Javascript</b>
 - <b>Apache HTTP server</b>
 
 <h2>Environments Used</h2>
 
 - <b>MySQL Workbench 8.0 CE</b>
+- <b>Θεόφραστος...ο μπρο έγραφε σε notepad</b>
