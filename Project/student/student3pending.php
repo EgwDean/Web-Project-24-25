@@ -34,213 +34,58 @@ if (isset($_SESSION['status'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Page</title>
-    <style>
-
-	* {
-		box-sizing: border-box;
-	}
-
-		/* Στυλ για τη σελίδα */
-	body {
-		font-family: Calibri, Arial, sans-serif;
-		margin: 0;
-		background-color: #f4f4f4;
-		display: flex;
-		flex-direction: column;
-		align-items: center; 
-	}
-
-	.navbar {
-		background-color: #333;
-		color: #fff;
-		padding: 15px;
-		display: flex;
-		justify-content: space-between; /* Χωρίζει τα sections από το user info */
-		align-items: center;
-		width: 100%
-	}
-
-	.navbar .menu {
-		display: flex;
-		gap: 20px;
-		justify-content: center; /* Κέντρο μεταξύ τους */
-		flex: 1; /* Παίρνει όλο τον διαθέσιμο χώρο */
-	}
-
-	.navbar .menu > div {
-		position: relative;
-	}
-
-	.navbar .menu > div:hover .submenu {
-		display: block;
-	}
-
-	.menu-item {
-        color: #fff;
-		background-color: #444;
-        text-decoration: none;
-        padding: 10px;
-		transition: background-color 0.3s ease;
-		border-radius: 4px;
-    }
-
-	.menu-item:hover {
-		background-color: #00BFFF;
-		color: white;
-	}
-
-	/* Στυλ για τα υπομενού */
-	.submenu {
-		display: none;
-		position: absolute;
-		top: 100%;
-		left: 0;
-		background-color: #444;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-		border-radius: 5px;
-	}
-
-	.submenu a {
-		display: block;
-		padding: 10px;
-		color: #fff;
-		text-decoration: none;
-		width: 150px;
-	}
-
-	.submenu a:hover {
-		background-color: #555;
-	}
-
-	.navbar .logo {
-		margin-right: 20px;
-		padding-left: 20px;
-	}
-
-	.navbar .user-info {
-		display: flex;
-		align-items: center;
-		gap: 15px;
-		white-space: nowrap;
-		padding-right: 20px;
-	}
-
-	.user-info span {
-		color: #fff;
-	}
-
-	.logout-btn {
-        padding: 8px 15px;
-        background-color: #444;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-		transition: background-color 0.3s ease;
-    }
-
-    .logout-btn:hover {
-        background-color: #00BFFF;
-    }
-
-
-	.logo {
-		margin-right: 20px;
-	}
-
-	.logo-img {
-		height: 40px;
-		width: auto;
-	}
-
-
-	.table-container {
-		max-width: 800px;
-		width: 100%;
-		padding: 20px;
-		margin: 20px auto;
-		background-color: #fff;
-		box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-		border-radius: 8px;
-	}
-
-	.search-bar-container {
-		margin-bottom: 10px;
-		display: flex;
-		justify-content: center; 
-	}
-
-	#searchBar {
-		width: 100%;
-		max-width: 600px;
-	}
-
-	.table-scroll {
-		max-height: 350px;
-		overflow-y: auto;
-		overflow-x: auto;
-		border: 1px solid #ccc;
-	}
-
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		margin-top: 20px;
-	}
-
-	th, td {
-		padding: 10px;
-		border: 1px solid black;
-		text-align: left;
-	}
-
-	th {
-		background-color: #f4f4f4;
-		font-weight: bold;
-	}
-
-	table tr:hover {
-		background-color: #f0f0f0;
-		cursor: pointer;
-	}
-
-	footer {
-		background-color: #192f59;
-		color: white;
-		text-align: center;
-		padding: 10px 0;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-	}
-
-	h1 {
-		text-align: center;
-	}
-
-	.button {
-      padding: 10px 15px;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .button:hover {
-      background-color: rgb(0, 191, 255);
-    }
-
-	#sendRequest:disabled {
-		background-color: #ccc; 
-		color: #777; 
-		border: 1px solid #aaa;  
-		cursor: not-allowed;
-	}
-
-</style>
+	<link rel="stylesheet" type="text/css" href="student3pending.css">
+</head>
+<body>
+   <!-- Navigation bar -->
+    <div class="navbar">
 	
+		<div class="logo">
+			<a href="student.php">
+				<img src="/Project/media/logo.png" alt="Logo" class="logo-img">
+			</a>
+		</div>
+	
+        <div class="menu">
+            <div>
+                <a href="student.php" class="menu-item">Προβολή Θέματος</a>
+            </div>
+            <div>
+				<a href="#" class="menu-item" onclick="statusRedirectProccess()">Επεξεργασία Προφίλ</a>
+            </div>
+            <div>
+				<a href="#" class="menu-item" onclick="statusRedirectManagement()">Διαχείριση Διπλωματικής</a>
+            </div>
+            
+        </div>
+
+        <div class="user-info">
+            <span><?php echo $userEmail; ?></span>
+            <form method="POST" action="">
+                <button type="submit" name="logout" class="logout-btn">Logout</button>
+            </form>
+        </div>
+</div>
+
+<div class="table-container">
+	<h1>Αίτηση Τριμελούς</h1>
+	<div class="search-bar-container">
+		<input type="text" id="searchBar" placeholder="Αναζήτηση βάσει ονόματος, επιθέτου ή email...">
+		<button class="button" id="sendRequest" disabled>Αποστολή Αίτησης</button>
+	</div>
+	<div class="table-scroll">
+		<table id="item_table">
+			<!-- Τα δεδομένα εισάγονται εδώ δυναμικά -->
+		</table>
+	</div>
+</div>
+
+	<footer>
+		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+	</footer>
+
+
+
 <script>	
 
      // Συνάρτηση που ελέγχει το status διπλωματικής και ανακατευθύνει κατάλληλα με το πάτημα του "Διαχείριση Διπλωματικής"
@@ -405,55 +250,6 @@ if (isset($_SESSION['status'])) {
     document.addEventListener('DOMContentLoaded', get);
 
 </script>
-	
-</head>
-<body>
-   <!-- Navigation bar -->
-    <div class="navbar">
-	
-		<div class="logo">
-			<a href="student.php">
-				<img src="/Project/media/logo.png" alt="Logo" class="logo-img">
-			</a>
-		</div>
-	
-        <div class="menu">
-            <div>
-                <a href="student.php" class="menu-item">Προβολή Θέματος</a>
-            </div>
-            <div>
-				<a href="#" class="menu-item" onclick="statusRedirectProccess()">Επεξεργασία Προφίλ</a>
-            </div>
-            <div>
-				<a href="#" class="menu-item" onclick="statusRedirectManagement()">Διαχείριση Διπλωματικής</a>
-            </div>
-            
-        </div>
-
-        <div class="user-info">
-            <span><?php echo $userEmail; ?></span>
-            <form method="POST" action="">
-                <button type="submit" name="logout" class="logout-btn">Logout</button>
-            </form>
-        </div>
-</div>
-
-<div class="table-container">
-	<h1>Αίτηση Τριμελούς</h1>
-	<div class="search-bar-container">
-		<input type="text" id="searchBar" placeholder="Αναζήτηση βάσει ονόματος, επιθέτου ή email...">
-		<button class="button" id="sendRequest" disabled>Αποστολή Αίτησης</button>
-	</div>
-	<div class="table-scroll">
-		<table id="item_table">
-			<!-- Τα δεδομένα εισάγονται εδώ δυναμικά -->
-		</table>
-	</div>
-</div>
-
-	<footer>
-		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
-	</footer>
 
 </body>
 </html>
