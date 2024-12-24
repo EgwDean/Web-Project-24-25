@@ -34,210 +34,69 @@ if (isset($_SESSION['status'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Page</title>
-    <style>
-		/* Στυλ για τη σελίδα */
-	body {
-		font-family: Calibri, Arial, sans-serif;
-		margin: 0;
-		background-color: #f4f4f4;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.navbar {
-		background-color: #333;
-		color: #fff;
-		padding: 15px;
-		display: flex;
-		justify-content: space-between; /* Χωρίζει τα sections από το user info */
-		align-items: center;
-	}
-
-	.navbar .menu {
-		display: flex;
-		gap: 20px;
-		justify-content: center; /* Κέντρο μεταξύ τους */
-		flex: 1; /* Παίρνει όλο τον διαθέσιμο χώρο */
-	}
-
-	.navbar .menu > div {
-		position: relative;
-	}
-
-	.navbar .menu > div:hover .submenu {
-		display: block;
-	}
-
-	.menu-item {
-        color: #fff;
-		background-color: #444;
-        text-decoration: none;
-        padding: 10px;
-		transition: background-color 0.3s ease;
-		border-radius: 4px;
-    }
-
-	.menu-item:hover {
-		background-color: #00BFFF;
-		color: white;
-	}
-
-	/* Στυλ για τα υπομενού */
-	.submenu {
-		display: none;
-		position: absolute;
-		top: 100%;
-		left: 0;
-		background-color: #444;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-		border-radius: 5px;
-	}
-
-	.submenu a {
-		display: block;
-		padding: 10px;
-		color: #fff;
-		text-decoration: none;
-		width: 150px;
-	}
-
-	.submenu a:hover {
-		background-color: #555;
-	}
-
-    /* Στυλ για τα στοιχεία του χρήστη */
-	.navbar .user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    white-space: nowrap; /* Αποφυγή αλλαγής γραμμής */
-	}
-
-	.user-info span {
-		color: #fff;
-	}
-
-	.logout-btn {
-        padding: 8px 15px;
-        background-color: #444;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-		transition: background-color 0.3s ease;
-    }
-
-    .logout-btn:hover {
-        background-color: #00BFFF;
-    }
-
+    <link rel="stylesheet" type="text/css" href="student3finished.css">
+</head>
+<body>
+   <!-- Navigation bar -->
+    <div class="navbar">
 	
-	/* Στυλ για τον πίνακα */
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-		margin-bottom: 20px;  /* Προσθήκη περιθωρίου στο κάτω μέρος του πίνακα */
-
-	}
+		<div class="logo">
+			<a href="student.php">
+				<img src="/Project/media/logo.png" alt="Logo" class="logo-img">
+			</a>
+		</div>
 	
-	th, td {
-		padding: 12px;
-		text-align: left;
-		border: 1px solid #ddd;
-	}
-
-	th {
-		background-color: #4a4a8d; /* Σκούρο μπλε χρώμα για κεφαλίδα */
-		color: white;
-	}
-
-	tr:nth-child(even) {
-		background-color: #f2f2f2; /* Εναλλασσόμενες γραμμές */
-	}
-
-	tr:hover {
-		background-color: #e1e1f0; /* Χρώμα όταν ο χρήστης περνάει το ποντίκι */
-	}
+        <div class="menu">
+            <div>
+                <a href="student.php" class="menu-item">Προβολή Θέματος</a>
+            </div>
+            <div>
+				<a href="#" class="menu-item" onclick="statusRedirectProccess()">Επεξεργασία Προφίλ</a>
+            </div>
+            <div>
+				<a href="#" class="menu-item" onclick="statusRedirectManagement()">Διαχείριση Διπλωματικής</a>
+            </div>
+            
+        </div>
 
 
-	h1 {
-		text-align: center;
-		margin-bottom: 20px; /* Προαιρετικό, για να δώσεις κάποια απόσταση από τον πίνακα */
-	}
+        <div class="user-info">
+            <span><?php echo $userEmail; ?></span>
+            <form method="POST" action="">
+                <button type="submit" name="logout" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </div>
 
-	.logo {
-		margin-right: 20px;
-	}
-
-	.logo-img {
-		height: 40px; /* Adjust size as needed */
-		width: auto;
-	}
-
-	footer {
-		background-color: #192f59;
-		color: white;
-		text-align: center;
-		padding: 10px 0;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-	}
-
-	.main-content {
-		display: flex;
-		align-items: flex-start;
-		width: 100%;
-		flex-grow: 1;
-		overflow-y: auto;
-		justify-content: space-between;
-		text-align: center;
-	}
-
-	.table-container {
-		flex: 1;
-		max-width: 50%;
-		margin-right: 10px;
-		overflow-y: auto;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.table-wrapper {
-		flex-grow: 1;
-		width: 100%;
-		max-height: 397px;
-		overflow-y: auto;
-	}
-
-	.form-button {
-		position: absolute;
-		background-color: #444;
-		padding: 10px 10px;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 16px;
-		transition: background-color 0.3s ease;
-		margin-top: 1px;
-		margin-right: 2px;
-		margin-left: 2px;
-		bottom: 90px;
-		left: 50%;
-		transform: translateX(-50%);
-	}
-
-	.form-button:hover {
-		background-color: #00BFFF;
-		color: white;
-	}
-
-
-</style>
+	<div class="main-content"> <!-- Main περιεχόμενο -->
+		<!-- Πίνακας διπλωματικών -->
+		<div class="table-container">
+			<h2>Στοιχεία Διπλωματικής</h2>
+			<div class="table-wrapper">
+				<table id="items_table1">
+					<!-- Εδώ μπαίνουν οι γραμμές του πίνακα διπλωματικών -->
+				</table>
+			</div>
+		</div>
+			
+		<!-- Πίνακας με logs -->
+		<div class="table-container">
+			<h2>Activity Log</h2>
+			<div class="table-wrapper">
+				<table id="items_table2">
+					<!-- Εδω μπαίνει το log -->
+				</table>
+			</div>
+		</div>
+	</div>
+	<button id="showPraktikoButton" class="form-button">Προβολή Πρακτικού Εξέτασης</button>
 	
+	<footer>
+		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+	</footer>
+
+
+
 <script>	
 
      // Συνάρτηση που ελέγχει το status διπλωματικής και ανακατευθύνει κατάλληλα με το πάτημα του "Διαχείριση Διπλωματικής"
@@ -407,66 +266,6 @@ if (isset($_SESSION['status'])) {
 	});
 
 </script>
-	
-</head>
-<body>
-   <!-- Navigation bar -->
-    <div class="navbar">
-	
-		<div class="logo">
-			<a href="student.php">
-				<img src="/Project/media/logo.png" alt="Logo" class="logo-img">
-			</a>
-		</div>
-	
-        <div class="menu">
-            <div>
-                <a href="student.php" class="menu-item">Προβολή Θέματος</a>
-            </div>
-            <div>
-				<a href="#" class="menu-item" onclick="statusRedirectProccess()">Επεξεργασία Προφίλ</a>
-            </div>
-            <div>
-				<a href="#" class="menu-item" onclick="statusRedirectManagement()">Διαχείριση Διπλωματικής</a>
-            </div>
-            
-        </div>
-
-
-        <div class="user-info">
-            <span><?php echo $userEmail; ?></span>
-            <form method="POST" action="">
-                <button type="submit" name="logout" class="logout-btn">Logout</button>
-            </form>
-        </div>
-    </div>
-
-	<div class="main-content"> <!-- Main περιεχόμενο -->
-		<!-- Πίνακας διπλωματικών -->
-		<div class="table-container">
-			<h2>Στοιχεία Διπλωματικής</h2>
-			<div class="table-wrapper">
-				<table id="items_table1">
-					<!-- Εδώ μπαίνουν οι γραμμές του πίνακα διπλωματικών -->
-				</table>
-			</div>
-		</div>
-			
-		<!-- Πίνακας με logs -->
-		<div class="table-container">
-			<h2>Activity Log</h2>
-			<div class="table-wrapper">
-				<table id="items_table2">
-					<!-- Εδω μπαίνει το log -->
-				</table>
-			</div>
-		</div>
-	</div>
-	<button id="showPraktikoButton" class="form-button">Προβολή Πρακτικού Εξέτασης</button>
-	
-	<footer>
-		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
-	</footer>
 
 </body>
 </html>
