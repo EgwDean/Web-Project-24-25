@@ -20,172 +20,7 @@ $email = $_SESSION['email']; //email χρήστη
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Secretary System</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #333;
-      padding: 10px 20px;
-      color: white;
-      width: 100%;
-    }
-
-    .nav-items {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-left: auto;
-    }
-
-    .nav-button {
-      background-color: #444;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .nav-button:hover {
-      background-color: rgb(0, 191, 255);
-    }
-
-    .logo img {
-      height: 40px;
-      cursor: pointer;
-    }
-
-    .user-info {
-      margin-right: 8px;
-      margin-left: 8px;
-    }
-
-    .main-content {
-      display: flex;
-      width: 100%;
-      flex-grow: 1;
-      padding: 20px;
-      gap: 20px;
-      overflow-y: auto;
-      justify-content: space-between;
-    }
-
-    .table-container {
-      flex: 1;
-      max-width: 50%;
-      border-right: 1px solid #ddd;
-      padding-right: 20px;
-      overflow-y: auto;
-    }
-
-    .details-container {
-      flex: 1;
-      max-width: 50%;
-      border-right: 1px solid #ddd;
-      padding-right: 20px;
-      overflow-y: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid black;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-
-    table tr:hover {
-      background-color: #f0f0f0;
-      cursor: pointer;
-    }
-
-    #searchBar {
-      flex-grow: 1;
-      margin: 0 20px;
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.3s;
-      background-color: rgb(255, 255, 255);
-    }
-
-    #searchBar:focus {
-      border-color: #555;
-    }
-
-    .details-button {
-      margin-top: 20px;
-      padding: 10px 15px;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .details-button2 {
-      margin-top: 20px;
-      padding: 10px 15px;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      margin: 30px;
-      font-size: 15px;
-    }
-
-    .details-button:hover {
-      background-color: rgb(0, 191, 255);
-    }
-
-    .details-button2:hover {
-      background-color: rgb(0, 191, 255);
-    }
-
-    .hidden {
-    display: none;
-    }
-
-    footer {
-		background-color: #192f59;
-		color: white;
-		text-align: center;
-		padding: 10px 0;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-	  }
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="secretary.css">
 </head>
 <body>
 <div class="navbar"> <!-- Navigation bar -->
@@ -227,6 +62,9 @@ $email = $_SESSION['email']; //email χρήστη
 <footer>
 		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
 </footer>
+
+
+
 
 <script>
 document.getElementById('addStudents').addEventListener('click', function () {
@@ -503,5 +341,6 @@ document.getElementById('logout').addEventListener('click', function() { // Επ
 
 document.addEventListener("DOMContentLoaded", get); // Φόρτωση διπλωματικών στον πίνακα μέσω της get() κατά τη φόρτωση της σελίδας
 </script>
+
 </body>
 </html>
