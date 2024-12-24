@@ -780,7 +780,7 @@ if (isset($_POST['logout'])) {
 			
 		
 			// Redirect to anakoinosi.php with the selected ID
-			const url = `anakoinosi.php?id=${selectedId}`;
+			const url = `anakoinosi_professor.php?id=${selectedId}`;
 			window.location.href = url;
 		}	
 				
