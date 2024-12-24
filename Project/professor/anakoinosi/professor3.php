@@ -759,27 +759,22 @@ if (isset($_POST['logout'])) {
 			
 			
 			
-			
-			
 		// Συνάρτηση εμφάνισης παρουσίασης για την επιλεγμένη γραμμή πίνακα/id διπλωματικής 
 		function viewPresentation() {
 			if (!selectedId) return;
 			
-			// Κώδικας για την περίπτωση όπου πριν το View έχω πατήσει άλλο button
+			// Κώδικας για την περίπτωση όπου πριν το "View Presentation" έχω πατήσει άλλο button
 			const gradesTable = document.getElementById('grades_table');
 			const gradesContainer = document.getElementById('gradesForm');
 			const notesContainer = document.getElementById('notesForm');
 			const infoTable = document.getElementById('info_table');
 			const logTable = document.getElementById('log_table');
 
-			// Hide the Notes and Grades form and the View Grades, Info tables
+			// Hide the Notes and Grades form and the View Grades, Info, Log tables
 			notesContainer.style.display = 'none';
 			gradesContainer.style.display = 'none';
 			gradesTable.style.display = 'none';
 			infoTable.style.display = 'none';
-		
-			
-			// Hide the Log table
 			logTable.style.display = 'none';
 			
 			
@@ -788,8 +783,8 @@ if (isset($_POST['logout'])) {
 			const url = `anakoinosi.php?id=${selectedId}`;
 			window.location.href = url;
 		}	
-			
-			
+				
+		
 					
 			
 		// συνάρτηση για εμφάνιση των προσκλήσεων σε καθηγητές για συγκεκριμένη διπλωματική
