@@ -4,7 +4,7 @@
 
 <h2>To Do:</h2>
 
-- <b>Separate CSS files</b>
+- <b>Final check CSS files</b>
 - <b>.htaccess</b>
 - <b>Indexing στη Βάση</b>
 - <b>Ολικά testfiles</b>
