@@ -204,7 +204,8 @@ VALUES
   ('s3', 'Kostas', 'Lazaridis', 1003, 'Elm St', '7', 'Patras', '26223', 'Andreas', '2610123456', '6908765432', 'kostas.lazaridis@student.edu'),
   ('pass1234', 'John', 'Doe', 1001, 'Main Street', '10', 'New York', '10001', 'Robert Doe', '1234567890', '9876543210', 'john.doe@example.com'),
   ('secure567', 'Jane', 'Smith', 1002, 'Elm Avenue', '20', 'Los Angeles', '90001', 'William Smith', NULL, '8765432109', 'jane.smith@example.com'),
-  ('mypassword789', 'Mike', 'Brown', 1003, 'Oak Street', '30', 'Chicago', '60601', 'James Brown', '0987654321', '7654321098', 'mike.brown@example.com');
+  ('mypassword789', 'Mike', 'Brown', 1003, 'Oak Street', '30', 'Chicago', '60601', 'James Brown', '0987654321', '7654321098', 'mike.brown@example.com'),
+  ('s4', 'Lucy', 'Brown', 1007, 'Sun St', '16B', 'Thessaloniki', '52635', 'Babis', '2310123452', '6933654321', 'lucy.brown@example.com');
   
 
 
@@ -218,7 +219,7 @@ VALUES
 (1, 'dimitris.papa@university.edu', 'Nikos Papadopoulos', 'Maria Vassilaki'),
 (2, 'dimitris.papa@university.edu', 'Elena Theodorou', 'Giannis Nikas'),
 (3, 'Professor Dimitrios Xenos', 'dimitris.papa@university.edu', 'Sofia Liasidou'),
-(4, 'Minister Ioannis Papanikolaou', 'Vasilis Georgiou', 'dimitris.papa@university.edu'),
+(4, 'dimitris.papa@university.edu', 'Vasilis Georgiou', 'Minister Ioannis Papanikolaou'),
 (5, 'dimitris.papa@university.edu', 'maria.ioannou@university.edu', 'Sofia Liasidou'),
 (6, 'Minister Ioannis Papanikolaou', 'dimitris.papa@university.edu', 'dimitris.papa@university.edu');
 
