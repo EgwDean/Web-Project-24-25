@@ -41,7 +41,7 @@ if (isset($_SESSION['status'])) {
     <div class="navbar">
         <div class="logo">
             <a href="student.php">
-                <img src="/Project/media/logo.png" alt="Logo" class="logo-img" style="height: 40px;">
+                <img src="/Project/media/logo.png" alt="Logo" class="logo-img">
             </a>
         </div>
 
@@ -206,18 +206,105 @@ if (isset($_SESSION['status'])) {
     }
 
 	function get() { // Εμφάνιση πινάκων
+		addResponsiveCSSForTables();
 		getTable1();
 		getTable2();
 	}
 
+	
+	
+	function addResponsiveCSSForTables() {
+		const style = document.createElement("style");
+		style.type = "text/css";
+		style.innerHTML = `
+			.responsive-table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 10px 0;
+				font-size: 1rem;
+				text-align: left;
+				overflow-x: auto; /* Add horizontal scroll if necessary */
+			}
+
+			.table-header {
+				background-color: #00BFFF;
+				color: white;
+				padding: 8px;
+				border: 1px solid #000;
+				text-align: left;
+			}
+
+			.table-cell {
+				border: 1px solid #000;
+				padding: 8px;
+				text-align: left;
+				word-wrap: break-word; /* Ensures long words wrap correctly */
+				max-width: 200px; /* Prevents cells from becoming too wide */
+			}
+
+			.table-row:hover {
+				background-color: #f1f1f1;
+			}
+
+			/* Media query for responsive tables */
+			@media (max-width: 900px) {
+				.responsive-table {
+					width: 100%;
+					display: block;
+					overflow-x: auto; /* Enable horizontal scrolling on small screens */
+				}
+
+				.responsive-table thead {
+					display: none; /* Hide the header on smaller screens */
+				}
+
+				.responsive-table tr {
+					display: block;
+					margin-bottom: 15px;
+					padding: 10px;
+					background-color: #f9f9f9;
+					border-radius: 8px;
+					border: 1px solid #ddd; /* Border for individual rows */
+				}
+
+				.responsive-table td {
+					display: block;
+					width: 100%;
+					padding: 8px;
+					border: none;
+					background-color: #f1f1f1;
+					font-weight: bold;
+					margin-bottom: 5px;
+					box-sizing: border-box; /* Ensures padding is included in width */
+				}
+
+				.responsive-table td::before {
+					content: attr(data-label);
+					font-weight: bold;
+					color: #00BFFF;
+					display: block;
+					margin-bottom: 5px;
+				}
+
+				.table-header, .table-cell {
+					font-size: 0.9rem;
+				}
+
+				.table-row:hover {
+					background-color: #e0e0e0;
+				}
+			}
+		`;
+		document.head.appendChild(style);
+	}
+
+
 	function getTable2() { // Κατασκευή πίνακα για στοιχεία εξέτασης
 		const table = document.getElementById("item_table2");
+		table.classList.add("responsive-table"); // Add responsive table class
 
 		function renderTable(item) {
 			table.innerHTML = ""; // Καθαρισμός πίνακα
-
-			table.style.height = "30%";
-			table.style.width = "100%";
 
 			const header = table.createTHead(); // Κεφαλίδα πίνακα
 			const row = header.insertRow(0);
@@ -227,9 +314,6 @@ if (isset($_SESSION['status'])) {
 			cell1.innerHTML = "<b>Επιβλέπων</b>";
 			cell2.innerHTML = "<b>Καθηγητής Α</b>";
 			cell3.innerHTML = "<b>Καθηγητής Β</b>";
-			cell1.style.border = "1px solid #000";
-			cell2.style.border = "1px solid #000";
-			cell3.style.border = "1px solid #000";
 			row.style.backgroundColor = "#00BFFF";
 			row.style.color = "white";
 
@@ -237,10 +321,22 @@ if (isset($_SESSION['status'])) {
 			const rowData = tbody.insertRow(-1); 
 			const cell1Data = rowData.insertCell(0);
 			const cell2Data = rowData.insertCell(1);
-			const cell3Data = rowData.insertCell(1);
+			const cell3Data = rowData.insertCell(2);
 			cell1Data.innerHTML = item.supervisor;
 			cell2Data.innerHTML = item.member1;
 			cell3Data.innerHTML = item.member2;
+
+			// Add class for header cells for responsive styling
+			[cell1, cell2, cell3].forEach((cell, index) => {
+				cell.classList.add("table-cell");
+				cell.setAttribute("data-label", ["Επιβλέπων", "Καθηγητής Α", "Καθηγητής Β"][index]); // Add data-label for responsive styling
+			});
+
+			// Add classes for the data row cells for responsive styling
+			[cell1Data, cell2Data, cell3Data].forEach((cell, index) => {
+				cell.classList.add("table-cell");
+				cell.setAttribute("data-label", ["Επιβλέπων", "Καθηγητής Α", "Καθηγητής Β"][index]); // Add data-label for responsive styling
+			});
 		}
 
 		var xhr = new XMLHttpRequest(); // Αποστολή request μέσω AJAX
@@ -258,14 +354,14 @@ if (isset($_SESSION['status'])) {
 		};
 	}
 
+
+
 	function getTable1() { // Κατασκευή πίνακα για στοιχεία εξέτασης
 		const table = document.getElementById("item_table1");
+		table.classList.add("responsive-table"); // Add responsive table class
 
 		function renderTable(item) {
 			table.innerHTML = ""; // Καθαρισμός πίνακα
-
-			table.style.height = "30%";
-			table.style.width = "100%";
 
 			const header = table.createTHead(); // Κεφαλίδα πίνακα
 			const row = header.insertRow(0);
@@ -273,10 +369,9 @@ if (isset($_SESSION['status'])) {
 			const cell2 = row.insertCell(1);
 			cell1.innerHTML = "<b>Ημερομηνία και Ώρα</b>";
 			cell2.innerHTML = "<b>Αίθουσα/Link</b>";
-			cell1.style.border = "1px solid #000";
-			cell2.style.border = "1px solid #000";
 			row.style.backgroundColor = "#00BFFF";
 			row.style.color = "white";
+			
 
 			const tbody = table.createTBody(); // Σώμα πίνακα
 			const rowData = tbody.insertRow(-1); 
@@ -284,6 +379,20 @@ if (isset($_SESSION['status'])) {
 			const cell2Data = rowData.insertCell(1);
 			cell1Data.innerHTML = item.exam_date;
 			cell2Data.innerHTML = item.exam_room;
+			
+			
+
+			// Add class for header cells for responsive styling
+			[cell1, cell2].forEach((cell, index) => {
+				cell.classList.add("table-cell");
+				cell.setAttribute("data-label", ["Ημερομηνία και Ώρα", "Αίθουσα/Link"][index]); // Add data-label for responsive styling
+			});
+
+			// Add classes for the data row cells for responsive styling
+			[cell1Data, cell2Data].forEach((cell, index) => {
+				cell.classList.add("table-cell");
+				cell.setAttribute("data-label", ["Ημερομηνία και Ώρα", "Αίθουσα/Link"][index]); // Add data-label for responsive styling
+			});
 		}
 
 		var xhr = new XMLHttpRequest(); // Αποστολή request μέσω AJAX
@@ -300,6 +409,8 @@ if (isset($_SESSION['status'])) {
 			}
 		};
 	}
+
+	
 
 	// Έλεγχος αν η ημερομηνία και ώρα έχουν το κατάλληλο format
 	function validateDateTime() {
