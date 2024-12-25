@@ -2,14 +2,15 @@
 	box-sizing: border-box;
 }
 
-	/* Στυλ για τη σελίδα */
+/* Στυλ για τη σελίδα */
 body {
 	font-family: Calibri, Arial, sans-serif;
 	margin: 0;
 	background-color: #f4f4f4;
 	display: flex;
 	flex-direction: column;
-	align-items: center; 
+	/*align-items: center;*/
+	min-height: 100vh; /* Ensures the body takes up at least the full viewport height */	
 }
 
 .navbar {
@@ -19,7 +20,6 @@ body {
 	display: flex;
 	justify-content: space-between; /* Χωρίζει τα sections από το user info */
 	align-items: center;
-	width: 100%
 }
 
 .navbar .menu {
@@ -76,7 +76,6 @@ body {
 
 .navbar .logo {
 	margin-right: 20px;
-	padding-left: 20px;
 }
 
 .navbar .user-info {
@@ -84,7 +83,6 @@ body {
 	align-items: center;
 	gap: 15px;
 	white-space: nowrap;
-	padding-right: 20px;
 }
 
 .user-info span {
@@ -114,6 +112,103 @@ body {
 	height: 40px;
 	width: auto;
 }
+
+footer {
+	background-color: #192f59;
+	color: white;
+	text-align: center;
+	padding: 10px 0;
+	position: relative;
+	bottom: 0;
+	width: 100%;
+}
+
+
+
+/* Mobile responsiveness */
+@media (max-width: 950px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar .menu {
+        display: block; /* Make the menu block-level for stacking items vertically */
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .navbar .menu-item {
+        display: block; /* Make each menu item block-level to ensure they take up the full width */
+        padding: 10px 20px; /* Adjust padding for better fit */
+        font-size: 16px; /* Adjust font size */
+        width: 100%;
+        text-align: center; /* Center the text */
+        margin-bottom: 15px; /* Add space between menu items */
+        box-sizing: border-box; /* Ensure padding doesn't affect the width */
+    }
+
+    .navbar .user-info {
+        margin-top: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar .user-info .logout-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Adjust logo size */
+    .logo img {
+        height: 30px; /* Smaller logo for mobile */
+    }
+}
+
+/* Default state for menu button (hidden) */
+.menu-button {
+    display: none;
+}
+
+
+
+
+@media (max-width: 560px) {
+    .navbar .menu {
+        font-size: 12px; /* Further reduce font size */
+		box-sizing: border-box; /* Include padding and borders in the element's total width */
+		width: 100%; /* Ensure the navbar takes full width */
+    }
+
+    .navbar .menu-item {
+        padding: 6px 8px; /* Reduce padding further */
+        font-size: 12px; /* Further reduce font size */
+        margin-bottom: 8px; /* Adjust spacing for smaller screens */
+    }
+	
+	
+	/* Stack user email and logout button */
+    .navbar .user-info {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar .user-email,
+    .navbar .logout-btn {
+        margin: 5px 0; /* Space between email and logout button */
+    }
+	
+
+    .navbar .logo-img {
+        height: 30px; /* Reduce logo size */
+    }
+}
+
+
 
 
 .table-container {
@@ -166,15 +261,6 @@ table tr:hover {
 	cursor: pointer;
 }
 
-footer {
-	background-color: #192f59;
-	color: white;
-	text-align: center;
-	padding: 10px 0;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-}
 
 h1 {
 	text-align: center;
