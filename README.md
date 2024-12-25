@@ -7,7 +7,7 @@
 - <b>.htaccess</b>
 - <b>Indexing στη Βάση</b>
 - <b>Ολικά testfiles</b>
-
+- <b>(Comments)</b>
 
 
 <h2>Languages and Utilities Used</h2>
