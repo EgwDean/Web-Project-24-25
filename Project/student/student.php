@@ -35,15 +35,15 @@ if (isset($_POST['status'])) { // Λήψη του status μέσω AJAX
 <link rel="stylesheet" type="text/css" href="student.css">
 </head>
 <body onload="get()">
-   <!-- Navigation bar -->
+    <!-- Navigation bar -->
     <div class="navbar">
-	
-		<div class="logo">
-			<a href="student.php"> 
-				<img src="/Project/media/logo.png" alt="Logo" class="logo-img">
-			</a>
-		</div>
-	
+        <div class="logo">
+            <a href="student.php">
+                <img src="/Project/media/logo.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+
+        <!-- Menu items (Always visible) -->
         <div class="menu">
             <div>
                 <a href="student.php" class="menu-item">Προβολή Θέματος</a>
@@ -54,10 +54,7 @@ if (isset($_POST['status'])) { // Λήψη του status μέσω AJAX
             <div>
                 <a href="#" class="menu-item" onclick="statusRedirectManagement()">Διαχείριση Διπλωματικής</a>
             </div>
-            
         </div>
-
-
 
         <div class="user-info">
             <span><?php echo $userEmail; ?></span>
@@ -84,99 +81,193 @@ if (isset($_POST['status'])) { // Λήψη του status μέσω AJAX
 	
 <script>	
 
+
+function addResponsiveCSS() {
+    const style = document.createElement("style");
+    style.type = "text/css";
+    style.innerHTML = `
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .table-header {
+            background-color: #00BFFF;
+            color: white;
+            padding: 8px;
+            border: 1px solid #000;
+            text-align: left;
+        }
+
+        .table-cell {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word; /* Ensures long words wrap correctly */
+            max-width: 200px; /* Prevents cells from becoming too wide */
+            box-sizing: border-box; /* Ensures padding is included in width */
+        }
+
+        .table-row:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Media query for responsive tables */
+        @media (max-width: 900px) {
+            .responsive-table {
+                width: 100%;
+                display: block;
+                overflow-x: auto; /* Enables horizontal scrolling */
+            }
+
+            .responsive-table thead {
+                display: none; /* Hide the header on smaller screens */
+            }
+
+            .responsive-table tr {
+                display: block;
+                margin-bottom: 15px;
+                padding: 10px;
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                border: 1px solid #ddd; /* Border for individual rows */
+            }
+
+            /* Stack each cell vertically with its corresponding header */
+            .responsive-table td {
+                display: block;
+                width: 100%;
+                padding: 8px;
+                border: none;
+                background-color: #f1f1f1;
+                font-weight: bold;
+                margin-bottom: 5px;
+                box-sizing: border-box; /* Ensures padding is included in width */
+            }
+
+            .responsive-table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #00BFFF;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            /* Adjust the text size */
+            .table-header, .table-cell {
+                font-size: 0.9rem;
+            }
+
+            /* Adjust row hover effect */
+            .table-row:hover {
+                background-color: #e0e0e0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
 function get() {
-var table1 = document.getElementById("item_table1");
-table1.style.marginBottom = "75px";
-var table2 = document.getElementById("item_table2");
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'view_topic.php');
-xhr.send();
+    addResponsiveCSS(); // Add CSS dynamically
 
-xhr.onreadystatechange = function() {
-	if (xhr.readyState === XMLHttpRequest.DONE) {
-		if (xhr.status === 200) {
-			var data1 = JSON.parse(xhr.responseText)['table1'];
-			var data2 = JSON.parse(xhr.responseText)['table2'];
+    var table1 = document.getElementById("item_table1");
+    table1.classList.add("responsive-table");
+    table1.style.marginBottom = "75px";
 
-			// Δημιουργία πρώτου πίνακα
-			var header = table1.createTHead();
-			var row = header.insertRow(0);
-			var headers = ["Title", "Description", "PDF Link", "Status", "Time active"];
+    var table2 = document.getElementById("item_table2");
+    table2.classList.add("responsive-table");
 
-			headers.forEach((text, index) => {
-				var cell = row.insertCell(index);
-				cell.innerHTML = text;
-				cell.style.cssText = "background-color: #00BFFF; color: white; text-align: left; border: 1px solid #000";
-            });
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'view_topic.php');
+    xhr.send();
 
-			// Δημιουργία σώματος πίνακα
-			var tbody = table1.createTBody();
-			for (let i = 0; i < data1.length; i++) {
-				var row = tbody.insertRow(-1);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				var cell3 = row.insertCell(2);
-				var cell4 = row.insertCell(3);
-				var cell5 = row.insertCell(4);
-				cell1.innerHTML = data1[i]['title'];
-				cell2.innerHTML = data1[i]['description'];
-				cell4.innerHTML = data1[i]['status'];
-				cell5.innerHTML = data1[i]['dateDiff'];
-				cell1.style.border = "1px solid #000";
-				cell2.style.border = "1px solid #000";
-				cell3.style.border = "1px solid #000";
-				cell4.style.border = "1px solid #000";
-				cell5.style.border = "1px solid #000";
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var data1 = JSON.parse(xhr.responseText)['table1'];
+                var data2 = JSON.parse(xhr.responseText)['table2'];
 
-				// Δημιουργία του συνδέσμου στο pdf_link
-				var pdfLink = document.createElement('a');
-				pdfLink.href = data1[i]['pdf_link_topic'];
-				pdfLink.innerHTML = data1[i]['pdf_link_topic'].slice(26);
-				pdfLink.target = '_blank';
-				cell3.appendChild(pdfLink);
-			}
-			
-			
-			
+                // Create table1
+                var header = table1.createTHead();
+                var row = header.insertRow(0);
+                var headers = ["Title", "Description", "PDF Link", "Status", "Time active"];
 
-			// Δημιουργία δεύτερου πίνακα			 
-			header = table2.createTHead();
-			row = header.insertRow(0);
-			var headers2 = ["Supervisor", "Member 1", "Member 2"];
+                headers.forEach((text, index) => {
+                    var cell = row.insertCell(index);
+                    cell.innerHTML = text;
+                    cell.classList.add("table-header");
+                });
 
-			headers2.forEach((text, index) => {
-				var cell = row.insertCell(index);
-				cell.innerHTML = text;
-				cell.style.cssText = "background-color: #00BFFF; color: white; text-align: left; border: 1px solid #000;";
-			});
-			
+                var tbody = table1.createTBody();
+                for (let i = 0; i < data1.length; i++) {
+                    var row = tbody.insertRow(-1);
+                    row.classList.add("table-row");
 
-			// Δημιουργία σώματος πίνακα
-			var tbody = table2.createTBody();
-			for (let i = 0; i < data2.length; i++) {
-				var row = tbody.insertRow(-1);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				var cell3 = row.insertCell(2);
-				cell1.innerHTML = data2[i]['supervisor'];
-				cell2.innerHTML = data2[i]['member1'];
-				cell3.innerHTML = data2[i]['member2'];
-				cell1.style.border = "1px solid #000";
-				cell2.style.border = "1px solid #000";
-				cell3.style.border = "1px solid #000";
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+                    var cell5 = row.insertCell(4);
 
-				
-			}
-			sendStatusToServer();			
-			
-		} else {
-			console.error("Error fetching data");
-		}
-		
-	}
+                    cell1.innerHTML = data1[i]['title'];
+                    cell2.innerHTML = data1[i]['description'];
+                    cell4.innerHTML = data1[i]['status'];
+                    cell5.innerHTML = data1[i]['dateDiff'];
+
+                    [cell1, cell2, cell3, cell4, cell5].forEach((cell, index) => {
+                        cell.classList.add("table-cell");
+                        cell.setAttribute("data-label", headers[index]); // Add data-label for responsive styling
+                    });
+
+                    var pdfLink = document.createElement('a');
+                    pdfLink.href = data1[i]['pdf_link_topic'];
+                    pdfLink.innerHTML = data1[i]['pdf_link_topic'].slice(26);
+                    pdfLink.target = '_blank';
+                    cell3.appendChild(pdfLink);
+                }
+
+                // Create table2
+                header = table2.createTHead();
+                row = header.insertRow(0);
+                var headers2 = ["Supervisor", "Member 1", "Member 2"];
+
+                headers2.forEach((text, index) => {
+                    var cell = row.insertCell(index);
+                    cell.innerHTML = text;
+                    cell.classList.add("table-header");
+                });
+
+                tbody = table2.createTBody();
+                for (let i = 0; i < data2.length; i++) {
+                    var row = tbody.insertRow(-1);
+                    row.classList.add("table-row");
+
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+
+                    cell1.innerHTML = data2[i]['supervisor'];
+                    cell2.innerHTML = data2[i]['member1'];
+                    cell3.innerHTML = data2[i]['member2'];
+
+                    [cell1, cell2, cell3].forEach((cell, index) => {
+                        cell.classList.add("table-cell");
+                        cell.setAttribute("data-label", headers2[index]); // Add data-label for responsive styling
+                    });
+                }
+            } else {
+                console.error("Error fetching data");
+            }
+        }
+    };
 }
 
-}
+
+
+
 
      // Συνάρτηση που ελέγχει το status διπλωματικής και ανακατευθύνει κατάλληλα με το πάτημα του "Διαχείριση Διπλωματικής"
 	 function statusRedirectManagement() { 
