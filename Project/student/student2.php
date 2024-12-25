@@ -85,7 +85,7 @@ if (isset($_POST['logout'])) {
         <label for="mobile_telephone">Mobile Telephone:</label>
         <input type="text" id="mobile_telephone" name="mobile_telephone" required>
 
-        <button type="submit">Update Information</button>
+        <button type="submit" class="update-btn">Update Information</button>
     </form>
 	
 	
