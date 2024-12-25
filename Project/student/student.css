@@ -5,6 +5,7 @@ body {
 	background-color: #f4f4f4;
 	display: flex;
 	flex-direction: column;
+	min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
 }
 
 .navbar {
@@ -143,12 +144,97 @@ footer {
 	color: white;
 	text-align: center;
 	padding: 10px 0;
-	position: fixed;
-	bottom: 0;
 	width: 100%;
 }
+
 
 .table-container {
 	margin: auto;
 	width: 80%;
+	flex: 1; /* Ensures the table container grows to fill the space */
+}
+
+
+
+/* Mobile responsiveness */
+@media (max-width: 925px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar .menu {
+        display: block; /* Make the menu block-level for stacking items vertically */
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .navbar .menu-item {
+        display: block; /* Make each menu item block-level to ensure they take up the full width */
+        padding: 10px 20px; /* Adjust padding for better fit */
+        font-size: 16px; /* Adjust font size */
+        width: 100%;
+        text-align: center; /* Center the text */
+        margin-bottom: 15px; /* Add space between menu items */
+        box-sizing: border-box; /* Ensure padding doesn't affect the width */
+    }
+
+    .navbar .user-info {
+        margin-top: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar .user-info .logout-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Adjust logo size */
+    .logo img {
+        height: 30px; /* Smaller logo for mobile */
+    }
+}
+
+/* Default state for menu button (hidden) */
+.menu-button {
+    display: none;
+}
+
+
+
+
+@media (max-width: 500px) {
+    .navbar .menu {
+        font-size: 12px; /* Further reduce font size */
+		box-sizing: border-box; /* Include padding and borders in the element's total width */
+		width: 100%; /* Ensure the navbar takes full width */
+    }
+
+    .navbar .menu-item {
+        padding: 6px 8px; /* Reduce padding further */
+        font-size: 12px; /* Further reduce font size */
+        margin-bottom: 8px; /* Adjust spacing for smaller screens */
+    }
+	
+	
+	/* Stack user email and logout button */
+    .navbar .user-info {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar .user-email,
+    .navbar .logout-btn {
+        margin: 5px 0; /* Space between email and logout button */
+    }
+	
+
+    .navbar .logo-img {
+        height: 30px; /* Reduce logo size */
+    }
 }
