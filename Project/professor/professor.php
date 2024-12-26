@@ -201,11 +201,23 @@ function get() {
                     cell3.innerHTML = data[i]['description'];
 
 			// Δημιουργία του συνδέσμου στο pdf_link
+			//var pdfLink = document.createElement('a');
+			//pdfLink.href = data[i]['pdf_link_topic'];
+			//pdfLink.innerHTML = data[i]['pdf_link_topic'].slice(26); // Αφαιρεί τους πρώτους 26 χαρακτήρες
+			//pdfLink.target = '_blank';
+			//cell4.appendChild(pdfLink);
+
+
 			var pdfLink = document.createElement('a');
-			pdfLink.href = data[i]['pdf_link_topic'];
-			pdfLink.innerHTML = data[i]['pdf_link_topic'].slice(26); // Αφαιρεί τους πρώτους 26 χαρακτήρες
-			pdfLink.target = '_blank';
-			cell4.appendChild(pdfLink);
+                        if (data[i]['pdf_link_topic']) {
+                        	pdfLink.href = data[i]['pdf_link_topic'];
+                        	pdfLink.innerHTML = data[i]['pdf_link_topic'].slice(26); // Αφαιρεί τους πρώτους 26 χαρακτήρες
+                   	} else {
+                        	pdfLink.href = "";
+                        	pdfLink.innerHTML = "";
+                    	}
+                    pdfLink.target = '_blank';
+                    cell4.appendChild(pdfLink);
 
                     // Χειριστής για επιλογή γραμμής
                     row.onclick = function() {
