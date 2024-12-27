@@ -74,9 +74,9 @@ if (isset($_POST['logout'])) {
     <div class="container">
         <div>
             <h1>Διαθέσιμες Διπλωματικές</h1>
-
+			<div class="table-container">
             <table id="item_table"></table>
-
+			</div>
 			<div class="button-container">
 				<button class="create-btn" onclick="showCreateForm()">Create Item</button>
 					<button class="edit-btn" onclick="showEditForm()">Edit</button>
