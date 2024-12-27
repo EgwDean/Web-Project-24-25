@@ -117,6 +117,14 @@ body {
 	margin-bottom: 20px;
 }
 
+/* Scrollable table container */
+.table-container {
+    width: 80%;
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin-bottom: 20px;
+}
+
 table {
 	width: 100%;
 	border-collapse: collapse;
