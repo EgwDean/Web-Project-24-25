@@ -182,14 +182,40 @@ footer {
     }
 	
 	
-	 .date-picker-container > div {
+	 
+    /* Stacking the label and input field */
+    .date-picker-container {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 20px;
+        text-align: center;
     }
 
-    .filter-button {
-        width: 100%;
-        margin: 5px 0;
+    .date-picker-container label {
+        margin-bottom: 5px; /* Add space between label and input */
+        font-size: 16px; /* Adjust font size */
+    }
+
+    input[type="date"] {
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        transition: border 0.3s ease;
+        width: 100%; /* Ensure input fields take full width */
+        max-width: 250px; /* Limit the width for a better look */
+    }
+
+    /* Stack the filter and XML/JSON buttons */
+    .filter-button,
+    .xml-button,
+    .json-button {
+        width: auto; /* Ensure buttons don't take full width */
+        margin: 5px 0; /* Add spacing between the buttons */
+        display: block; /* Make them block elements to stack them */
+		margin-left: auto; /* Center the buttons */
+        margin-right: auto; /* Center the buttons */
     }
 	
 
