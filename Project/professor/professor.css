@@ -175,7 +175,7 @@ tr:hover {
 .create-form,
 .edit-form,
 .upload-form {
-    position: absolute;
+    position: relative; /* Keeps the forms within the container */
     width: 50%; /* Καταλαμβάνουν το μισό πλάτος */
     max-width: none; /* Κατάργηση του περιορισμού μεγέθους */
     padding: 20px;
