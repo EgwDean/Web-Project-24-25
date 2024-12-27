@@ -177,6 +177,21 @@ footer {
         padding: 6px 10px; /* Smaller padding for the button */
         font-size: 14px; /* Smaller font size */
     }
+	
+	
+	/* Styling for the department text */
+    p {
+        font-size: 16px; /* Adjust font size */
+        font-weight: bold; /* Make it bold */
+        text-align: center; /* Center align the text */
+        color: white; /* Keep the text color white */
+        margin: 5px 0; /* Add some margin for spacing */
+        padding: 5px 0; /* Add some padding for better spacing */
+        width: 100%; /* Ensure it takes full width */
+        text-transform: uppercase; /* Capitalize the text for a more formal look */
+        letter-spacing: 1px; /* Slight letter spacing for readability */
+    }
+	
 
     table {
         border: none; /* Remove outer table borders */
