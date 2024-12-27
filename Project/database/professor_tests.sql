@@ -255,7 +255,6 @@ VALUES
 
 
 
-
 -- 4 ----
 
 DROP TABLE diplomatiki;
