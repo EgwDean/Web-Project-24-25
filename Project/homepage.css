@@ -169,10 +169,13 @@ footer {
         width: 100%;
     }
 
-    .nav-button {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 5px;
+    .navbar .nav-button {
+        position: relative;
+        top: auto;
+        transform: translateX(0);
+        margin: 10px 0; /* Add some margin for spacing */
+        padding: 6px 10px; /* Smaller padding for the button */
+        font-size: 14px; /* Smaller font size */
     }
 
     table {
