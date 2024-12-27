@@ -104,6 +104,16 @@ white-space: nowrap; /* Αποφυγή αλλαγής γραμμής */
 }
 
 /* Στυλ για τον πίνακα */
+
+/* Scrollable table container */
+.table-container {
+    width: 80%;
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin-bottom: 20px;
+}
+
+
 table {
 width: 100%;
 border-collapse: collapse;
@@ -111,6 +121,7 @@ box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 margin-bottom: 20px;  /* Προσθήκη περιθωρίου στο κάτω μέρος του πίνακα */
 
 }
+
 th, td {
 	padding: 12px;
 	text-align: left;
@@ -378,7 +389,7 @@ footer {
 	color: white;
 	text-align: center;
 	padding: 0px;
-	position: relative;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 }
