@@ -4,7 +4,6 @@
 
 <h2>To Do:</h2>
 
-- <b>.htaccess</b>
 - <b>Indexing στη Βάση</b>
 - <b>Ολικά testfiles</b>
 - <b>(Comments)</b>
