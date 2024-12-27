@@ -107,8 +107,11 @@ if (isset($_POST['logout'])) {
                 <button onclick="filterTable()" class="filter-button">Φίλτρο</button>
                 <input type="text" id="filterInput" placeholder="Αναζήτηση... " class="filter-input">
             </div>
-
-            <table id="item_table"></table>
+			
+			<div class="table-container">
+				<table id="item_table"></table>
+			</div>
+			
         </div>
     </div>
 
