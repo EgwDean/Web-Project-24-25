@@ -80,7 +80,9 @@ if (isset($_POST['logout'])) {
             <!-- Τίτλος στο κέντρο του δεξιού div -->
             <h1 class="table-title">Αιτήσεις</h1>
 
-            <table id="item_table"></table>
+			<div class="table-container">
+				<table id="item_table"></table>
+			</div>
 
 
 </div>
