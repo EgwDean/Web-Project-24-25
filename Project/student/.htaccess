@@ -1,0 +1,276 @@
+<Files "student.php">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student.css">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student2.php">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student2.css">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student3finished.php">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student3finished.css">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+
+<Files "student3pending.php">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student3pending.css">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student3under_examination.php">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+<Files "student3under_examination.css">
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "public, max-age=3600"
+</Files>
+
+
+
+
+<Files "checkGrade.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+
+<Files "checkHTMLPraktiko.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+
+<Files "checkPraktiko.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "fetchExcelFile.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "get_excel_data.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "get_praktiko.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "getExamDetails1.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "getExamDetails2.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "getId.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "getNemertesLink.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "getPdfLink.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "getProfessorNames.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "insertNemertes.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "logout.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "sendRequest.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "show_diplomatiki_details.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "show_log.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "update_student_info.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "updateExam.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "updateLinks.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "uploadPraktiko.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "uploadProxeiro.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "view_topic.php">
+    Header unset Cache-Control
+    Header unset Pragma
+    Header unset Expires
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</Files>
+
+<Files "../media/logo.png">
+    Header set Cache-Control "public, max-age=3600"
+</Files>
