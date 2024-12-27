@@ -67,6 +67,57 @@ function getAnnouncements() {
                 table.innerHTML = '';
 
                 if (data.length > 0) {
+					// Δημιουργία κεφαλίδων του πίνακα μόνο αν υπάρχουν δεδομένα
+                    var header = table.createTHead();
+                    var row = header.insertRow(0);
+                    var cell1 = row.insertCell(0);
+                    cell1.style.backgroundColor = "#00BFFF";
+                    cell1.style.color = "#FFF";
+                    var cell2 = row.insertCell(1);
+                    cell2.style.backgroundColor = "#00BFFF";
+                    cell2.style.color = "#FFF";
+                    var cell3 = row.insertCell(2);
+                    cell3.style.backgroundColor = "#00BFFF";
+                    cell3.style.color = "#FFF";
+                    var cell4 = row.insertCell(3);
+                    cell4.style.backgroundColor = "#00BFFF";
+                    cell4.style.color = "#FFF";
+                    var cell5 = row.insertCell(4);
+                    cell5.style.backgroundColor = "#00BFFF";
+                    cell5.style.color = "#FFF";
+                    var cell6 = row.insertCell(5);
+                    cell6.style.backgroundColor = "#00BFFF";
+                    cell6.style.color = "#FFF";
+                    var cell7 = row.insertCell(6);
+                    cell7.style.backgroundColor = "#00BFFF";
+                    cell7.style.color = "#FFF";
+                    var cell8 = row.insertCell(7);
+                    cell8.style.backgroundColor = "#00BFFF";
+                    cell8.style.color = "#FFF";
+                    var cell9 = row.insertCell(8);
+                    cell9.style.backgroundColor = "#00BFFF";
+                    cell9.style.color = "#FFF";
+                    var cell10 = row.insertCell(9);
+                    cell10.style.backgroundColor = "#00BFFF";
+                    cell10.style.color = "#FFF";
+                    var cell11 = row.insertCell(10);
+                    cell11.style.backgroundColor = "#00BFFF";
+                    cell11.style.color = "#FFF";
+
+                    cell1.innerHTML = "Ονοματεπώνυμο Φοιτητή";
+                    cell2.innerHTML = "ΑΜ";
+                    cell3.innerHTML = "Κωδικός Διπλωματικής";
+                    cell4.innerHTML = "Τίτλος Διπλωματικής";
+                    cell5.innerHTML = "Ημερομηνία Εξέτασης";
+                    cell6.innerHTML = "Χώρος Εξέτασης";
+                    cell7.innerHTML = "Ονοματεπώνυμο Καθηγητή";
+                    cell8.innerHTML = "Βαθμός 1";
+                    cell9.innerHTML = "Βαθμός 2";
+                    cell10.innerHTML = "Βαθμός 3";
+                    cell11.innerHTML = "Τελικός Βαθμός";
+				
+				
+				
                     // Δημιουργία του σώματος του πίνακα
                     var tbody = table.createTBody();
                     for (var i = 0; i < data.length; i++) {
