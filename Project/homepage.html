@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ανακοινώσεις</title>
-	<link rel="stylesheet" type="text/css" href="homepage.css">
+    <link rel="stylesheet" type="text/css" href="homepage.css">
 </head>
 <body onload="getAnnouncements()">
 
@@ -35,13 +35,15 @@
     <button class="filter-button" onclick="exportFormat('json')">JSON</button>
 </div>
     
-<table id="announcement_table" border="1"></table>
-
+<table id="announcement_table">
+    <tbody>
+        <!-- Rows will be inserted here dynamically -->
+    </tbody>
+</table>
 
 <footer>
-	<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+    <p>&copy; 2024 University of Patras - All Rights Reserved</p>
 </footer>
-
 
 <script>
 function getAnnouncements() {
@@ -65,55 +67,6 @@ function getAnnouncements() {
                 table.innerHTML = '';
 
                 if (data.length > 0) {
-                    // Δημιουργία κεφαλίδων του πίνακα μόνο αν υπάρχουν δεδομένα
-                    var header = table.createTHead();
-                    var row = header.insertRow(0);
-                    var cell1 = row.insertCell(0);
-                    cell1.style.backgroundColor = "#00BFFF";
-                    cell1.style.color = "#FFF";
-                    var cell2 = row.insertCell(1);
-                    cell2.style.backgroundColor = "#00BFFF";
-                    cell2.style.color = "#FFF";
-                    var cell3 = row.insertCell(2);
-                    cell3.style.backgroundColor = "#00BFFF";
-                    cell3.style.color = "#FFF";
-                    var cell4 = row.insertCell(3);
-                    cell4.style.backgroundColor = "#00BFFF";
-                    cell4.style.color = "#FFF";
-                    var cell5 = row.insertCell(4);
-                    cell5.style.backgroundColor = "#00BFFF";
-                    cell5.style.color = "#FFF";
-                    var cell6 = row.insertCell(5);
-                    cell6.style.backgroundColor = "#00BFFF";
-                    cell6.style.color = "#FFF";
-                    var cell7 = row.insertCell(6);
-                    cell7.style.backgroundColor = "#00BFFF";
-                    cell7.style.color = "#FFF";
-                    var cell8 = row.insertCell(7);
-                    cell8.style.backgroundColor = "#00BFFF";
-                    cell8.style.color = "#FFF";
-                    var cell9 = row.insertCell(8);
-                    cell9.style.backgroundColor = "#00BFFF";
-                    cell9.style.color = "#FFF";
-                    var cell10 = row.insertCell(9);
-                    cell10.style.backgroundColor = "#00BFFF";
-                    cell10.style.color = "#FFF";
-                    var cell11 = row.insertCell(10);
-                    cell11.style.backgroundColor = "#00BFFF";
-                    cell11.style.color = "#FFF";
-
-                    cell1.innerHTML = "Ονοματεπώνυμο Φοιτητή";
-                    cell2.innerHTML = "ΑΜ";
-                    cell3.innerHTML = "Κωδικός Διπλωματικής";
-                    cell4.innerHTML = "Τίτλος Διπλωματικής";
-                    cell5.innerHTML = "Ημερομηνία Εξέτασης";
-                    cell6.innerHTML = "Χώρος Εξέτασης";
-                    cell7.innerHTML = "Ονοματεπώνυμο Καθηγητή";
-                    cell8.innerHTML = "Βαθμός 1";
-                    cell9.innerHTML = "Βαθμός 2";
-                    cell10.innerHTML = "Βαθμός 3";
-                    cell11.innerHTML = "Τελικός Βαθμός";
-
                     // Δημιουργία του σώματος του πίνακα
                     var tbody = table.createTBody();
                     for (var i = 0; i < data.length; i++) {
@@ -130,16 +83,27 @@ function getAnnouncements() {
                         var cell10 = row.insertCell(9);
                         var cell11 = row.insertCell(10);
 
+                        cell1.setAttribute("data-label", "Ονοματεπώνυμο Φοιτητή");
                         cell1.innerHTML = data[i]['student_full_name'];
+                        cell2.setAttribute("data-label", "ΑΜ");
                         cell2.innerHTML = data[i]['number'];
+                        cell3.setAttribute("data-label", "Κωδικός Διπλωματικής");
                         cell3.innerHTML = data[i]['id'];
+                        cell4.setAttribute("data-label", "Τίτλος Διπλωματικής");
                         cell4.innerHTML = data[i]['title'];
+                        cell5.setAttribute("data-label", "Ημερομηνία Εξέτασης");
                         cell5.innerHTML = data[i]['exam_date'];
+                        cell6.setAttribute("data-label", "Χώρος Εξέτασης");
                         cell6.innerHTML = data[i]['exam_room'];
+                        cell7.setAttribute("data-label", "Ονοματεπώνυμο Καθηγητή");
                         cell7.innerHTML = data[i]['professor_full_name'];
+                        cell8.setAttribute("data-label", "Βαθμός 1");
                         cell8.innerHTML = data[i]['grade1'];
+                        cell9.setAttribute("data-label", "Βαθμός 2");
                         cell9.innerHTML = data[i]['grade2'];
+                        cell10.setAttribute("data-label", "Βαθμός 3");
                         cell10.innerHTML = data[i]['grade3'];
+                        cell11.setAttribute("data-label", "Τελικός Βαθμός");
                         cell11.innerHTML = data[i]['final_grade'];
                     }
                 }
@@ -166,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open('login.php', '_self');
     })
 });
-
 </script>
 
 </body>
