@@ -96,8 +96,9 @@ if (isset($_POST['logout'])) {
 				<button class="filter-btn" onclick="applyFilter()">Filter</button>
 			</div>
 
-			<table id="item_table"></table>
-
+			<div class="table-container">
+				<table id="item_table"></table>
+			</div>
 
 			<!-- Προσθήκη κουμπιών εξαγωγής -->
 			<div class="export-btn-container">
