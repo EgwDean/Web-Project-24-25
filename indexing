@@ -1,0 +1,16 @@
+Determining whether a table in SQL needs indexing when querying involves analyzing the performance of your queries and identifying potential bottlenecks. Here's how you can evaluate this:
+
+1. Analyze Query Performance
+Use EXPLAIN (or EXPLAIN ANALYZE for more detailed output) to understand how the database executes your query. This command provides information about:
+
+Whether the query uses indexes.
+The number of rows scanned.
+The type of join operations performed.
+Example:
+
+EXPLAIN SELECT * FROM table_name WHERE column_name = 'value';
+
+Look for:
+
+Full Table Scans: If the database scans the entire table, it might indicate a missing index.
+Rows Examined: A high number of rows examined compared to the result size suggests inefficient access patterns.
