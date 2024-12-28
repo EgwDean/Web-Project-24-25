@@ -18,6 +18,8 @@ $dbname = "diplomatiki_support";
 
 $conn = new mysqli($servername, $username, $password, $dbname); // Σύνδεση με τη βάση
 
+// Set the character set to UTF-8
+$conn->set_charset("utf8");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
