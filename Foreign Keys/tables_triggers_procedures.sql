@@ -105,7 +105,7 @@ CREATE TABLE trimelis_epitropi_diplomatikis (
   FOREIGN KEY (id_dipl) REFERENCES diplomatiki(id_diplomatiki) 
   ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (supervisor) REFERENCES professor(email_professor) 
-  ON DELETE SET NULL ON UPDATE CASCADE,
+  ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (member1) REFERENCES professor(email_professor) 
   ON DELETE SET NULL ON UPDATE CASCADE,
   FOREIGN KEY (member2) REFERENCES professor(email_professor) 
