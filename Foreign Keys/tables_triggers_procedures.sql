@@ -99,7 +99,7 @@ CREATE TABLE professor_notes (
 
 CREATE TABLE trimelis_epitropi_diplomatikis (                 
   id_dipl INT NOT NULL,    
-  supervisor VARCHAR(255) /*NOT NULL*/,               
+  supervisor VARCHAR(255) NOT NULL,               
   member1 VARCHAR(255) DEFAULT NULL,                  
   member2 VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (id_dipl) REFERENCES diplomatiki(id_diplomatiki) 
