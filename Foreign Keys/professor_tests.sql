@@ -1,5 +1,6 @@
 USE diplomatiki_support;
 
+# Απενεργοποίηση Foreign Keys
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- homepage --
@@ -354,5 +355,6 @@ VALUES
 (4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
 
 
-SET FOREIGN_KEY_CHECKS = 0;
+# Επαναφορά Foreign Keys
+SET FOREIGN_KEY_CHECKS = 1;
 
