@@ -1,5 +1,8 @@
 USE diplomatiki_support;
 
+# Απενεργοποίηση Foreign Keys
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- Καθαρισμός πινάκων
 DELETE FROM professor;
 DELETE FROM student;
@@ -153,3 +156,7 @@ VALUES
   ('katerina.kouli@student.edu', 'sophia.pavlou@university.edu', 7, 'accepted', '2024-01-16', '2024-01-10'),
   ('eleni.kiriakidou@student.edu', 'vasilis.zafiropoulos@university.edu', 8, 'declined', '2024-01-17', '2024-01-10'),
   ('antonis.papageorgiou@student.edu', 'eleni.chrysafides@university.edu', 9, 'pending', NULL, '2024-01-10');
+
+
+  # Επαναφορά Foreign Keys
+SET FOREIGN_KEY_CHECKS = 1;
