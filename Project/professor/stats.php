@@ -36,7 +36,7 @@ INNER JOIN trimelis_epitropi_diplomatikis
 WHERE supervisor = ?
   AND anathesi_diplomatikis.status = 'finished'
 
-UNION
+UNION ALL
 
 SELECT ROUND(AVG(TIMESTAMPDIFF(MONTH, start_date, end_date)), 1) AS avg_completion_days
 FROM anathesi_diplomatikis 
@@ -45,7 +45,7 @@ INNER JOIN trimelis_epitropi_diplomatikis
 WHERE (member1 = ? OR member2 = ?) 
   AND anathesi_diplomatikis.status = 'finished'
 
-UNION
+UNION ALL
 
 SELECT ROUND(AVG(final_grade), 1) AS mesos_oros
 FROM trimelis_epitropi_diplomatikis 
@@ -54,7 +54,7 @@ INNER JOIN eksetasi_diplomatikis
 WHERE supervisor = ?
   AND final_grade IS NOT NULL
 
-UNION
+UNION ALL
 
 SELECT ROUND(AVG(final_grade), 1) AS mesos_oros
 FROM trimelis_epitropi_diplomatikis 
@@ -63,7 +63,7 @@ INNER JOIN eksetasi_diplomatikis
 WHERE (member1 = ? OR member2 = ?) 
   AND final_grade IS NOT NULL
 
-UNION
+UNION ALL
 
 SELECT CAST(COUNT(*) AS DECIMAL(10, 1)) AS plithos1
 FROM trimelis_epitropi_diplomatikis 
