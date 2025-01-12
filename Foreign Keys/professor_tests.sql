@@ -1,9 +1,10 @@
 USE diplomatiki_support;
 
-# Απενεργοποίηση Foreign Keys
+# Απενεργοποίηση Foreign Keys 
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- homepage --
+
 DROP TABLE diplomatiki;
 DELETE FROM eksetasi_diplomatikis;
 DELETE FROM anathesi_diplomatikis;
@@ -16,9 +17,7 @@ CREATE TABLE diplomatiki (
   title VARCHAR(255) NOT NULL,    
   description TEXT NOT NULL,                            
   pdf_link_topic VARCHAR(255),
-  status ENUM('available', 'given') NOT NULL,
-  CONSTRAINT DIPLPROF FOREIGN KEY (email_prof) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  status ENUM('available', 'given') NOT NULL
 );
 
 INSERT INTO student (password, name, surname, student_number, street, number, city, postcode, father_name, landline_telephone, mobile_telephone, email_student)
@@ -89,9 +88,7 @@ CREATE TABLE diplomatiki (
   title VARCHAR(255) NOT NULL,    
   description TEXT NOT NULL,                            
   pdf_link_topic VARCHAR(255),
-  status ENUM('available', 'given') NOT NULL,
-  CONSTRAINT DIPLPROF FOREIGN KEY (email_prof) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  status ENUM('available', 'given') NOT NULL
 );
 
   INSERT INTO diplomatiki (email_prof, title, description, pdf_link_topic, status)
@@ -119,9 +116,7 @@ CREATE TABLE diplomatiki (
   title VARCHAR(255) NOT NULL,    
   description TEXT NOT NULL,                            
   pdf_link_topic VARCHAR(255),
-  status ENUM('available', 'given') NOT NULL,
-  CONSTRAINT DIPLPROF FOREIGN KEY (email_prof) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  status ENUM('available', 'given') NOT NULL
 );
   
   INSERT INTO diplomatiki (email_prof, title, description, pdf_link_topic, status)
@@ -182,9 +177,7 @@ CREATE TABLE diplomatiki (
   title VARCHAR(255) NOT NULL,    
   description TEXT NOT NULL,                            
   pdf_link_topic VARCHAR(255),
-  status ENUM('available', 'given') NOT NULL,
-  CONSTRAINT DIPLPROF FOREIGN KEY (email_prof) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  status ENUM('available', 'given') NOT NULL
 );
 
 
@@ -248,8 +241,7 @@ VALUES
 (1, 'john.doe@example.com', '2024-06-15 09:00:00', 'Room A101', 8.50, 7.75, 9.00, 8.42, 'Pass'),
 (2, 'mary.smith@example.com', '2024-06-16 11:00:00', 'Room B202', 6.80, 7.90, 8.20, 7.30, 'Pass'),
 (3, 'peter.jones@example.com', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
-(4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass'),
-(5, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', NULL, 9.50, 9.30, 9.27, 'Pass');
+(4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
 
 
 DELETE FROM prosklisi_se_trimeli;
@@ -354,7 +346,5 @@ VALUES
 (3, 'peter.jones@example.com', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
 (4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
 
-
-# Επαναφορά Foreign Keys
+# Επαναφορά Foreign Keys 
 SET FOREIGN_KEY_CHECKS = 1;
-
