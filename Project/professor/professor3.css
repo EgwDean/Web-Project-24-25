@@ -221,6 +221,9 @@ div[style="margin-bottom: 20px;"] {
 	background-color: #00BFFF;
 }
 
+#presentation_btn{
+	margin-bottom:20px;	# για να υπάρχει κενό μεταξύ footer και κουμπιών
+}
 
 .right-section table td:first-child {
 	font-weight: bold;
