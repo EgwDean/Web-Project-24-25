@@ -509,10 +509,6 @@ DELIMITER ;
 
 
 
--- Υπό Εξέταση Διπλωματική
-
-
-
 DELIMITER $
 DROP PROCEDURE IF EXISTS setUnderExam$
 CREATE PROCEDURE setUnderExam(IN dip_id INT,  OUT error_code INT)
@@ -535,6 +531,11 @@ END IF;
 END$
 DELIMITER ;
 
+
+
+
+
+-- Υπό Εξέταση Διπλωματική
 
 
 DELIMITER $
