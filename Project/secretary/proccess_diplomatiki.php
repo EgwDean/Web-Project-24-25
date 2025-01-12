@@ -84,7 +84,7 @@ $email = $_SESSION['email']; // Αποθήκευση email χρήστη για �
 </div>
 
 <footer>
-	<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+	<p>Computer Engineering and Informatics Departmentd</p>
 </footer>
 
 
