@@ -60,7 +60,7 @@ $email = $_SESSION['email']; //email χρήστη
 <input type="file" id="fileInputStudents" accept=".json" class="hidden"> <!-- Input για json file με student records -->
 
 <footer>
-		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+		<p>Computer Engineering and Informatics Department</p>
 </footer>
 
 
