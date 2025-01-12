@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 	<footer>
-		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+		<p>Computer Engineering and Informatics Department</p>
 	</footer>
 	
 		
