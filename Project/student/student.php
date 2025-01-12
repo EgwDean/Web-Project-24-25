@@ -74,7 +74,7 @@ if (isset($_POST['status'])) { // Λήψη του status μέσω AJAX
 	
 
 	<footer>
-		<p>&copy; 2024 University of Patras - All Rights Reserved</p>
+		<p>Computer Engineering and Informatics Department</p>
 	</footer>
 	
 	
