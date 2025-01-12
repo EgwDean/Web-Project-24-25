@@ -238,8 +238,7 @@ VALUES
 (1, 'john.doe@example.com', '2024-06-15 09:00:00', 'Room A101', 8.50, 7.75, 9.00, 8.42, 'Pass'),
 (2, 'mary.smith@example.com', '2024-06-16 11:00:00', 'Room B202', 6.80, 7.90, 8.20, 7.30, 'Pass'),
 (3, 'peter.jones@example.com', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
-(4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass'),
-(5, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', NULL, 9.50, 9.30, 9.27, 'Pass');
+(4, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
 
 
 DELETE FROM prosklisi_se_trimeli;
