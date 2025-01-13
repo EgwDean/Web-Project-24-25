@@ -18,7 +18,7 @@
 - <b>Javascript</b>
 - <b>Apache HTTP server</b>
 
-<h2>Environments Used</h2>
+<h2>Technical Report</h2>
 
-- <b>MySQL Workbench 8.0 CE</b>
-- <b>Θεόφραστος...ο μπρο έγραφε σε notepad</b>
+[web_report.docx](https://upatrasgr-my.sharepoint.com/:w:/g/personal/up1093320_upatras_gr/EWBqCI-nFTFNqJrxYYGxbt0BqjDK9bzyOQl3NQL9T5XR6A?e=2aUZ3r
+)
