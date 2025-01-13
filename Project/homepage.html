@@ -10,7 +10,7 @@
 
 <div class="navbar">
     <div class="logo"> <!-- Logo/home-button -->
-        <img src="/Project/media/logo.png" alt="Logo">
+        <img src="media/logo.png" alt="Logo">
     </div>
     <p>Computer Engineering and Informatics Department</p>
     <!-- Κουμπί Login με σύνδεση στην σελίδα Login.php -->
@@ -19,7 +19,7 @@
     </div>
 </div>
     
-<h1>Εξετάσεις Διπλωματικών</h1>
+<h1>Παρουσίαση Διπλωματικών</h1>
 
 <!-- Επιλογή ημερομηνίας -->
 <div class="date-picker-container">
@@ -91,18 +91,7 @@ function getAnnouncements() {
                     var cell7 = row.insertCell(6);
                     cell7.style.backgroundColor = "#00BFFF";
                     cell7.style.color = "#FFF";
-                    var cell8 = row.insertCell(7);
-                    cell8.style.backgroundColor = "#00BFFF";
-                    cell8.style.color = "#FFF";
-                    var cell9 = row.insertCell(8);
-                    cell9.style.backgroundColor = "#00BFFF";
-                    cell9.style.color = "#FFF";
-                    var cell10 = row.insertCell(9);
-                    cell10.style.backgroundColor = "#00BFFF";
-                    cell10.style.color = "#FFF";
-                    var cell11 = row.insertCell(10);
-                    cell11.style.backgroundColor = "#00BFFF";
-                    cell11.style.color = "#FFF";
+
 
                     cell1.innerHTML = "Ονοματεπώνυμο Φοιτητή";
                     cell2.innerHTML = "ΑΜ";
@@ -111,11 +100,7 @@ function getAnnouncements() {
                     cell5.innerHTML = "Ημερομηνία Εξέτασης";
                     cell6.innerHTML = "Χώρος Εξέτασης";
                     cell7.innerHTML = "Ονοματεπώνυμο Καθηγητή";
-                    cell8.innerHTML = "Βαθμός 1";
-                    cell9.innerHTML = "Βαθμός 2";
-                    cell10.innerHTML = "Βαθμός 3";
-                    cell11.innerHTML = "Τελικός Βαθμός";
-				
+			
 				
 				
                     // Δημιουργία του σώματος του πίνακα
@@ -129,10 +114,7 @@ function getAnnouncements() {
                         var cell5 = row.insertCell(4);
                         var cell6 = row.insertCell(5);
                         var cell7 = row.insertCell(6);
-                        var cell8 = row.insertCell(7);
-                        var cell9 = row.insertCell(8);
-                        var cell10 = row.insertCell(9);
-                        var cell11 = row.insertCell(10);
+
 
                         cell1.setAttribute("data-label", "Ονοματεπώνυμο Φοιτητή");
                         cell1.innerHTML = data[i]['student_full_name'];
@@ -148,14 +130,7 @@ function getAnnouncements() {
                         cell6.innerHTML = data[i]['exam_room'];
                         cell7.setAttribute("data-label", "Ονοματεπώνυμο Καθηγητή");
                         cell7.innerHTML = data[i]['professor_full_name'];
-                        cell8.setAttribute("data-label", "Βαθμός 1");
-                        cell8.innerHTML = data[i]['grade1'];
-                        cell9.setAttribute("data-label", "Βαθμός 2");
-                        cell9.innerHTML = data[i]['grade2'];
-                        cell10.setAttribute("data-label", "Βαθμός 3");
-                        cell10.innerHTML = data[i]['grade3'];
-                        cell11.setAttribute("data-label", "Τελικός Βαθμός");
-                        cell11.innerHTML = data[i]['final_grade'];
+
                     }
                 }
             } else {
