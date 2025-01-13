@@ -42,7 +42,7 @@ $id = $row['id'];
 $stmt->close();
 
 // File path
-$file_path = $_SERVER['DOCUMENT_ROOT'] . '/Project/uploads/praktiko/' . $id . '_praktiko_simplified.xlsx';
+$file_path = '../uploads/praktiko/' . $id . '_praktiko_simplified.xlsx';
 
 // Απάντηση
 $response = array('exists' => 0);
