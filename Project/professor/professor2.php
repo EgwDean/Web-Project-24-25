@@ -156,9 +156,9 @@ function getData(filterValue = '') {
                 cell4.style.backgroundColor = "#00BFFF";
                 cell4.style.color = "white";
 
-                cell1.innerHTML = "Name";
-                cell2.innerHTML = "Surname";
-                cell3.innerHTML = "Student Number";
+                cell1.innerHTML = "Όνομα";
+                cell2.innerHTML = "Επώνυμο";
+                cell3.innerHTML = "ΑΜ";
                 cell4.innerHTML = "Email";
 
                 var tbody = table.createTBody();
