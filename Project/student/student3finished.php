@@ -261,7 +261,7 @@ if (isset($_SESSION['status'])) {
 		getDetails2();
 		getIdAndShowPraktiko();
 		document.getElementById('showPraktikoButton').addEventListener("click", function () { // Λειτουργία κουμπιού προβολής πρακτικού
-			window.open('/Project/uploads/praktiko/' + id + '_praktiko_simplified.html', '_blank'); // Άνοιγμα html
+			window.open('../uploads/praktiko/' + id + '_praktiko_simplified.html', '_blank'); // Άνοιγμα html
 		});
 	});
 

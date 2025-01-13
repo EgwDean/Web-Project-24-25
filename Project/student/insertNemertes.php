@@ -32,7 +32,7 @@ $link = $_POST['link']; // link προς Νημερτής
 $email = $_SESSION['email']; // Email φοιτητή
 
 // Update statement προς τη βάση
-$sql = "UPDATE anathesi_diplomatikis SET Nemertes_link = ? WHERE email_stud = ? ORDER BY start_date DESC LIMIT 1";
+$sql = "UPDATE anathesi_diplomatikis SET Nemertes_link = ? WHERE email_stud = ? AND status = 'under examination'";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $link, $email);
 $stmt->execute();

@@ -40,7 +40,7 @@ $id = $row['id'];
 $stmt->close();
 
 // File path
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/Project/uploads/praktiko/' . $id . '_praktiko_simplified.xlsx';
+$filePath = '../uploads/praktiko/' . $id . '_praktiko_simplified.xlsx';
 
 // Έλεγχος αν υπάρχει
 if (file_exists($filePath)) {

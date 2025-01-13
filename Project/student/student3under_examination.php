@@ -559,7 +559,7 @@ if (isset($_SESSION['status'])) {
 							const fileLabel = document.getElementById('fileLabel');
 							const fileLink = document.createElement('a');
 							fileLink.textContent = response.file;
-							fileLink.href = `/Project/uploads/students/${response.file}`;
+							fileLink.href = `../uploads/students/${response.file}`;
 							fileLink.target = '_blank';
 							fileLabel.innerHTML = '';
 							fileLabel.appendChild(fileLink);
@@ -602,7 +602,7 @@ if (isset($_SESSION['status'])) {
 			const fileLabel = document.getElementById('fileLabel');
 			const fileLink = document.createElement('a');
 			fileLink.textContent = pdfLink.slice(20);
-			fileLink.href = `/Project/${pdfLink}`;
+			fileLink.href = `../${pdfLink}`;
 			fileLink.target = '_blank';
 			fileLabel.innerHTML = '';
 			fileLabel.appendChild(fileLink);
@@ -727,7 +727,7 @@ if (isset($_SESSION['status'])) {
 								const response = JSON.parse(xhr.responseText);
 								const exists = response['exists'];
 								if (exists === 1) { 
-									window.open('/Project/uploads/praktiko/' + id + '_praktiko_simplified.html', '_blank'); // Άνοιγμα html
+									window.open('../uploads/praktiko/' + id + '_praktiko_simplified.html', '_blank'); // Άνοιγμα html
 								} else {
 									excelToHtml(); // create html
 									document.getElementById('showPraktikoButton').click();

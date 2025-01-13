@@ -38,7 +38,7 @@ $email = $_SESSION['email'];
 $linksString = implode(', ', $_POST['links']); // Όλα τα links σε κοινό string
 
 // Update statement προς τη βάση
-$sql = "UPDATE anathesi_diplomatikis SET external_links = ? WHERE email_stud = ? ORDER BY start_date DESC LIMIT 1";
+$sql = "UPDATE anathesi_diplomatikis SET external_links = ? WHERE email_stud = ? AND status = 'under examination'";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $linksString, $email);
 if ($stmt->execute()) {

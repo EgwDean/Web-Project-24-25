@@ -17,7 +17,7 @@ if (isset($_SESSION['status'])) { // Ανακατεύθυνση αν ο χρήσ
     }
 }
 
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/Project/uploads/praktiko/template/praktiko_simplified.xlsx'; // File path
+$filePath = '../uploads/praktiko/template/praktiko_simplified.xlsx'; // File path
 
 // Έλεγχος αν υπάρχει
 if (file_exists($filePath)) {
