@@ -67,7 +67,7 @@ CREATE TABLE anathesi_diplomatikis (
   email_stud VARCHAR(255) NOT NULL,                     
   id_diploma INT NOT NULL,                     
   status ENUM('pending', 'active', 'canceled_by_student', 'canceled_by_professor', 'recalled', 'under examination', 'finished') NOT NULL DEFAULT 'pending',  
-  start_date DATE NOT NULL,                        
+  start_date DATE,                        
   end_date DATE DEFAULT NULL,                                   
   Nemertes_link VARCHAR(255) DEFAULT NULL,
   pdf_main_diploma VARCHAR(255) DEFAULT NULL,
@@ -270,7 +270,7 @@ BEGIN
 		SET error_code = 3;		# CORRECT
         
         INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
-		VALUES(stud_email, dip_id, 'pending', current_date(), NULL, NULL, NULL, NULL);
+		VALUES(stud_email, dip_id, 'pending', NULL, NULL, NULL, NULL, NULL);
         
         INSERT INTO trimelis_epitropi_diplomatikis (id_dipl, supervisor, member1 , member2 )
         VALUES(dip_id, prof_email, NULL, NULL);
@@ -445,7 +445,7 @@ BEGIN
         WHERE status = 'pending' AND id_dip = pcode;
         
         UPDATE anathesi_diplomatikis
-        SET status = 'active'
+        SET status = 'active' AND start_date = CURDATE()
         WHERE id_diploma = pcode AND status = 'pending';
             
 	END IF;
