@@ -60,7 +60,7 @@ if (move_uploaded_file($file['tmp_name'], $filePath)) { // Τοποθέτηση 
     http_response_code(200);
     echo json_encode(['success' => 'File uploaded successfully.', 'file' => $filename]);
 
-    $sql = "UPDATE anathesi_diplomatikis SET pdf_main_diploma = ? WHERE id_diploma = ?"; // Εισαγωγή του ονόματος του pdf στη βάση
+    $sql = "UPDATE anathesi_diplomatikis SET pdf_main_diploma = ? WHERE id_diploma = ? AND status = 'under examination'"; // Εισαγωγή του ονόματος του pdf στη βάση
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $filePath, $id);
     $stmt->execute();
