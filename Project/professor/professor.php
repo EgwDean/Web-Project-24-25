@@ -78,7 +78,7 @@ if (isset($_POST['logout'])) {
             <table id="item_table"></table>
 			</div>
 			<div class="button-container">
-				<button class="create-btn" onclick="showCreateForm()">Create Item</button>
+				<button class="create-btn" onclick="showCreateForm()">Create Thesis</button>
 					<button class="edit-btn" onclick="showEditForm()">Edit</button>
 				<button class="upload-btn" onclick="showUploadForm()">Upload PDF</button>
 
