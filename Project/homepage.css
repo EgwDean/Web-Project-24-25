@@ -100,6 +100,7 @@ input[type="date"] {
     max-height: 400px; /* Adjust the height as needed */
     overflow-y: auto; /* Enable vertical scrolling */
     margin-bottom: 20px;
+    padding: 0; /* Αφαίρεση padding */
 }
 
 
