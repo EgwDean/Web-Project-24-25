@@ -226,7 +226,7 @@ function assignThesis(event){
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
-                alert("Thesis assigned successfully!"); 		// Success alert
+                alert("Επιτυγχής Ανάθεση!"); 		// Success alert
 				clearForm();
             } else {
                 alert("Error: " + response.error); 				// Error alert
