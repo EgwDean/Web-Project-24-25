@@ -100,11 +100,12 @@ input[type="date"] {
     max-height: 400px; /* Adjust the height as needed */
     overflow-y: auto; /* Enable vertical scrolling */
     margin-bottom: 20px;
+    padding: 0; /* Αφαίρεση padding */
 }
 
 
 table {
-    width: 80%; /* Το πλάτος του πίνακα είναι 80% της σελίδας */
+    width: 100%; /* Το πλάτος του πίνακα είναι 80% της σελίδας */
     border-collapse: collapse;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
