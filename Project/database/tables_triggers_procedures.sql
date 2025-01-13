@@ -53,7 +53,7 @@ CREATE TABLE diplomatiki (
 CREATE TABLE eksetasi_diplomatikis (
   id_diplomatikis INT NOT NULL,
   email_st VARCHAR(255) NOT NULL,
-  exam_date DATETIME NOT NULL,                    
+  exam_date DATETIME DEFAULT NULL,                    
   exam_room VARCHAR(255) NOT NULL,
   grade1 DECIMAL(4, 2) DEFAULT NULL,               
   grade2 DECIMAL(4, 2) DEFAULT NULL,               
