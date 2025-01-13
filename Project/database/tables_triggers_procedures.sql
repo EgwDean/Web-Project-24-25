@@ -445,7 +445,7 @@ BEGIN
         WHERE status = 'pending' AND id_dip = pcode;
         
         UPDATE anathesi_diplomatikis
-        SET status = 'active' AND start_date = CURDATE()
+        SET status = 'active' ,start_date = CURDATE()
         WHERE id_diploma = pcode AND status = 'pending';
             
 	END IF;
