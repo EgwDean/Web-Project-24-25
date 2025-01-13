@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 
 $servername = "localhost";
 $username = "root";
-$password = "Matsaniarakos9";
+$password = "12345theo";
 $dbname = "diplomatiki_support";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,8 +16,7 @@ $start_date = isset($_GET['start_date']) ? $_GET['start_date'] : '';
 $end_date = isset($_GET['end_date']) ? $_GET['end_date'] : '';
 $format = isset($_GET['format']) ? $_GET['format'] : 'json';
 
-$sql = "SELECT CONCAT(student.name, ' ', student.surname) AS student_full_name,number,id_diplomatikis AS id,title,exam_date,exam_room,CONCAT(professor.name, ' ', professor.surname) AS professor_full_name,
-        grade1, grade2, grade3, final_grade
+$sql = "SELECT CONCAT(student.name, ' ', student.surname) AS student_full_name,number,id_diplomatikis AS id,title,exam_date,exam_room,CONCAT(professor.name, ' ', professor.surname) AS professor_full_name
 FROM eksetasi_diplomatikis 
 INNER JOIN diplomatiki ON eksetasi_diplomatikis.id_diplomatikis = diplomatiki.id_diplomatiki
 INNER JOIN student ON eksetasi_diplomatikis.email_st = student.email_student
