@@ -1,5 +1,10 @@
 USE diplomatiki_support;
 
+
+# Απενεργοποίηση Foreign Keys
+SET FOREIGN_KEY_CHECKS = 0;
+
+
 -- Καθαρισμός πινάκων
 DELETE FROM professor;
 DELETE FROM student;
