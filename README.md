@@ -4,8 +4,7 @@
 
 <h2>To Do:</h2>
 
-- <b>Indexing στη Βάση</b>
-- <b>Foreign Keys και τελικά testfiles</b>
+- <b>Τελικά testfiles</b>
 - <b>(Comments)</b>
 
 
