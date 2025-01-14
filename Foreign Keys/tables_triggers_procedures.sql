@@ -139,6 +139,16 @@ CREATE TABLE cancellations (
     meeting_year INT NOT NULL
 );
 
+
+-- -- Indexing
+
+CREATE INDEX idx_email_status_start_date ON anathesi_diplomatikis (status, start_date);
+CREATE INDEX idx_email_id_exam_date ON eksetasi_diplomatikis (exam_date);
+CREATE INDEX idx_student_prof_status ON prosklisi_se_trimeli (status);
+CREATE INDEX idx_id_di ON log (id_di);
+
+
+
 -- -- STORED PROCEDURE FOR USER LOGIN
 
 DELIMITER $
