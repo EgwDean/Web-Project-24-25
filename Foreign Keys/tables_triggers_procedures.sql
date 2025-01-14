@@ -55,8 +55,8 @@ CREATE TABLE diplomatiki (
 CREATE TABLE eksetasi_diplomatikis (
   id_diplomatikis INT NOT NULL,
   email_st VARCHAR(255) NOT NULL,
-  exam_date DATETIME NOT NULL,                    
-  exam_room VARCHAR(255) NOT NULL,
+  exam_date DATETIME DEFAULT NULL,                    
+  exam_room VARCHAR(255) DEFAULT NULL,
   grade1 DECIMAL(4, 2) DEFAULT NULL,               
   grade2 DECIMAL(4, 2) DEFAULT NULL,               
   grade3 DECIMAL(4, 2) DEFAULT NULL,               
@@ -73,7 +73,7 @@ CREATE TABLE anathesi_diplomatikis (
   email_stud VARCHAR(255) NOT NULL,                     
   id_diploma INT NOT NULL,                     
   status ENUM('pending', 'active', 'canceled_by_student', 'canceled_by_professor', 'recalled', 'under examination', 'finished') NOT NULL DEFAULT 'pending',  
-  start_date DATE NOT NULL,                        
+  start_date DATE,                        
   end_date DATE DEFAULT NULL,                                   
   Nemertes_link VARCHAR(255) DEFAULT NULL,
   pdf_main_diploma VARCHAR(255) DEFAULT NULL,
@@ -298,7 +298,7 @@ BEGIN
 		SET error_code = 3;		# CORRECT
         
         INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
-		VALUES(stud_email, dip_id, 'pending', current_date(), NULL, NULL, NULL, NULL);
+		VALUES(stud_email, dip_id, 'pending', NULL, NULL, NULL, NULL, NULL);
         
         INSERT INTO trimelis_epitropi_diplomatikis (id_dipl, supervisor, member1 , member2 )
         VALUES(dip_id, prof_email, NULL, NULL);
@@ -473,7 +473,7 @@ BEGIN
         WHERE status = 'pending' AND id_dip = pcode;
         
         UPDATE anathesi_diplomatikis
-        SET status = 'active'
+        SET status = 'active' ,start_date = CURDATE()
         WHERE id_diploma = pcode AND status = 'pending';
             
 	END IF;
@@ -537,24 +537,25 @@ DELIMITER ;
 
 
 
--- Υπό Εξέταση Διπλωματική
-
-
-
 DELIMITER $
 DROP PROCEDURE IF EXISTS setUnderExam$
 CREATE PROCEDURE setUnderExam(IN dip_id INT,  OUT error_code INT)
 BEGIN 
 DECLARE protocol INT;
+DECLARE email_student VARCHAR(255);
 
-SELECT anathesi_diplomatikis.protocol_number INTO protocol FROM anathesi_diplomatikis 
-WHERE id_diploma = dip_id
-LIMIT 1;
+SELECT anathesi_diplomatikis.protocol_number, email_stud INTO protocol, email_student FROM anathesi_diplomatikis 
+WHERE id_diploma = dip_id AND status = 'active';
+
+SELECT email_student;
 
 IF (protocol IS NOT NULL) THEN
 	UPDATE anathesi_diplomatikis 
 	SET status = 'under examination' 
 	WHERE id_diploma = dip_id AND status = 'active';
+       
+    INSERT INTO eksetasi_diplomatikis(id_diplomatikis, email_st)
+    VALUES (dip_id, email_student);
     
     SET error_code = 0;
 ELSE 
@@ -563,6 +564,11 @@ END IF;
 END$
 DELIMITER ;
 
+
+
+
+
+-- Υπό Εξέταση Διπλωματική
 
 
 DELIMITER $
@@ -670,11 +676,13 @@ BEGIN
   DECLARE curr_date DATETIME;
   SET curr_date = NOW();
   
+  IF (OLD.status != NEW.status ) THEN
   INSERT INTO log (id_di, record)
   VALUES (NEW.id_diploma, CONCAT(
     curr_date, ' - UPDATE: ',
     'Old status: ', IFNULL(OLD.status, 'NULL'), ', ', 'New status: ', IFNULL(NEW.status, 'NULL'), ', '
   ));
+  END IF;
 END //
 DELIMITER ;
 
