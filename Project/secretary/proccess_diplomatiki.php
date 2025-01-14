@@ -84,7 +84,7 @@ $email = $_SESSION['email']; // Αποθήκευση email χρήστη για �
 </div>
 
 <footer>
-	<p>Computer Engineering and Informatics Departmentd</p>
+	<p>Computer Engineering and Informatics Department</p>
 </footer>
 
 
