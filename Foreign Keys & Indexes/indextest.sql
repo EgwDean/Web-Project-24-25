@@ -11,7 +11,7 @@ BEGIN
 
     -- Loop to execute the query 10 times (you can adjust the number of iterations)
     WHILE counter <= 10 DO
-        -- Run the query, but don't display the result
+        -- Run the query
         SELECT 1 FROM anathesi_diplomatikis WHERE status = 'active' LIMIT 1;
 
         -- Get the duration of the last executed query from profiling
