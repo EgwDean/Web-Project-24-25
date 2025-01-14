@@ -1,0 +1,16 @@
+[
+    {
+      "password": "s20",
+      "name": "Giorgos",
+      "surname": "Papadakis",
+      "student_number": 10011,
+      "street": "Main St",
+      "number": "5A",
+      "city": "Athens",
+      "postcode": "10432",
+      "father_name": "Nikolaos",
+      "landline_telephone": "2106543210",
+      "mobile_telephone": "6906543210",
+      "email_student": "giorgos.papadakis@student.edu"
+    }
+]
