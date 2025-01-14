@@ -420,10 +420,5 @@ VALUES
 (34, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
   
 
-  
-  
-
-
-  
-
-  
+  # Επαναφορά Foreign Keys
+SET FOREIGN_KEY_CHECKS = 1;
