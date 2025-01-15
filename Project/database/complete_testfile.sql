@@ -315,25 +315,25 @@ VALUES
   (22, 'anastasia.koutra@student.edu', '2024-12-15 10:00:00', 'Αιθουσα Γ', NULL, NULL, NULL, NULL);
   
   
-  -- finished -- 
-  
-      INSERT INTO diplomatiki (email_prof, title, description, pdf_link_topic, status)
+  -- under exam  3 --
+INSERT INTO diplomatiki (email_prof, title, description, pdf_link_topic, status)
 VALUES
   ('nikos.katsaros@university.edu', 'Artifical INtelligence and future 23', 'Description 23', '../uploads/pdf_link_topic/link13.pdf', 'given');
   
 INSERT INTO trimelis_epitropi_diplomatikis (id_dipl, supervisor, member1, member2)
 VALUES
-  (23, 'nikos.katsaros@university.edu', 'dimitris.papa@university.edu', 'kostas.nikolopoulos@university.edu');
+  (23, 'dimitris.papa@university.edu', 'nikos.katsaros@university.edu', 'kostas.nikolopoulos@university.edu');
   
 INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links)
 VALUES
-  ('christos.lykourgos@student.edu', 23, 'finished', '2024-01-10', '2025-01-10', 'link', '../uploads/students/22.pdf', 'links');  
+  ('christos.lykourgos@student.edu', 23, 'under examination', '2024-01-10', '2025-01-10', 'link', '../uploads/students/22.pdf', 'links');  
   
   INSERT INTO eksetasi_diplomatikis (id_diplomatikis, email_st, exam_date, exam_room, grade1, grade2, grade3, final_grade)
 VALUES
   (23, 'christos.lykourgos@student.edu', '2024-12-15 10:00:00', 'Αιθουσα Γ', 8, 7, 5, 6.33);
   
   UPDATE eksetasi_diplomatikis SET praktiko_bathmologisis = '../uploads/praktiko/22_praktiko_simplified.html' WHERE id_diplomatikis = 23;
+  
   
   -- PART 4 invites --
   
