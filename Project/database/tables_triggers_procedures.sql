@@ -701,7 +701,9 @@ BEFORE UPDATE ON eksetasi_diplomatikis
 FOR EACH ROW
 BEGIN
   -- Recalculate the final grade, treating NULL as 0
-  SET NEW.final_grade = (IFNULL(NEW.grade1, 0) + IFNULL(NEW.grade2, 0) + IFNULL(NEW.grade3, 0)) / 3;
+	  IF (NEW.grade1 IS NOT NULL AND NEW.grade2 IS NOT NULL AND NEW.grade3 IS NOT NULL) THEN 
+ 		 SET NEW.final_grade = (IFNULL(NEW.grade1, 0) + IFNULL(NEW.grade2, 0) + IFNULL(NEW.grade3, 0)) / 3;
+  	  END IF;
 END //
 DELIMITER ;
 
