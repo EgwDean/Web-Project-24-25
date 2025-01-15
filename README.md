@@ -2,12 +2,6 @@
 
 
 
-<h2>To Do:</h2>
-
-- <b>Τελικά testfiles</b>
-- <b>(Comments)</b>
-
-
 <h2>Languages and Utilities Used</h2>
 
 - <b>HTML</b>
