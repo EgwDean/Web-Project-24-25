@@ -45,9 +45,7 @@ CREATE TABLE diplomatiki (
   title VARCHAR(255) NOT NULL,    
   description TEXT NOT NULL,                            
   pdf_link_topic VARCHAR(255) DEFAULT NULL,
-  status ENUM('available', 'given') NOT NULL,
-  CONSTRAINT DIPLPROF FOREIGN KEY (email_prof) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  status ENUM('available', 'given') NOT NULL
 )AUTO_INCREMENT = 1;
 
 
@@ -61,11 +59,7 @@ CREATE TABLE eksetasi_diplomatikis (
   grade2 DECIMAL(4, 2) DEFAULT NULL,               
   grade3 DECIMAL(4, 2) DEFAULT NULL,               
   final_grade DECIMAL(4, 2) DEFAULT NULL,          
-  praktiko_bathmologisis VARCHAR(255) DEFAULT NULL,
-  CONSTRAINT EXAMDIPL FOREIGN KEY (id_diplomatikis) REFERENCES diplomatiki(id_diplomatiki) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT EXAMSTUD FOREIGN KEY (email_st) REFERENCES student(email_student) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  praktiko_bathmologisis VARCHAR(255) DEFAULT NULL
 );
 
 
@@ -78,22 +72,14 @@ CREATE TABLE anathesi_diplomatikis (
   Nemertes_link VARCHAR(255) DEFAULT NULL,
   pdf_main_diploma VARCHAR(255) DEFAULT NULL,
   external_links TEXT DEFAULT NULL, 
-  protocol_number INT DEFAULT NULL,
-  CONSTRAINT ANASTUD FOREIGN KEY (email_stud) REFERENCES student(email_student) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT ANADIPL FOREIGN KEY (id_diploma) REFERENCES diplomatiki(id_diplomatiki) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  protocol_number INT DEFAULT NULL
 );
 
 
 CREATE TABLE professor_notes (
   professor_email VARCHAR(255) NOT NULL,
   id_diplom INT NOT NULL,
-  notes TEXT NOT NULL,
-  CONSTRAINT NOTEPROF FOREIGN KEY (professor_email) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT NOTEDIPL FOREIGN KEY (id_diplom) REFERENCES diplomatiki(id_diplomatiki) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  notes TEXT NOT NULL
 );
 
 
@@ -101,15 +87,7 @@ CREATE TABLE trimelis_epitropi_diplomatikis (
   id_dipl INT NOT NULL,    
   supervisor VARCHAR(255) NOT NULL,               
   member1 VARCHAR(255) DEFAULT NULL,                  
-  member2 VARCHAR(255) DEFAULT NULL,
-  FOREIGN KEY (id_dipl) REFERENCES diplomatiki(id_diplomatiki) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (supervisor) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (member1) REFERENCES professor(email_professor) 
-  ON DELETE SET NULL ON UPDATE CASCADE,
-  FOREIGN KEY (member2) REFERENCES professor(email_professor) 
-  ON DELETE SET NULL ON UPDATE CASCADE
+  member2 VARCHAR(255) DEFAULT NULL
 );
 
 
@@ -119,13 +97,7 @@ CREATE TABLE prosklisi_se_trimeli (
   id_dip INT NOT NULL,                 
   status ENUM('pending', 'accepted', 'declined') NOT NULL DEFAULT 'pending', 
   reply_date DATE DEFAULT NULL, 
-  invitation_date DATE DEFAULT NULL,
-  FOREIGN KEY (student_email) REFERENCES student(email_student) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (prof_email) REFERENCES professor(email_professor) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (id_dip) REFERENCES diplomatiki(id_diplomatiki) 
-  ON DELETE CASCADE ON UPDATE CASCADE
+  invitation_date DATE DEFAULT NULL
 );
 
 CREATE TABLE log (
@@ -530,29 +502,47 @@ DECLARE state ENUM('pending', 'active', 'canceled_by_student', 'canceled_by_prof
 DECLARE supervisor_email VARCHAR(255);
 DECLARE member1_email VARCHAR(255);
 DECLARE member2_email VARCHAR(255);
-SET error_code=0;
+
+DECLARE id_count INT;
+DECLARE professor_count INT;
+
+SELECT COUNT(*)
+INTO id_count
+FROM diplomatiki
+WHERE id_diplomatiki = id_diploma;
+
+SELECT COUNT(*)
+INTO professor_count
+FROM professor
+WHERE email_professor = professor_email;
+
+
+SET error_code=-1;
 
 SELECT supervisor, member1, member2
 INTO supervisor_email, member1_email, member2_email
 FROM trimelis_epitropi_diplomatikis
 WHERE id_dipl = id_diploma;
 
-IF (professor_email = supervisor_email OR professor_email = member1_email OR professor_email = member2_email) THEN
-	IF NOT EXISTS (SELECT * FROM professor_notes WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma) THEN
-		INSERT INTO professor_notes (professor_email, id_diplom, notes)
-		VALUES (professor_email, id_diploma, notes);
+
+IF (id_count > 0 AND professor_count > 0) THEN 
+	IF (professor_email = supervisor_email OR professor_email = member1_email OR professor_email = member2_email) THEN
+		IF NOT EXISTS (SELECT * FROM professor_notes WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma) THEN
+			INSERT INTO professor_notes (professor_email, id_diplom, notes)
+			VALUES (professor_email, id_diploma, notes);
+            
+            SET error_code=0;
+		ELSE
+			UPDATE professor_notes
+			SET professor_notes.notes = notes
+			WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma;
+		END IF;
 	ELSE
-		UPDATE professor_notes
-		SET professor_notes.notes = notes
-		WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma;
+		SET error_code = 1;      # You need to be a supervisor or member of this diploma to add notes.
 	END IF;
-ELSE
-	SET error_code = 1;      # You need to be a supervisor or member of this diploma to add notes.
 END IF;
 END$
 DELIMITER ;
-
-
 
 DELIMITER $
 DROP PROCEDURE IF EXISTS setUnderExam$
