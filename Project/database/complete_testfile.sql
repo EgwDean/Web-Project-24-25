@@ -384,35 +384,54 @@ VALUES
   ('fotis.vlachos@student.edu', 'dimitris.papa@university.edu', 28, 'pending', NULL, '2024-01-10');
   
   
-  -- PART 5 -- 
+ -- PART 5 -- 
   
+  
+INSERT INTO diplomatiki (email_prof, title, description, pdf_link_topic, status)
+VALUES
+  ('dimitris.papa@university.edu', 'Sample Thesis Title 4', 'Description 4', 'link4.pdf', 'given'),
+  ('dimitris.papa@university.edu', 'Sample Thesis Title 5', 'Description 5', 'link5.pdf', 'given'),
+  ('nikos.katsaros@university.edu', 'Sample Thesis Title 6', 'Description 6', 'link6.pdf', 'given'),
+  ('nikos.katsaros@university.edu', 'Sample Thesis Title 7', 'Description 7', 'link7.pdf', 'given'),
+  ('nikos.katsaros@university.edu', 'Sample Thesis Title 8', 'Description 8', 'link8.pdf', 'given'),
+  ('dimitra.kondylia@university.edu', 'Sample Thesis Title 9', 'Description 9', 'link9.pdf', 'given');  
   
   
   INSERT INTO trimelis_epitropi_diplomatikis (id_dipl, supervisor, member1, member2) 
 VALUES 
-(31, 'dimitris.papa@university.edu', 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu'),
-(32, 'dimitris.papa@university.edu', 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu'),
-(33, 'nikos.katsaros@university.edu', 'dimitris.papa@university.edu', 'maria.ioannou@university.edu'),
-(34, 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu', 'dimitris.papa@university.edu'),
-(35, 'dimitris.papa@university.edu', 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu'),
-(36, 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu', 'dimitris.papa@university.edu');
+(29, 'dimitris.papa@university.edu', 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu'),
+(30, 'dimitris.papa@university.edu', 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu'),
+(31, 'nikos.katsaros@university.edu', 'dimitris.papa@university.edu', 'maria.ioannou@university.edu'),
+(32, 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu', 'dimitris.papa@university.edu'),
+(33, 'dimitris.papa@university.edu', 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu'),
+(34, 'nikos.katsaros@university.edu', 'maria.ioannou@university.edu', 'dimitris.papa@university.edu');
+
+
+  INSERT INTO student (password, name, surname, student_number, street, number, city, postcode, father_name, landline_telephone, mobile_telephone, email_student)
+VALUES
+  ('s14', 'Alex', 'Papa', 1014, 'Hill St', '25', 'Athens', '10562', 'Dimitris', '2101234567', '6901234567', 'alexpoulos@student.edu'),
+  ('s15', 'Georg', 'Mav', 1015, 'Forest Rd', '18A', 'Thessaloniki', '54645', 'Antonis', '2310456789', '6902345679', 'georvrou@student.edu'),
+  ('s16', 'Sof', 'Karagi', 1016, 'Olive St', '5', 'Patras', '26224', 'Kostas', '2610234567', '6903456780', 'sofigiorgi@student.edu'),
+  ('s17', 'Pets', 'Tsaos', 1017, 'Sunrise Ave', '10', 'Heraklion', '71325', 'Vasilis', '2810456789', '6904567891', 'petrlos@student.edu'),
+  ('s18', 'Ioaa', 'Mai', 1018, 'Lake St', '12B', 'Larissa', '41335', 'Giannis', '2410234567', '6905678912', 'ioanna.ri@student.edu'),
+  ('s19', 'Dima', 'Zafou', 1019, 'Skyline Rd', '9', 'Chania', '73222', 'Manolis', '2820345678', '6906789123', 'dimiiriou@student.edu');
 
 
 INSERT INTO anathesi_diplomatikis (email_stud, id_diploma, status, start_date, end_date, Nemertes_link, pdf_main_diploma, external_links) 
 VALUES 
-('john.doe@example.com', 31, 'finished', '2024-01-15', '2024-12-15', 'http://example.com/nemertes/101', 'path/to/diploma1.pdf', 'http://example.com/external_link1'),
-('mary.smith@example.com', 32, 'finished', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2'),
-('peter.jones@example.com', 33, 'finished', '2024-02-20', '2026-1-1', 'http://example.com/nemertes/103', 'path/to/diploma3.pdf', 'http://example.com/external_link3'),
-('lucy.brown@example.com', 34, 'finished', '2024-04-10', '2024-10-10', 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4'),
-('lucy.brown@example.com', 35, 'active', '2024-04-10', NULL, 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4'),
-('lucy.brown@example.com', 36, 'active', '2024-04-10', NULL, 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4');
+('alexpoulos@student.edu', 29, 'finished', '2024-01-15', '2024-12-15', 'http://example.com/nemertes/101', 'path/to/diploma1.pdf', 'http://example.com/external_link1'),
+('georvrou@student.edu', 30, 'finished', '2024-03-01', '2025-1-1', 'http://example.com/nemertes/102', 'path/to/diploma2.pdf', 'http://example.com/external_link2'),
+('sofigiorgi@student.edu', 31, 'finished', '2024-02-20', '2026-1-1', 'http://example.com/nemertes/103', 'path/to/diploma3.pdf', 'http://example.com/external_link3'),
+('petrlos@student.edu', 32, 'finished', '2024-04-10', '2024-10-10', 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4'),
+('ioanna.ri@student.edu', 33, 'active', '2024-04-10', NULL, 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4'),
+('dimiiriou@student.edu', 34, 'active', '2024-04-10', NULL, 'http://example.com/nemertes/104', 'path/to/diploma4.pdf', 'http://example.com/external_link4');
 
 INSERT INTO eksetasi_diplomatikis (id_diplomatikis, email_st, exam_date, exam_room, grade1, grade2, grade3, final_grade, praktiko_bathmologisis) 
 VALUES 
-(31, 'john.doe@example.com', '2024-06-15 09:00:00', 'Room A101', 8.50, 7.75, 9.00, 8.42, 'Pass'),
-(32, 'mary.smith@example.com', '2024-06-16 11:00:00', 'Room B202', 6.80, 7.90, 8.20, 7.30, 'Pass'),
-(33, 'peter.jones@example.com', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
-(34, 'lucy.brown@example.com', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
+(29, 'alexpoulos@student.edu', '2024-06-15 09:00:00', 'Room A101', 8.50, 7.75, 9.00, 8.42, 'Pass'),
+(30, 'georvrou@student.edu', '2024-06-16 11:00:00', 'Room B202', 6.80, 7.90, 8.20, 7.30, 'Pass'),
+(31, 'sofigiorgi@student.edu', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
+(32, 'petrlos@student.edu', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
   
 
   
