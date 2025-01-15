@@ -485,29 +485,47 @@ DECLARE state ENUM('pending', 'active', 'canceled_by_student', 'canceled_by_prof
 DECLARE supervisor_email VARCHAR(255);
 DECLARE member1_email VARCHAR(255);
 DECLARE member2_email VARCHAR(255);
-SET error_code=0;
+
+DECLARE id_count INT;
+DECLARE professor_count INT;
+
+SELECT COUNT(*)
+INTO id_count
+FROM diplomatiki
+WHERE id_diplomatiki = id_diploma;
+
+SELECT COUNT(*)
+INTO professor_count
+FROM professor
+WHERE email_professor = professor_email;
+
+
+SET error_code=-1;
 
 SELECT supervisor, member1, member2
 INTO supervisor_email, member1_email, member2_email
 FROM trimelis_epitropi_diplomatikis
 WHERE id_dipl = id_diploma;
 
-IF (professor_email = supervisor_email OR professor_email = member1_email OR professor_email = member2_email) THEN
-	IF NOT EXISTS (SELECT * FROM professor_notes WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma) THEN
-		INSERT INTO professor_notes (professor_email, id_diplom, notes)
-		VALUES (professor_email, id_diploma, notes);
+
+IF (id_count > 0 AND professor_count > 0) THEN 
+	IF (professor_email = supervisor_email OR professor_email = member1_email OR professor_email = member2_email) THEN
+		IF NOT EXISTS (SELECT * FROM professor_notes WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma) THEN
+			INSERT INTO professor_notes (professor_email, id_diplom, notes)
+			VALUES (professor_email, id_diploma, notes);
+            
+            SET error_code=0;
+		ELSE
+			UPDATE professor_notes
+			SET professor_notes.notes = notes
+			WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma;
+		END IF;
 	ELSE
-		UPDATE professor_notes
-		SET professor_notes.notes = notes
-		WHERE professor_notes.professor_email = professor_email AND professor_notes.id_diplom = id_diploma;
+		SET error_code = 1;      # You need to be a supervisor or member of this diploma to add notes.
 	END IF;
-ELSE
-	SET error_code = 1;      # You need to be a supervisor or member of this diploma to add notes.
 END IF;
 END$
 DELIMITER ;
-
-
 
 DELIMITER $
 DROP PROCEDURE IF EXISTS setUnderExam$
