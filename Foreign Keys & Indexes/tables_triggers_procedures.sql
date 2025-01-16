@@ -59,7 +59,11 @@ CREATE TABLE eksetasi_diplomatikis (
   grade2 DECIMAL(4, 2) DEFAULT NULL,               
   grade3 DECIMAL(4, 2) DEFAULT NULL,               
   final_grade DECIMAL(4, 2) DEFAULT NULL,          
-  praktiko_bathmologisis VARCHAR(255) DEFAULT NULL
+  praktiko_bathmologisis VARCHAR(255) DEFAULT NULL,
+  CONSTRAINT EXAMDIPL FOREIGN KEY (id_diplomatikis) REFERENCES diplomatiki(id_diplomatiki) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT EXAMSTUD FOREIGN KEY (email_st) REFERENCES student(email_student) 
+  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -72,14 +76,22 @@ CREATE TABLE anathesi_diplomatikis (
   Nemertes_link VARCHAR(255) DEFAULT NULL,
   pdf_main_diploma VARCHAR(255) DEFAULT NULL,
   external_links TEXT DEFAULT NULL, 
-  protocol_number INT DEFAULT NULL
+  protocol_number INT DEFAULT NULL,
+  CONSTRAINT ANASTUD FOREIGN KEY (email_stud) REFERENCES student(email_student) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT ANADIPL FOREIGN KEY (id_diploma) REFERENCES diplomatiki(id_diplomatiki) 
+  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
 CREATE TABLE professor_notes (
   professor_email VARCHAR(255) NOT NULL,
   id_diplom INT NOT NULL,
-  notes TEXT NOT NULL
+  notes TEXT NOT NULL,
+  CONSTRAINT NOTEPROF FOREIGN KEY (professor_email) REFERENCES professor(email_professor) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT NOTEDIPL FOREIGN KEY (id_diplom) REFERENCES diplomatiki(id_diplomatiki) 
+  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -87,7 +99,15 @@ CREATE TABLE trimelis_epitropi_diplomatikis (
   id_dipl INT NOT NULL,    
   supervisor VARCHAR(255) NOT NULL,               
   member1 VARCHAR(255) DEFAULT NULL,                  
-  member2 VARCHAR(255) DEFAULT NULL
+  member2 VARCHAR(255) DEFAULT NULL,
+  FOREIGN KEY (id_dipl) REFERENCES diplomatiki(id_diplomatiki) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (supervisor) REFERENCES professor(email_professor) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (member1) REFERENCES professor(email_professor) 
+  ON DELETE SET NULL ON UPDATE CASCADE,
+  FOREIGN KEY (member2) REFERENCES professor(email_professor) 
+  ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
@@ -97,7 +117,13 @@ CREATE TABLE prosklisi_se_trimeli (
   id_dip INT NOT NULL,                 
   status ENUM('pending', 'accepted', 'declined') NOT NULL DEFAULT 'pending', 
   reply_date DATE DEFAULT NULL, 
-  invitation_date DATE DEFAULT NULL
+  invitation_date DATE DEFAULT NULL,
+  FOREIGN KEY (student_email) REFERENCES student(email_student) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (prof_email) REFERENCES professor(email_professor) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (id_dip) REFERENCES diplomatiki(id_diplomatiki) 
+  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE log (
@@ -718,10 +744,7 @@ BEFORE UPDATE ON eksetasi_diplomatikis
 FOR EACH ROW
 BEGIN
   -- Recalculate the final grade, treating NULL as 0
-	  IF (NEW.grade1 IS NOT NULL AND NEW.grade2 IS NOT NULL AND NEW.grade3 IS NOT NULL) THEN 
- 		 SET NEW.final_grade = (IFNULL(NEW.grade1, 0) + IFNULL(NEW.grade2, 0) + IFNULL(NEW.grade3, 0)) / 3;
-  	  END IF;
-
+  SET NEW.final_grade = (IFNULL(NEW.grade1, 0) + IFNULL(NEW.grade2, 0) + IFNULL(NEW.grade3, 0)) / 3;
 END //
 DELIMITER ;
 
