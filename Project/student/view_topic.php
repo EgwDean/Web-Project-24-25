@@ -15,7 +15,7 @@ $email = $_SESSION['email'];
 
 $servername = "localhost";
 $username = "root";
-$password = "Matsaniarakos9";
+$password = explode(' ', file_get_contents('../dbpassword.txt'))[0];
 $dbname = "diplomatiki_support";
 $dateDiff = null;
 

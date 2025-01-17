@@ -1,5 +1,9 @@
 USE diplomatiki_support;
 
+# Απενεργοποίηση Foreign Keys 
+SET FOREIGN_KEY_CHECKS = 0;
+
+
 -- Καθαρισμός πινάκων
 DELETE FROM professor;
 DELETE FROM student;
@@ -432,12 +436,8 @@ VALUES
 (30, 'georvrou@student.edu', '2024-06-16 11:00:00', 'Room B202', 6.80, 7.90, 8.20, 7.30, 'Pass'),
 (31, 'sofigiorgi@student.edu', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
 (32, 'petrlos@student.edu', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
-  
-
-  
-  
 
 
-  
 
-  
+# Επαναφορά Foreign Keys 
+SET FOREIGN_KEY_CHECKS = 1;

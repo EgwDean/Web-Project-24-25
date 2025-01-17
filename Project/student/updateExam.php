@@ -19,7 +19,7 @@ if (isset($_SESSION['status'])) {
 
 $host = "localhost";
 $dbusername = "root";
-$dbpassword = "Matsaniarakos9";
+$dbpassword = explode(' ', file_get_contents('../dbpassword.txt'))[0];
 $dbname = "diplomatiki_support";
 
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname); // Σύνδεση με τη βάση

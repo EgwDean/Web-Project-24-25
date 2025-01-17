@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Σύνδεση στη βάση δεδομένων
         $servername = "localhost";
         $username = "root";
-        $password = "556782340";
+        $password = explode(' ', file_get_contents('../dbpassword.txt'))[0];
         $dbname = "diplomatiki_support";
 
         $conn = new mysqli($servername, $username, $password, $dbname);

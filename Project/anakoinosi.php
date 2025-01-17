@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 
 $servername = "localhost";
 $username = "root";
-$password = "12345theo";
+$password = explode(' ', file_get_contents('dbpassword.txt'))[0];
 $dbname = "diplomatiki_support";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

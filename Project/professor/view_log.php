@@ -10,7 +10,7 @@ if (!isset($_SESSION['email']) OR $_SESSION['type'] != 'PROF') {
 // Στοιχεία σύνδεσης με τη βάση δεδομένων
 $servername = "localhost";
 $username = "root";
-$password = "556782340";
+$password = explode(' ', file_get_contents('../dbpassword.txt'))[0];
 $dbname = "diplomatiki_support";
 
 // Σύνδεση στη βάση δεδομένων

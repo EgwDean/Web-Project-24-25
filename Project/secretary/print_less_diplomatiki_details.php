@@ -13,7 +13,7 @@ if ($_SESSION['type'] != 'GRAM') {
 
 $servername = "localhost";
 $username = "root";
-$password = "Matsaniarakos9";
+$password = explode(' ', file_get_contents('../dbpassword.txt'))[0];
 $dbname = "diplomatiki_support";
 
 $conn = new mysqli($servername, $username, $password, $dbname); // Σύνδεση με τη βάση
