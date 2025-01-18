@@ -1,7 +1,7 @@
 USE diplomatiki_support;
 
 # Απενεργοποίηση Foreign Keys 
-SET FOREIGN_KEY_CHECKS = 0;
+#SET FOREIGN_KEY_CHECKS = 0;
 
 
 -- Καθαρισμός πινάκων
@@ -15,17 +15,6 @@ DELETE FROM professor_notes;
 DELETE FROM trimelis_epitropi_diplomatikis;
 DELETE FROM prosklisi_se_trimeli;
 DELETE FROM log;
-
-DROP TABLE diplomatiki;
-
-CREATE TABLE diplomatiki (
-  id_diplomatiki INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  email_prof VARCHAR(255) NOT NULL,
-  title VARCHAR(255) NOT NULL,    
-  description TEXT NOT NULL,                            
-  pdf_link_topic VARCHAR(255),
-  status ENUM('available', 'given') NOT NULL
-);
 
 -- Εισαγωγή δεδομένων στον πίνακα professor
 INSERT INTO professor (password, name, surname, email_professor, topic, landline, mobile, department, university)
@@ -436,8 +425,3 @@ VALUES
 (30, 'georvrou@student.edu', '2024-06-16 11:00:00', 'Room B202', 6.80, 7.90, 8.20, 7.30, 'Pass'),
 (31, 'sofigiorgi@student.edu', '2024-06-17 14:00:00', 'Room C303', 7.50, 8.00, 8.75, 8.08, 'Pass'),
 (32, 'petrlos@student.edu', '2024-06-18 10:00:00', 'Room D404', 9.00, 9.50, 9.30, 9.27, 'Pass');
-
-
-
-# Επαναφορά Foreign Keys 
-SET FOREIGN_KEY_CHECKS = 1;

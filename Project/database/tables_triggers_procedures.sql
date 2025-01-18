@@ -713,7 +713,7 @@ BEGIN
   INSERT INTO log (id_di, record)
   VALUES (NEW.id_diploma, CONCAT(
     curr_date, ' - UPDATE: ',
-    'Old status: ', IFNULL(OLD.status, 'NULL'), ', ', 'New status: ', IFNULL(NEW.status, 'NULL'), ', '
+    'Old status: ', IFNULL(OLD.status, 'NULL'), ', ', 'New status: ', IFNULL(NEW.status, 'NULL'), '.'
   ));
   END IF;
 END //
