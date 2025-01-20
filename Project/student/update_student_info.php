@@ -43,24 +43,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 	// Validate inputs using regular expressions
     $errors = [];
 
-    // Street: Only letters, numbers, spaces, and basic punctuation
-    if (!preg_match("/^[a-zA-Z0-9\s.,'-]+$/", $street)) {
-        $errors[] = "Το πεδίο 'Οδός' πρέπει να περιέχει μόνο γράμματα, αριθμούς, κενά και σημεία στίξης (.,'-).";
-    }
+    // Street: Only letters (Greek with/without accents & English), numbers, spaces, and basic punctuation
+	if (!preg_match("/^[a-zA-Zα-ωά-ώΑ-ΩΆ-Ώ0-9\s.,'-]+$/u", $street)) {
+		$errors[] = "Το πεδίο 'Οδός' πρέπει να περιέχει μόνο γράμματα (ελληνικά ή λατινικά, με ή χωρίς τόνους), αριθμούς, κενά και σημεία στίξης (.,'-).";
+	}
+
+
 
     // Number: Digits only, up to 10 characters
     if (!preg_match("/^\d{1,10}$/", $number)) {
         $errors[] = "Το πεδίο 'Αριθμός' πρέπει να περιέχει μόνο αριθμούς (1-10 χαρακτήρες).";
     }
 
-    // City: Only letters and spaces
-    if (!preg_match("/^[a-zA-Z\s]+$/", $city)) {
-        $errors[] = "Το πεδίο 'Πόλη' πρέπει να περιέχει μόνο γράμματα και κενά.";
-    }
+    // City: Only letters (Greek with/without accents & English) and spaces
+	if (!preg_match("/^[a-zA-Zα-ωά-ώΑ-ΩΆ-Ώ\s]+$/u", $city)) {
+		$errors[] = "Το πεδίο 'Πόλη' πρέπει να περιέχει μόνο γράμματα (ελληνικά ή λατινικά, με ή χωρίς τόνους) και κενά.";
+	}
+
+
 
     // Postcode: Exactly 5 digits
     if (!preg_match("/^\d{5}$/", $postcode)) {
-        $errors[] = "Το πεδίο 'Ταχυδρομικός Κώδικας' πρέπει να περιέχει ακριβώς 5 ψηφία.";
+        $errors[] = "Το πεδίο 'Ταχυδρομικός Κώδικας' πρέπει να περιέχει ακριβώς 5 ψηφία χωρίς κενά.";
     }
 
     // Landline Telephone: Optional, but must be 10-13 digits
