@@ -225,6 +225,8 @@ function get() {
                     window.location.href = "student2.php?data=under_examination";
                 } else if (status === "finished") {
                     window.location.href = "student2.php?data=finished";
+		} else if (status === "active") {
+                    window.location.href = "student2.php?data=active";
                 } else if (status === "notfound") {
                     window.location.href = "student2.php?data=notfound";
                 }
